@@ -12,7 +12,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Install pnmpm
+
+      - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 8
@@ -25,27 +26,33 @@ jobs:
 
       - name: Install NodeJS dependencies
         run: pnpm install
+
       - name: Build
-        run: pnpm run-script build
+        run: pnpm run build  # Adjust this to match your actual build script
+
       - name: Archive build
         if: success()
         uses: actions/upload-artifact@v4
         with:
           name: deploy_dist
-          path: dist
+          path: dist/tevet-troc-client/browser  # Precise path to your built files
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2  # Updated to v2 for consistency
+
       - name: Download build
         uses: actions/download-artifact@v4
         with:
           name: deploy_dist
+          path: dist  # Specify download path
+
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+        uses: JamesIves/github-pages-deploy-action@v4  # Updated to latest version
         with:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          BRANCH: gh_pages
-          FOLDER: deploy_dist/tevet-troc-client/browser
+          token: ${{ secrets.GH_TOKEN }}  # Use built-in token
+          branch: gh-pages  # Corrected branch name
+          folder: dist/tevet-troc-client/browser  # Precise folder to deploy
