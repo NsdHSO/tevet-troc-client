@@ -40,6 +40,7 @@
       },
       "configurations": {
         "production": {
+          "baseHref": "/tevet-troc-client/",
           "budgets": [
             {
               "type": "initial",
