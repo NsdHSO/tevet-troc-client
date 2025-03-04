@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
@@ -24,41 +24,41 @@ jobs:
           node-version: 20
           cache: 'pnpm'
 
-      - name: Install NodeJS dependencies
+      - name: Install dependencies
         run: pnpm install
 
-      - name: Build
-        run: pnpm run build  # Adjust this to match your actual build script
+      - name: Build Project
+        run: pnpm run build
 
       - name: Debug - List dist contents
         run: |
           echo "Listing dist directory:"
-          ls -R dist
-          echo "Checking specific paths:"
-          find . -name "browser" -type d
+          ls -R dist/tevet-troc-client
 
       - name: Archive build
-        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: deploy_dist
-          path: dist/tevet-troc-client/browser  # Precise path to your built files
+          path: dist/tevet-troc-client/browser
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
     steps:
       - name: Checkout
-        uses: actions/checkout@v2  # Updated to v2 for consistency
+        uses: actions/checkout@v3
 
       - name: Download build
         uses: actions/download-artifact@v4
         with:
           name: deploy_dist
-          path: dist  # Specify download path
-
+          path: dist/tevet-troc-client/browser
+      - name: Debug - List dist contents
+        run: |
+          echo "Listing dist directory:"
+          ls -R dist
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4  # Updated to latest version
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           token: ${{ secrets.GH_TOKEN }}  # Use built-in token
           branch: gh-pages  # Corrected branch name
