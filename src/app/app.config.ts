@@ -13,16 +13,16 @@ export const CONFIG_MAIN = Object.freeze({
   routerDataConfig: [
     {
       path: 'table',
-      icon: 'fa_solid:gauge',
+      icon: 'fa_solid:1',
       text: 'Dashboard',
     },
     {
       path: 'calendar',
-      icon: 'fa_solid:gauge',
+      icon: 'fa_solid:2',
       text: 'test',
     },
   ],
-  iconApp: '',
+  iconApp: 'fa_solid:logo',
 }) as RouterConfig;
 export const appConfig: ApplicationConfig = {
   providers: [

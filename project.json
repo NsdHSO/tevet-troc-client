@@ -29,7 +29,7 @@
           },
           {
             "glob": "**/*",
-            "input": "node_modules/ngx-liburg-icon/assets/icons/svgs",
+            "input": "src/assets/icons/svgs",
             "output": "assets/icons/svgs"
           }
         ],

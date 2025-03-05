@@ -31,12 +31,6 @@ dependencies:
   '@angular/router':
     specifier: ~19.1.0
     version: 19.1.0(@angular/common@19.1.0)(@angular/core@19.1.0)(@angular/platform-browser@19.1.0)(rxjs@7.8.1)
-  ngx-liburg-frame-side:
-    specifier: ^19.0.0
-    version: 19.0.0(@angular/common@19.1.0)(@angular/core@19.1.0)
-  ngx-liburg-icon:
-    specifier: ^19.0.2
-    version: 19.0.2(@angular/common@19.1.0)(@angular/core@19.1.0)
   reset-css:
     specifier: ^5.0.2
     version: 5.0.2
@@ -141,6 +135,12 @@ devDependencies:
   jest-preset-angular:
     specifier: ~14.4.0
     version: 14.4.0(@angular-devkit/build-angular@19.1.0)(@angular/compiler-cli@19.1.0)(@angular/core@19.1.0)(@angular/platform-browser-dynamic@19.1.0)(@babel/core@7.26.9)(jest@29.7.0)(typescript@5.7.2)
+  ngx-liburg-frame-side:
+    specifier: ^19.0.2
+    version: 19.0.2(@angular/common@19.1.0)(@angular/core@19.1.0)
+  ngx-liburg-icon:
+    specifier: ^19.0.2
+    version: 19.0.2(@angular/common@19.1.0)(@angular/core@19.1.0)
   nx:
     specifier: 20.4.6
     version: 20.4.6(@swc-node/register@1.9.1)(@swc/core@1.5.7)
@@ -12280,8 +12280,8 @@ packages:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
     dev: true
 
-  /ngx-liburg-frame-side@19.0.0(@angular/common@19.1.0)(@angular/core@19.1.0):
-    resolution: {integrity: sha512-5ZLscN//ARi+vayzJukeRiPQceLCFs4lskzOIOwf2PXZ9dCxwgdMmrxNDIim/6xi6RjflSbytoq5TjdPnIQQyQ==}
+  /ngx-liburg-frame-side@19.0.2(@angular/common@19.1.0)(@angular/core@19.1.0):
+    resolution: {integrity: sha512-GD0dPXhUkMBz9txsNpSKzZVnVf1XwQiO9+XUk+ImRhAyywIsCDE1l1ZiPc/l7XYkqOjm4RkMVNOmABCAHOO2Pw==}
     peerDependencies:
       '@angular/common': ^19.0.0
       '@angular/core': ^19.0.0
@@ -12289,7 +12289,7 @@ packages:
       '@angular/common': 19.1.0(@angular/core@19.1.0)(rxjs@7.8.1)
       '@angular/core': 19.1.0(rxjs@7.8.1)(zone.js@0.15.0)
       tslib: 2.8.1
-    dev: false
+    dev: true
 
   /ngx-liburg-icon@19.0.2(@angular/common@19.1.0)(@angular/core@19.1.0):
     resolution: {integrity: sha512-vlT7LzWdKffY2To8d9ueBci1j9CwA3bzoLyRHI4eGQU6x5wpVck3nSCPoddopbO7+FCIMjfUQ6SNS2jsOoYwrA==}
@@ -12300,7 +12300,7 @@ packages:
       '@angular/common': 19.1.0(@angular/core@19.1.0)(rxjs@7.8.1)
       '@angular/core': 19.1.0(rxjs@7.8.1)(zone.js@0.15.0)
       tslib: 2.8.1
-    dev: false
+    dev: true
 
   /node-abort-controller@3.1.1:
     resolution: {integrity: sha512-AGK2yQKIjRuqnc6VkX2Xj5d+QW8xZ87pa1UK6yA6ouUyuxfHuMP6umE5QK7UmTeOAymo+Zx1Fxiuw9rVx8taHQ==}
