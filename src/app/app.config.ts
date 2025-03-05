@@ -12,14 +12,14 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 export const CONFIG_MAIN = Object.freeze({
   routerDataConfig: [
     {
-      path: 'table',
+      path: 'dashboard',
       icon: 'fa_solid:1',
       text: 'Dashboard',
     },
     {
-      path: 'calendar',
+      path: 'emergency',
       icon: 'fa_solid:2',
-      text: 'test',
+      text: 'Emergency',
     },
   ],
   iconApp: 'fa_solid:logo',

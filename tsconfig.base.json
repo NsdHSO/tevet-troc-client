@@ -1,0 +1,25 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2022",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@tevet-troc-client/button": ["packages/ui/button/src/index.ts"],
+      "@tevet-troc-client/dashboard": ["packages/dashboard/src/index.ts"],
+      "@tevet-troc-client/emergency": ["packages/emergency/src/index.ts"],
+      "@tevet-troc-client/landing": ["packages/landing/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
