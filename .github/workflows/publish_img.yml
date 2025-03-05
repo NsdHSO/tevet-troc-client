@@ -30,11 +30,6 @@ jobs:
       - name: Build Project
         run: pnpm run build
 
-      - name: Debug - List dist contents
-        run: |
-          echo "Listing dist directory:"
-          ls -R dist/tevet-troc-client
-
       - name: Archive build
         uses: actions/upload-artifact@v4
         with:
@@ -53,10 +48,7 @@ jobs:
         with:
           name: deploy_dist
           path: dist/tevet-troc-client/browser
-      - name: Debug - List dist contents
-        run: |
-          echo "Listing dist directory:"
-          ls -R dist
+
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
