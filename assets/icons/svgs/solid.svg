@@ -5,6 +5,54 @@ License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL
 Copyright 2022 Fonticons, Inc.
 -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+
+  <symbol id="logo" viewBox="0 0 200 200">
+    <!-- Background Gradient -->
+    <defs>
+      <linearGradient id="hospitalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#3498db;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#2ecc71;stop-opacity:1" />
+      </linearGradient>
+
+      <!-- Pulse/Heartbeat Animation Path -->
+      <path id="heartbeatPath" d="M50,100 Q75,70 100,100 Q125,130 150,100" fill="none" stroke="white" stroke-width="4"/>
+    </defs>
+
+    <!-- Circular Background -->
+    <circle cx="100" cy="100" r="90" fill="url(#hospitalGradient)"/>
+
+    <!-- Medical Cross -->
+    <path d="M100 50 L100 150 M50 100 L150 100"
+          stroke="white"
+          stroke-width="12"
+          stroke-linecap="round"/>
+
+    <!-- Animated Heartbeat Line -->
+    <use href="#heartbeatPath" stroke="white" stroke-width="4">
+      <animate
+        attributeName="stroke-dasharray"
+        from="0,200"
+        to="200,0"
+        dur="2s"
+        repeatCount="indefinite"/>
+    </use>
+
+    <!-- Pulse Dots -->
+    <circle cx="50" cy="100" r="5" fill="white">
+      <animate
+        attributeName="r"
+        values="5;10;5"
+        dur="2s"
+        repeatCount="indefinite"/>
+    </circle>
+    <circle cx="150" cy="100" r="5" fill="white">
+      <animate
+        attributeName="r"
+        values="5;10;5"
+        dur="2s"
+        repeatCount="indefinite"/>
+    </circle>
+  </symbol>
   <symbol id="0" viewBox="0 0 320 512">
     <path d="M160 32.01c-88.37 0-160 71.63-160 160v127.1c0 88.37 71.63 160 160 160s160-71.63 160-160V192C320 103.6 248.4 32.01 160 32.01zM256 320c0 52.93-43.06 96-96 96c-52.93 0-96-43.07-96-96V192c0-52.94 43.07-96 96-96c52.94 0 96 43.06 96 96V320z"></path>
   </symbol>
