@@ -1,0 +1,1 @@
+import{Sa as t,Sb as i,fb as n,gb as a,sb as r}from"./chunk-FXRSZQKI.js";var p=(()=>{class e{static \u0275fac=function(o){return new(o||e)};static \u0275cmp=t({type:e,selectors:[["lib-dashboard"]],decls:2,vars:0,template:function(o,s){o&1&&(n(0,"p"),r(1,"Dashboard works!"),a())},dependencies:[i],encapsulation:2})}return e})();export{p as C};

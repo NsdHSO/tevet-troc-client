@@ -1,0 +1,1 @@
+import{Sa as n,Sb as i,fb as o,gb as m,sb as r}from"./chunk-FXRSZQKI.js";var c=(()=>{class e{static \u0275fac=function(t){return new(t||e)};static \u0275cmp=n({type:e,selectors:[["lib-emergency"]],decls:2,vars:0,template:function(t,a){t&1&&(o(0,"p"),r(1,"Emergency works!"),m())},dependencies:[i],encapsulation:2})}return e})();export{c as C};
