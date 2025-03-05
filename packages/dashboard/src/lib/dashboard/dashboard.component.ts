@@ -12,7 +12,11 @@ import {
   styleUrl: './dashboard.component.css',
 })
 export default class DashboardComponent {
-  pressMe() {
-    console.log('Press me out side dashboard');
+  pressMe(dasboard=false) {
+    if (!dasboard) {
+      console.log('Press me out side dashboard')
+    }else{
+      console.log('Press me out side Button')
+    }
   }
 }
