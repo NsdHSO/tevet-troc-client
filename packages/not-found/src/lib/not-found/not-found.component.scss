@@ -1,0 +1,20 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.not-found_icon{
+  width: calc(100vw - 10rem);
+  height: calc(100vh - 10rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  ::ng-deep{
+    svg{
+      height: inherit;
+      width: inherit;
+    }
+  }
+}

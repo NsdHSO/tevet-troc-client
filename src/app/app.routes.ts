@@ -17,4 +17,9 @@ export const appRoutes: Route[] = [
     loadComponent: () =>
       import('./../../packages/emergency/src').then((c) => c.C),
   },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./../../packages/not-found/src').then((c) => c.C),
+  },
 ];

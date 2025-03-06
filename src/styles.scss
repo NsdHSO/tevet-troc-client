@@ -2,3 +2,13 @@
 @use '@angular/material/prebuilt-themes/indigo-pink.css';
 @use 'reset-css';
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  @apply dark:bg-neutral-900 bg-indigo-50 h-full w-full;
+}

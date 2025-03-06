@@ -1,0 +1,1 @@
+export * from './add-aria-label/add-aria-label.directive'
