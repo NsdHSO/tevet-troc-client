@@ -14,7 +14,6 @@
         "outputPath": "dist/tevet-troc-client",
         "index": "./src/index.html",
         "browser": "./src/main.ts",
-        "baseHref": "/tevet-troc-client/",
         "polyfills": ["zone.js"],
         "tsConfig": "tsconfig.app.json",
         "inlineStyleLanguage": "scss",

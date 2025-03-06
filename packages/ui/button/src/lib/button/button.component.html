@@ -1,6 +1,7 @@
 <button
-aria-label="'Iancu'"
-role="button"
+  [attr.aria-label]="ariaLabel()"
+  [attr.role]="buttonRole()"
+  (click)="event.emit()"
 >
-  pressMe
+  {{ text() }}
 </button>
