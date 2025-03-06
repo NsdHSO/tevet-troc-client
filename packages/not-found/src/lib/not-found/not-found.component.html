@@ -1,4 +1,10 @@
-<mat-icon class="not-found_icon" [svgIcon]="'fa_solid:not-found'"/>
-<lib-text>
-  Iancu
+<mat-icon class="not-found_icon" [svgIcon]="'fa_solid:not-found'" />
+<lib-text styleText="Title_2">
+  Oops! Page not found.
+</lib-text>
+<lib-text styleText="Small_2">
+  We couldn't find the page you requested. It might have been moved or deleted.
+</lib-text>
+<lib-text styleText="Small_2" routerLink="/" class="cursor-pointer" [ariaName]="'Redirect to the Dashboard'">
+  Use the search bar or go back to the Dashboard.
 </lib-text>
