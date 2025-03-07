@@ -8,10 +8,10 @@ import {
   input,
   Renderer2,
 } from '@angular/core';
-import { AddAriaLabelDirective } from '@tevet-troc-client/accessibility';
 import { DOCUMENT } from '@angular/common';
 import { Observable, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { AccessibilityDirective } from '@tevet-troc-client/accessibility';
 
 export type StyleTextType =
   | 'Title_1'
@@ -37,12 +37,12 @@ export enum StyleTextEnum {
 }
 
 @Directive({
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: 'lib-text',
-  standalone: true,
   hostDirectives: [
     {
-      directive: AddAriaLabelDirective,
-      inputs: ['ariaName'],
+      directive: AccessibilityDirective,
+      inputs: ['ariaName', 'ariaDesc'],
     },
   ],
 })

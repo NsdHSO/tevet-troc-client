@@ -1,15 +1,13 @@
 import { Directive, input } from '@angular/core';
 
 @Directive({
-  standalone: true,
   host: {
-  '[attr.aria-label]': 'ariaName()??""'
-}
+    '[attr.aria-description]': 'ariaDesc()?? ""',
+  },
 })
-export class AddAriaLabelDirective {
-
+export class AddAriaDescriptionDirective {
   /**
    * An input what wanted to put it on the element
    */
-  ariaName = input<string>('');
+  ariaDesc = input<string>('');
 }

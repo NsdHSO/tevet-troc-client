@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TextComponent, TextDirective } from '@tevet-troc-client/text';
 
 @Component({
   selector: 'lib-emergency',
-  imports: [CommonModule],
+  imports: [CommonModule, TextComponent, TextDirective],
   templateUrl: './emergency.component.html',
   styleUrl: './emergency.component.css',
 })

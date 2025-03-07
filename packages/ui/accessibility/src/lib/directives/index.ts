@@ -1,1 +1,1 @@
-export * from './add-aria-label/add-aria-label.directive'
+export * from './accessibility.directive';
