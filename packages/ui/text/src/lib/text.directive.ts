@@ -9,7 +9,7 @@ import {
   Renderer2,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { Observable, tap } from 'rxjs';
+import { debounceTime, delay, Observable, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AccessibilityDirective } from '@tevet-troc-client/accessibility';
 
@@ -87,6 +87,13 @@ export class TextDirective  {
    */
   colorText = input<string>('text-slate-800 dark:text-indigo-50');
 
+  constructor() {
+    setTimeout(()=>{
+      this.verifiedIfIsReactiveOrNot()
+    }, 0)
+
+  }
+
   /**
    * Subscribe on value changes and applied the contet
    * @private
@@ -95,6 +102,7 @@ export class TextDirective  {
     if (this.reactiveValueChange !== undefined) {
       this.reactiveValueChange
         ?.pipe(
+          debounceTime(500),
           tap((vlaue: unknown) => {
             this.checkContentAndApplied(vlaue);
           }),
