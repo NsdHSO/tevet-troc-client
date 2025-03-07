@@ -3,23 +3,22 @@ import { Route } from '@angular/router';
 export const appRoutes: Route[] = [
   {
     path: '',
-    loadComponent: () =>
-      import('./../../packages/landing/src').then((c) => c.C),
+    loadComponent: () => import('@tevet-troc-client/landing').then((c) => c.C),
   },
 
   {
     path: 'dashboard',
     loadComponent: () =>
-      import('./../../packages/dashboard/src').then((c) => c.C),
+      import('@tevet-troc-client/dashboard').then((c) => c.C),
   },
   {
     path: 'emergency',
     loadComponent: () =>
-      import('./../../packages/emergency/src').then((c) => c.C),
+      import('@tevet-troc-client/emergency').then((c) => c.C),
   },
   {
     path: '**',
     loadComponent: () =>
-      import('./../../packages/not-found/src').then((c) => c.C),
+      import('@tevet-troc-client/not-found').then((c) => c.C),
   },
 ];
