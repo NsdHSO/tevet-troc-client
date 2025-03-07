@@ -46,7 +46,7 @@ export enum StyleTextEnum {
     },
   ],
 })
-export class TextDirective implements AfterViewInit {
+export class TextDirective  {
   /**
    * Instance of element Ref
    */
@@ -86,10 +86,6 @@ export class TextDirective implements AfterViewInit {
    * Color for text
    */
   colorText = input<string>('text-slate-800 dark:text-indigo-50');
-
-  ngAfterViewInit(): void {
-    this.verifiedIfIsReactiveOrNot();
-  }
 
   /**
    * Subscribe on value changes and applied the contet
