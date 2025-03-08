@@ -99,8 +99,7 @@ export class TextDirective {
   private verifiedIfIsReactiveOrNot() {
     if (this.reactiveValueChange !== undefined) {
       this.reactiveValueChange
-        ?.pipe(
-          debounceTime(500),
+        .pipe(
           tap((vlaue: unknown) => {
             this.checkContentAndApplied(vlaue);
           }),
