@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   DestroyRef,
   Directive,
   ElementRef,
@@ -9,7 +8,7 @@ import {
   Renderer2,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { debounceTime, delay, Observable, tap } from 'rxjs';
+import { debounceTime, Observable, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AccessibilityDirective } from '@tevet-troc-client/accessibility';
 
@@ -46,7 +45,7 @@ export enum StyleTextEnum {
     },
   ],
 })
-export class TextDirective  {
+export class TextDirective {
   /**
    * Instance of element Ref
    */
@@ -88,10 +87,9 @@ export class TextDirective  {
   colorText = input<string>('text-slate-800 dark:text-indigo-50');
 
   constructor() {
-    setTimeout(()=>{
-      this.verifiedIfIsReactiveOrNot()
-    }, 0)
-
+    setTimeout(() => {
+      this.verifiedIfIsReactiveOrNot();
+    }, 0);
   }
 
   /**
@@ -122,7 +120,7 @@ export class TextDirective  {
       case StyleTextEnum.Title_3:
         return 'h1';
       default:
-        return 'p';
+        return 'span';
     }
   }
 
@@ -154,7 +152,7 @@ export class TextDirective  {
 
   createStyledElement(tag: string, classes: string[], content: string): void {
     const element = this._document.createElement(tag);
-    element.innerText = content;
+    element.textContent = content;
 
     classes.forEach((className) =>
       this._renderer2.addClass(element, className)
@@ -163,7 +161,7 @@ export class TextDirective  {
     // Clear the original content
     this._renderer2.setProperty(
       this._elementRef.nativeElement,
-      'innerText',
+      'textContent',
       ''
     );
 
