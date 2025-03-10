@@ -9,7 +9,12 @@ module.exports = {
   ],
   theme: {
     extend: {},
-  },plugins: [
-    require('@tailwindcss/typography')
-  ]
+    fontFamily: {
+      sans: ['Inter', 'sans-serif'],
+      // Keep other default font families if needed
+      serif: ['ui-serif', 'Georgia' /* other serif fonts */],
+      mono: ['ui-monospace', 'SFMono-Regular' /* other mono fonts */],
+    },
+  },
+  plugins: [require('@tailwindcss/typography')],
 };
