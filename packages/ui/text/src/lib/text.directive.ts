@@ -118,7 +118,7 @@ export class TextDirective {
     this.checkContentAndApplied();
   }
 
-  getElementTag(style: string): string {
+  getElementTag(style: string, content: string): string {
     switch (style as StyleTextType) {
       case StyleTextEnum.Title_1:
         return 'h3';
@@ -127,6 +127,9 @@ export class TextDirective {
       case StyleTextEnum.Title_3:
         return 'h1';
       default:
+        if (content.length > 8) {
+          return 'p';
+        }
         return 'span';
     }
   }
@@ -204,7 +207,7 @@ export class TextDirective {
    * @private
    */
   private appliedStyleAndAppended(content: string | any) {
-    const elementTag = this.getElementTag(this.styleText());
+    const elementTag = this.getElementTag(this.styleText(), content);
 
     const elementClasses = this.getElementClasses(this.styleText());
     this.createStyledElement(elementTag, elementClasses, content);

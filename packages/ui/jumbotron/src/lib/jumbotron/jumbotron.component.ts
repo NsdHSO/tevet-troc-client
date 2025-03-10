@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,4 +9,14 @@ import { CommonModule } from '@angular/common';
   `,
   styleUrl: './jumbotron.component.scss',
 })
-export class JumbotronComponent {}
+export class JumbotronComponent {
+  /**
+   * Controls whether hover effects are enabled
+   */
+  hover = input(false);
+
+  @HostBinding('class.hover-enabled')
+  get isHoverEnabled(): boolean {
+    return this.hover();
+  }
+}

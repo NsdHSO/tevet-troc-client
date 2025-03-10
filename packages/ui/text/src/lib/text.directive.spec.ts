@@ -37,8 +37,9 @@ describe('TextDirective', () => {
     };
     const directive = setup(element, renderer2, docuument);
 
-    expect(directive.getElementTag(StyleTextEnum.Title_1 as string))
-      .toEqual('h3');
+    expect(
+      directive.getElementTag(StyleTextEnum.Title_1 as string, content)
+    ).toEqual('h3');
   });
   const testCases = [
     {
@@ -131,7 +132,7 @@ describe('TextDirective', () => {
       const result = directive.getElementClasses(style);
       expect(result)
         .toEqual(expectedClasses);
-      const resultElementExpected = directive.getElementTag(style);
+      const resultElementExpected = directive.getElementTag(style, content);
 
       expect(resultElementExpected)
         .toEqual(elementExpected ?? 'p');
