@@ -1,7 +1,10 @@
 <button
-  [attr.aria-label]="ariaLabel()"
+  [attr.aria-label]="ariaName()"
+  [attr.aria-description]="ariaDesc()"
   [attr.role]="buttonRole()"
   (click)="event.emit()"
 >
-  {{ text() }}
+  <lib-text [styleText]="styleText() ">
+    {{ text() }}
+  </lib-text>
 </button>

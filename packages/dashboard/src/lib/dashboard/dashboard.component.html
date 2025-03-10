@@ -1,6 +1,15 @@
-<lib-button
-  [ariaLabel]="'Iancu'"
-  (event)="pressMe()"
->
+<ul>
+  @for (card of [1,2,3,4]; track card){
+    <li><lib-jumbotron>
+      <lib-text styleText="Title_3" ariaName="asdfsd" ariaDesc="fsdfsd">
+        test {{card}}
+        sdfsdf
+      </lib-text>
+    </lib-jumbotron>
 
-</lib-button>
+      <lib-jumbotron>
+        <lib-button [text]="'Iancu'"/>
+      </lib-jumbotron>
+    </li>
+  }
+</ul>

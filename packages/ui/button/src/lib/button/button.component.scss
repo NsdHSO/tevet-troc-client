@@ -1,0 +1,112 @@
+:host {
+  /* Base styles with improved contrast and spacing */
+  @apply inline-flex items-center justify-center
+  dark:bg-neutral-800 bg-indigo-100
+  px-6 py-3 m-1 rounded-lg
+  shadow-md border dark:border-neutral-700 border-indigo-200
+  dark:text-indigo-100 text-indigo-800
+  relative max-w-max
+  font-medium text-base;
+
+  /* Better transitions for reduced motion if needed */
+  transition: all 200ms ease;
+
+  /* Position relative for the before pseudo-element */
+  position: relative;
+  overflow: hidden; /* Important to contain the ripple effect */
+
+  /* Ensure minimum size for touch targets */
+  min-width: 44px;
+  min-height: 44px;
+
+  /* Before element for click effect - modified for persistent animation */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background-color: currentColor;
+    border-radius: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    pointer-events: none; /* Ensures clicks go through to the button */
+    z-index: 1;
+  }
+
+  /* Focus styles with multiple indicators */
+  &:focus-visible {
+    @apply outline-4 outline-offset-4 outline-indigo-600 dark:outline-indigo-300
+    ring-2 ring-indigo-600 dark:ring-indigo-300;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.4);
+  }
+
+  /* Hover state */
+  &:hover {
+    @apply dark:bg-neutral-700 bg-indigo-50 shadow-lg;
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 2.5px rgba(79, 70, 229, 0.4);
+  }
+
+  /* Active/click state that triggers the before element */
+  &:active {
+    @apply dark:bg-neutral-900 bg-indigo-200 shadow-inner;
+    transform: translateY(1px);
+  }
+
+  /* We'll use a class that gets added on click and removed after animation */
+  &.ripple::before {
+    animation: ripple-complete 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0.2;
+  }
+
+  /* Disabled state with clear visual indicators */
+  &:disabled {
+    @apply dark:bg-neutral-600 bg-indigo-50
+    dark:text-neutral-400 text-neutral-400
+    cursor-not-allowed
+    opacity-70;
+
+    &::before {
+      display: none; /* No ripple effect when disabled */
+    }
+  }
+
+  /* Mobile enhancements */
+  @media (max-width: 768px) {
+    @apply px-5 py-4;
+    min-height: 48px;
+    min-width: 48px;
+  }
+
+  /* High contrast mode support */
+  @media (forced-colors: active) {
+    border: 3px solid ButtonText;
+    background-color: ButtonFace;
+    color: ButtonText;
+
+    &:focus-visible {
+      outline: 3px solid Highlight;
+    }
+  }
+
+  /* Animation for the ripple effect that completes regardless of mouse state */
+  @keyframes ripple-complete {
+    0% {
+      width: 0;
+      height: 0;
+      opacity: 0.2;
+    }
+    100% {
+      width: 500px; /* Large enough to cover any button size */
+      height: 500px;
+      opacity: 0;
+    }
+  }
+}
+
+/* Skip focus styling when using mouse, but keep it for keyboard */
+:global(.js-focus-visible) :host:focus:not(.focus-visible) {
+  @apply outline-none ring-0;
+}

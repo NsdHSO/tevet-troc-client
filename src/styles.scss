@@ -11,4 +11,11 @@
 html,
 body {
   @apply dark:bg-neutral-900 bg-indigo-50 h-full w-full;
+  /* Reduced motion preference support */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.001ms !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
 }

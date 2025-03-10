@@ -22,6 +22,7 @@
       "@tevet-troc-client/card": ["packages/ui/card/src/index.ts"],
       "@tevet-troc-client/dashboard": ["packages/dashboard/src/index.ts"],
       "@tevet-troc-client/emergency": ["packages/emergency/src/index.ts"],
+      "@tevet-troc-client/jumbotron": ["packages/ui/jumbotron/src/index.ts"],
       "@tevet-troc-client/landing": ["packages/landing/src/index.ts"],
       "@tevet-troc-client/not-found": ["packages/not-found/src/index.ts"],
       "@tevet-troc-client/text": ["packages/ui/text/src/index.ts"]

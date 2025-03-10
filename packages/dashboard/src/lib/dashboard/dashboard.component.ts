@@ -1,10 +1,18 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonComponent } from '../../../../ui/button/src/lib/button/button.component';
+import { JumbotronComponent } from '@tevet-troc-client/jumbotron';
+import { TextComponent, TextDirective } from '@tevet-troc-client/text';
+import { ButtonComponent } from '@tevet-troc-client/button';
 
 @Component({
   selector: 'lib-dashboard',
-  imports: [CommonModule, ButtonComponent],
+  imports: [
+    CommonModule,
+    JumbotronComponent,
+    TextComponent,
+    TextDirective,
+    ButtonComponent,
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })

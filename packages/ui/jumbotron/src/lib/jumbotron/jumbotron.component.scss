@@ -1,0 +1,37 @@
+:host {
+  /* Base styles with improved contrast */
+  @apply inline-flex dark:bg-neutral-800 bg-indigo-100 h-full w-full p-4 m-1
+  rounded-lg shadow-md border dark:border-neutral-700 border-indigo-200
+  dark:text-white text-neutral-900 relative max-w-max;
+
+  /* Focus states for keyboard navigation */
+  &:focus-visible {
+    @apply outline-4 outline-offset-2 outline-indigo-500 dark:outline-indigo-400
+    ring-2 ring-indigo-500 dark:ring-indigo-400;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.4);
+  }
+
+  /* Interactive states with multiple visual cues */
+  &:hover {
+    @apply dark:bg-neutral-700 bg-indigo-50 transition-colors duration-200;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.3);
+  }
+
+  &:active {
+    @apply dark:bg-neutral-900 bg-indigo-200 transition-colors duration-75;
+    transform: scale(0.98); /* Subtle scale effect for feedback */
+  }
+
+  /* High contrast mode support */
+  @media (forced-colors: active) {
+    border: 3px solid ButtonText;
+    background-color: ButtonFace;
+    color: ButtonText;
+  }
+
+  /* Larger touch targets on mobile */
+  @media (max-width: 768px) {
+    @apply p-5;
+    min-height: 48px;
+  }
+}

@@ -8,7 +8,7 @@ import {
   Renderer2,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { debounceTime, Observable, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AccessibilityDirective } from '@tevet-troc-client/accessibility';
 
@@ -67,6 +67,14 @@ export class TextDirective {
    */
   @Input()
   reactiveValueChange?: Observable<unknown>;
+  /**
+   * An input what wanted to put it on the element
+   */
+  ariaName = input<string>('');
+  /**
+   * An input what wanted to put it on the element
+   */
+  ariaDesc = input<string>('');
   /**
    * Input with style
    * @enum {string} StyleTextEnum
@@ -197,6 +205,7 @@ export class TextDirective {
    */
   private appliedStyleAndAppended(content: string | any) {
     const elementTag = this.getElementTag(this.styleText());
+
     const elementClasses = this.getElementClasses(this.styleText());
     this.createStyledElement(elementTag, elementClasses, content);
   }
