@@ -4,6 +4,8 @@
 dist
 tmp
 out-tsc
+build
+dist-*
 
 # dependencies
 node_modules
@@ -23,7 +25,7 @@ node_modules
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-*env*
+*.env*
 
 # misc
 /.sass-cache
@@ -38,8 +40,14 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+desktop.ini # windows
 
+# Nx and Angular
 .nx/cache
 .nx/workspace-data
-
 .angular
+
+# Package manager lock files. It is best practice to include these.
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
