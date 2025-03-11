@@ -8,12 +8,4 @@ import { JumbotronComponent } from '@tevet-troc-client/jumbotron';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
-export default class DashboardComponent {
-  pressMe(dasboard = false) {
-    if (!dasboard) {
-      console.log('Press me out side dashboard');
-    } else {
-      console.log('Press me out side Button');
-    }
-  }
-}
+export default class DashboardComponent {}

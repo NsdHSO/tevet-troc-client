@@ -13,7 +13,7 @@ export const CONFIG_MAIN = Object.freeze({
   routerDataConfig: [
     {
       path: 'dashboard',
-      icon: 'fa_solid:1',
+      icon: 'fa_solid:laptop-medical',
       text: 'Dashboard',
     },
     {
