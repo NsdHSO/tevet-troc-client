@@ -1,15 +1,12 @@
-<ul>
+<ul class="grid gap-3 w-full
+           4xs:grid-cols-1
+           2xs:grid-cols-1
+           lg:grid-cols-2">
   @for (card of [1, 2, 3, 4]; track card) {
-    <li>
+    <li class="flex gap-1
+               4xs:flex-col
+               2xs:flex-col">
       <lib-jumbotron [hover]="true">
-        <lib-text styleText="Title_3" ariaName="asdfsd" ariaDesc="fsdfsd">
-          test {{ card }}
-          sdfsdf
-        </lib-text>
-      </lib-jumbotron>
-
-      <lib-jumbotron>
-        <lib-button [text]="'Iancu'" />
       </lib-jumbotron>
     </li>
   }

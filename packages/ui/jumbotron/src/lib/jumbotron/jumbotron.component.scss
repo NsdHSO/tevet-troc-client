@@ -1,8 +1,8 @@
 :host {
   /* Base styles with improved contrast */
-  @apply inline-flex dark:bg-neutral-800 bg-indigo-100 h-full w-full p-4 m-1
+  @apply inline-flex dark:bg-neutral-800 bg-indigo-100 h-full w-full p-4
   rounded-lg shadow-md border dark:border-neutral-700 border-indigo-200
-  dark:text-white text-neutral-900 relative max-w-max;
+  dark:text-white text-neutral-900 relative;
 
   /* Focus states for keyboard navigation */
   &:focus-visible {
