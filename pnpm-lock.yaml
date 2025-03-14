@@ -132,6 +132,9 @@ devDependencies:
   cssnano:
     specifier: ^7.0.6
     version: 7.0.6(postcss@8.4.49)
+  dotenv:
+    specifier: ^16.4.7
+    version: 16.4.7
   eslint:
     specifier: ^9.8.0
     version: 9.21.0

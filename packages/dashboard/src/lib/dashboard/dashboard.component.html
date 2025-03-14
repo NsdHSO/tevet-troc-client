@@ -3,7 +3,7 @@
 sm:grid-cols-2
 "
           >
-  @for (card of [1, 2, 3, 4]; track card) {
+  @for (card of dashboardApi.getAllCards$; track card) {
     <li class="flex gap-1
                4xs:flex-col
                2xs:flex-col">
