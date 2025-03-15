@@ -3,12 +3,11 @@
 sm:grid-cols-2
 "
           >
-  @for (card of dashboardApi.getAllCards$; track card) {
-    <li class="flex gap-1
-               4xs:flex-col
-               2xs:flex-col">
-      <lib-jumbotron [hover]="true">
-      </lib-jumbotron>
-    </li>
+  @if (cards$ | async; as cards) {
+    @for (card of cards; track card.id) {
+      <li>{{ card.title }}</li> <!-- Replace with actual card properties -->
+    }
+  } @else {
+    <li>Loading cards...</li>
   }
 </ul>

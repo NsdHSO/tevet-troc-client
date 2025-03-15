@@ -12,4 +12,5 @@ import { DashboardApiService } from '../service/dashboard-api.service';
 })
 export default class DashboardComponent {
   readonly dashboardApi = inject(DashboardApiService);
+  cards$ = this.dashboardApi.getAllCards$;
 }
