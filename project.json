@@ -152,7 +152,7 @@
       "options": {
         "buildTarget": "tevet-troc-client:build",
         "port": 4200,
-        "staticFilePath": "dist/tevet-troc-client/browser",
+        "staticFilePath": "dist/tevet-troc-client",
         "spa": true
       }
     }
