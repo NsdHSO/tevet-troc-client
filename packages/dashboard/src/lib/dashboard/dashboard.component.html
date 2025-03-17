@@ -6,33 +6,34 @@
     } @placeholder {
       <div class="flex items-center justify-center w-full p-4">
         <div class="animate-pulse flex space-x-4 w-full">
-          <div class="flex-1 space-y-4 py-1">
-            <div class="h-12 bg-gray-200 rounded w-full">
-              Placeholder.....
-            </div>
-          </div>
+          <lib-jumbotron>
+            <lib-text>
+              PlaceHolder
+            </lib-text>
+          </lib-jumbotron>
         </div>
       </div>
     } @loading (minimum 500ms) {
       <!-- Loading state placeholder -->
       <div class="flex items-center justify-center w-full p-4">
         <div class="animate-pulse flex space-x-4 w-full">
-          <div class="flex-1 space-y-4 py-1">
-            <div class="h-12 bg-gray-200 rounded w-full">
-              Loading.....
-            </div>
-          </div>
+          <lib-jumbotron>
+            <lib-text>
+              Loading...
+            </lib-text>
+          </lib-jumbotron>
+
         </div>
       </div>
     } @error {
       <div class="flex items-center justify-center w-full p-4"
       >
         <div class="animate-pulse flex space-x-4 w-full">
-          <div class="flex-1 space-y-4 py-1">
-            <div class="h-12 bg-gray-200 rounded w-full">
-              Something goes wrong
-            </div>
-          </div>
+          <lib-jumbotron>
+            <lib-text>
+              Error When called the API
+            </lib-text>
+          </lib-jumbotron>
         </div>
       </div>
 
