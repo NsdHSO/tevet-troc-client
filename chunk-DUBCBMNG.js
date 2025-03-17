@@ -1,1 +1,0 @@
-import{Sa as t,Sb as p,fb as o,gb as i,sb as m}from"./chunk-FXRSZQKI.js";var a=(()=>{class e{static \u0275fac=function(n){return new(n||e)};static \u0275cmp=t({type:e,selectors:[["lib-landing"]],decls:2,vars:0,template:function(n,d){n&1&&(o(0,"p"),m(1,"Landing works!"),i())},dependencies:[p],encapsulation:2})}return e})();export{a as C};
