@@ -1,12 +1,20 @@
-
-@for (card of dashboardApi.getAllCards$ | async; track card) {
+@for (card of dashboardApi.resp().value; track card) {
   <a [routerLink]="'/'+card.title" role="link" [attr.aria-label]="card.description">
     <li class="flex gap-1
                  4xs:flex-col
                  2xs:flex-col">
       <lib-jumbotron [hover]="true">
-        {{ card.title }}
-      </lib-jumbotron>
+        {{ card.title.charAt(0).toUpperCase() + card.title.slice(1) }}      </lib-jumbotron>
     </li>
   </a>
+}
+
+<!-- Loading state -->
+@if (dashboardApi.resp().loading) {
+  <lib-text>Loading</lib-text>
+}
+
+<!-- Error state -->
+@if (dashboardApi.resp().error) {
+  <lib-text>Error loading data</lib-text>
 }
