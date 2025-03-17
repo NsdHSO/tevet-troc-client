@@ -1,14 +1,42 @@
-<ul class="grid gap-3 w-full
-2xs:grid-cols-1
-sm:grid-cols-2
-"
-          >
-  @for (card of dashboardApi.getAllCards$; track card) {
-    <li class="flex gap-1
-               4xs:flex-col
-               2xs:flex-col">
-      <lib-jumbotron [hover]="true">
-      </lib-jumbotron>
-    </li>
-  }
-</ul>
+<lib-button (event)="should =true" text="Click" [disabled]="true"/>
+<nav aria-label="Second navigation">
+  <ul
+  >
+    @defer(when should) {
+      <app-landing-card />
+    } @placeholder {
+      <div class="flex items-center justify-center w-full p-4">
+        <div class="animate-pulse flex space-x-4 w-full">
+          <div class="flex-1 space-y-4 py-1">
+            <div class="h-12 bg-gray-200 rounded w-full">
+              Placeholder.....
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+    @loading (minimum 500ms) {
+      <!-- Loading state placeholder -->
+      <div class="flex items-center justify-center w-full p-4">
+        <div class="animate-pulse flex space-x-4 w-full">
+          <div class="flex-1 space-y-4 py-1">
+            <div class="h-12 bg-gray-200 rounded w-full">
+              Loading.....
+            </div>
+          </div>
+        </div>
+      </div>
+    } @error {<div class="flex items-center justify-center w-full p-4"
+    >
+      <div class="animate-pulse flex space-x-4 w-full">
+        <div class="flex-1 space-y-4 py-1">
+          <div class="h-12 bg-gray-200 rounded w-full">
+    Something goes wrong
+          </div>
+        </div>
+      </div>
+    </div>
+
+    }
+  </ul>
+</nav>

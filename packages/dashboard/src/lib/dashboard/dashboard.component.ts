@@ -1,15 +1,16 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { JumbotronComponent } from '@tevet-troc-client/jumbotron';
 import { DashboardApiService } from '../service/dashboard-api.service';
+import { LandingCardComponent } from '../components/landing-card/landing-card.component';
+import { ButtonComponent } from '@tevet-troc-client/button';
 
 @Component({
   selector: 'lib-dashboard',
-  imports: [CommonModule, JumbotronComponent],
+  imports: [CommonModule, LandingCardComponent, ButtonComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
-  providers:[DashboardApiService]
+  providers: [DashboardApiService],
 })
 export default class DashboardComponent {
-  readonly dashboardApi = inject(DashboardApiService);
+  should = false;
 }

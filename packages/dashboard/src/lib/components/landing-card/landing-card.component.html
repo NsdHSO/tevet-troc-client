@@ -1,0 +1,12 @@
+
+@for (card of dashboardApi.getAllCards$ | async; track card) {
+  <a [routerLink]="'/'+card.title" role="link" [attr.aria-label]="card.description">
+    <li class="flex gap-1
+                 4xs:flex-col
+                 2xs:flex-col">
+      <lib-jumbotron [hover]="true">
+        {{ card.title }}
+      </lib-jumbotron>
+    </li>
+  </a>
+}

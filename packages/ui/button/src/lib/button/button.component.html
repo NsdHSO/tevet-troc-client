@@ -2,9 +2,11 @@
   [attr.aria-label]="ariaName()"
   [attr.aria-description]="ariaDesc()"
   [attr.role]="buttonRole()"
-  (click)="event.emit()"
+  [attr.aria-disabled]="disabled()"
+
 >
-  <lib-text [styleText]="styleText() ">
+  <lib-text [styleText]="styleText() "
+  >
     {{ text() }}
   </lib-text>
 </button>
