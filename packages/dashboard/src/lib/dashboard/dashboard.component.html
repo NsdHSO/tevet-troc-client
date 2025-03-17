@@ -1,8 +1,7 @@
-<lib-button (event)="should =true" text="Click" [disabled]="true"/>
 <nav aria-label="Second navigation">
   <ul
   >
-    @defer(when should) {
+    @defer {
       <app-landing-card />
     } @placeholder {
       <div class="flex items-center justify-center w-full p-4">
