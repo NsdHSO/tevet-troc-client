@@ -11,7 +11,7 @@ export class DashboardApiService {
     url: this.apiConfigCard.baseUrl,
   }));
 
-  // Consolidated response for template usage
+  // Consolidated response for template usage 
   resp = computed(() => ({
     value: this.httpResourceRes.value()?.message.map((value) => ({
       ...value,
