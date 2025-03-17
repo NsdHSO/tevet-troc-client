@@ -1,12 +1,10 @@
 import { computed, inject, Injectable } from '@angular/core';
-import { API_CONFIG_CARD, API_CONFIG_DASHBOARD } from '../provider/api.token';
+import { API_CONFIG_CARD } from '../provider/api.token';
 import { HttpErrorResponse, httpResource } from '@angular/common/http';
 
 @Injectable()
 export class DashboardApiService {
-  private apiConfigDashboard = inject(API_CONFIG_DASHBOARD);
   private apiConfigCard = inject(API_CONFIG_CARD);
-  // Store the result of httpResource directly
   private httpResourceRes = httpResource<{
     message: { title: string; description: string }[];
   }>(() => ({

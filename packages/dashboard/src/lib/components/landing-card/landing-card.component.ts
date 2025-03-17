@@ -3,10 +3,17 @@ import { RouterLink } from '@angular/router';
 import { JumbotronComponent } from '@tevet-troc-client/jumbotron';
 import { DashboardApiService } from '../../service/dashboard-api.service';
 import { TextComponent, TextDirective } from '@tevet-troc-client/text';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'lib-landing-card',
-  imports: [RouterLink, JumbotronComponent, TextDirective, TextComponent],
+  imports: [
+    RouterLink,
+    JumbotronComponent,
+    TextDirective,
+    TextComponent,
+    AsyncPipe,
+  ],
   templateUrl: './landing-card.component.html',
   styleUrl: './landing-card.component.scss',
 })

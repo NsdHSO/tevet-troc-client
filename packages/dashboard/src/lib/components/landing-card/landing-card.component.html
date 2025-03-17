@@ -4,7 +4,8 @@
                  4xs:flex-col
                  2xs:flex-col">
       <lib-jumbotron [hover]="true">
-        {{ card.title.charAt(0).toUpperCase() + card.title.slice(1) }}      </lib-jumbotron>
+        {{ card.title.charAt(0).toUpperCase() + card.title.slice(1) }}
+      </lib-jumbotron>
     </li>
   </a>
 }
@@ -16,5 +17,6 @@
 
 <!-- Error state -->
 @if (dashboardApi.resp().error) {
-  <lib-text>Error loading data</lib-text>
+  <lib-text>Error loading data signal</lib-text>
 }
+
