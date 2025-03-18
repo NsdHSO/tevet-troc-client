@@ -1,5 +1,5 @@
 @for (card of dashboardApi.resp().value; track card; let idx = $index) {
-  <a libViewTransition="router-navigation" id="{{card.title}}" [routerLink]="'/'+card.title" role="link"
+  <a libViewTransition="router-navigation" identifierTransition="{{card.title}}" [routerLink]="'/'+card.title" role="link"
      [attr.aria-label]="card.title">
     <li class="flex gap-1
                  4xs:flex-col
