@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { FrameWholeModule } from 'ngx-liburg-frame-side';
+import { FrameComponent } from 'ngx-liburg-frame-side';
 
 @Component({
-  imports: [RouterModule, FrameWholeModule],
+  imports: [FrameComponent],
   selector: 'app-root',
-  standalone:true,
+  standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
