@@ -6,6 +6,6 @@ import { TextComponent, TextDirective } from '@tevet-troc-client/text';
   selector: 'lib-emergency',
   imports: [CommonModule, TextComponent, TextDirective],
   templateUrl: './emergency.component.html',
-  styleUrl: './emergency.component.css',
+  styleUrl: './emergency.component.scss',
 })
 export default class EmergencyComponent {}

@@ -29,6 +29,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimations(),
     provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(appRoutes, withViewTransitions()),
     importProvidersFrom(FrameWholeModule.forRoot(CONFIG_MAIN)),
     importProvidersFrom(IconCoreModule),
   ],
