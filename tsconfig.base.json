@@ -27,6 +27,9 @@
       "@tevet-troc-client/landing": ["packages/landing/src/index.ts"],
       "@tevet-troc-client/not-found": ["packages/not-found/src/index.ts"],
       "@tevet-troc-client/text": ["packages/ui/text/src/index.ts"],
+      "@tevet-troc-client/transition": [
+        "packages/utils/transition/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
