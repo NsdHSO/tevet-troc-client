@@ -6,7 +6,7 @@ import { HttpErrorResponse, httpResource } from '@angular/common/http';
 export class DashboardApiService {
   private apiConfigCard = inject(API_CONFIG_CARD);
   private httpResourceRes = httpResource<
-    { title: string; content: string; icon: string }[]
+    { title: string; content: string; icon: string; iconClass: string }[]
   >(
     () => ({
       url: this.apiConfigCard.baseUrl,
@@ -16,7 +16,8 @@ export class DashboardApiService {
         e.message.map((message: any) => ({
           content: message.content,
           title: message.title.toLowerCase(),
-          icon: 'fa_solid:d',
+          icon: message.icon,
+          iconClass: message.iconClass,
         })),
     }
   );
