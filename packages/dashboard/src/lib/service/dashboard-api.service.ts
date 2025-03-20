@@ -1,12 +1,19 @@
 import { computed, inject, Injectable } from '@angular/core';
 import { API_CONFIG_CARD } from '../provider/api.token';
 import { HttpErrorResponse, httpResource } from '@angular/common/http';
+import { CARD_COLOR } from '../maps/card-color';
 
 @Injectable()
 export class DashboardApiService {
   private apiConfigCard = inject(API_CONFIG_CARD);
   private httpResourceRes = httpResource<
-    { title: string; content: string; icon: string; iconClass: string }[]
+    {
+      title: string;
+      content: string;
+      icon: string;
+      iconClass: string;
+      routerLink: string;
+    }[]
   >(
     () => ({
       url: this.apiConfigCard.baseUrl,
@@ -17,7 +24,8 @@ export class DashboardApiService {
           content: message.content,
           title: message.title.toLowerCase(),
           icon: message.icon,
-          iconClass: message.iconClass,
+          iconClass: CARD_COLOR[message.title],
+          routerLink: message.title.replace(/ /g, '-').toLowerCase(),
         })),
     }
   );

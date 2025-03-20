@@ -1,43 +1,41 @@
 <nav aria-label="Second navigation">
-  <ul
-  >
-    @defer {
-      <lib-landing-card />
-    } @placeholder {
-      <div class="flex items-center justify-center w-full p-4">
-        <!-- state placeholder -->
-        <div class="animate-pulse flex space-x-4 w-full">
-          <lib-jumbotron>
-            <lib-text>
-              PlaceHolder
-            </lib-text>
-          </lib-jumbotron>
-        </div>
-      </div>
-    } @loading (minimum 500ms) {
-      <!-- Loading state placeholder -->
-      <div class="flex items-center justify-center w-full p-4">
-        <div class="animate-pulse flex space-x-4 w-full">
-          <lib-jumbotron>
-            <lib-text>
-              Loading...
-            </lib-text>
-          </lib-jumbotron>
 
-        </div>
+  @defer {
+    <lib-landing-card role="list" />
+  } @placeholder {
+    <div class="flex items-center justify-center w-full p-4">
+      <!-- state placeholder -->
+      <div class="animate-pulse flex space-x-4 w-full">
+        <lib-jumbotron>
+          <lib-text>
+            PlaceHolder
+          </lib-text>
+        </lib-jumbotron>
       </div>
-    } @error {
-      <div class="flex items-center justify-center w-full p-4"
-      >
-        <!-- Error state placeholder -->
-        <div class="animate-pulse flex space-x-4 w-full">
-          <lib-jumbotron>
-            <lib-text>
-              Error When called the API...
-            </lib-text>
-          </lib-jumbotron>
-        </div>
+    </div>
+  } @loading (minimum 500ms) {
+    <!-- Loading state placeholder -->
+    <div class="flex items-center justify-center w-full p-4">
+      <div class="animate-pulse flex space-x-4 w-full">
+        <lib-jumbotron>
+          <lib-text>
+            Loading...
+          </lib-text>
+        </lib-jumbotron>
+
       </div>
-    }
-  </ul>
+    </div>
+  } @error {
+    <div class="flex items-center justify-center w-full p-4"
+    >
+      <!-- Error state placeholder -->
+      <div class="animate-pulse flex space-x-4 w-full">
+        <lib-jumbotron>
+          <lib-text>
+            Error When called the API...
+          </lib-text>
+        </lib-jumbotron>
+      </div>
+    </div>
+  }
 </nav>
