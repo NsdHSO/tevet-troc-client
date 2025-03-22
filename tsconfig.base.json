@@ -19,6 +19,7 @@
       "@tevet-troc-client/accessibility": [
         "packages/ui/accessibility/src/index.ts"
       ],
+      "@tevet-troc-client/ambulance": ["packages/ambulance/src/index.ts"],
       "@tevet-troc-client/button": ["packages/ui/button/src/index.ts"],
       "@tevet-troc-client/card": ["packages/ui/card/src/index.ts"],
       "@tevet-troc-client/dashboard": ["packages/dashboard/src/index.ts"],

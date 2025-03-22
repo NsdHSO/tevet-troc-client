@@ -1,4 +1,5 @@
 import {
+  APP_INITIALIZER,
   ApplicationConfig,
   importProvidersFrom,
   inject,
@@ -14,6 +15,9 @@ import {
 } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { TransitionViewService } from '@tevet-troc-client/transition';
+import { httpResource } from '@angular/common/http';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { tap } from 'rxjs';
 
 export const CONFIG_MAIN = Object.freeze({
   routerDataConfig: [

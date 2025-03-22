@@ -7,6 +7,7 @@
     "build": "nx build",
     "build-without-base-h-ref": "nx build-github",
     "test": "nx test",
+    "gen:pack": "read -p 'Enter library name: ' LIBNAME && nx g @nx/angular:library packages/$LIBNAME --tags=business®",
     "gen:lib": "read -p 'Enter library name: ' LIBNAME && nx g @nx/angular:library packages/ui/$LIBNAME --tags=ui®",
     "gen:util": "read -p 'Enter library name: ' LIBNAME && nx g @nx/angular:library packages/utils/$LIBNAME --tags=utils®"
   },
