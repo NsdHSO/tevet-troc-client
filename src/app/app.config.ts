@@ -1,5 +1,4 @@
 import {
-  APP_INITIALIZER,
   ApplicationConfig,
   importProvidersFrom,
   inject,
@@ -11,13 +10,11 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   provideRouter,
   ViewTransitionInfo,
+  withComponentInputBinding,
   withViewTransitions,
 } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { TransitionViewService } from '@tevet-troc-client/transition';
-import { httpResource } from '@angular/common/http';
-import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { tap } from 'rxjs';
 
 export const CONFIG_MAIN = Object.freeze({
   routerDataConfig: [
@@ -28,7 +25,7 @@ export const CONFIG_MAIN = Object.freeze({
     },
     {
       path: 'emergency',
-      icon: 'fa_solid:2',
+      icon: 'fa_solid:truck-medical',
       text: 'Emergency',
     },
   ],
@@ -39,7 +36,11 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimations(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(appRoutes, withViewTransitions({ onViewTransitionCreated })),
+    provideRouter(
+      appRoutes,
+      withViewTransitions({ onViewTransitionCreated }),
+      withComponentInputBinding()
+    ),
     importProvidersFrom(FrameWholeModule.forRoot(CONFIG_MAIN)),
     importProvidersFrom(IconCoreModule),
     TransitionViewService,

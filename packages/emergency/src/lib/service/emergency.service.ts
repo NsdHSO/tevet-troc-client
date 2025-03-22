@@ -1,9 +1,16 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { EmergencyApiService } from './api/emergency-api.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class EmergencyService {
+  /**
+   *
+   * @private
+   */
+  private readonly _ambulanceApi = inject(EmergencyApiService);
 
-  constructor() { }
+  /**
+   *
+   */
+  resource = this._ambulanceApi.httpResourceRes;
 }

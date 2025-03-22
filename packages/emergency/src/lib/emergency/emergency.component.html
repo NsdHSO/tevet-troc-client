@@ -1,3 +1,11 @@
-<lib-text ariaName="fsdf">
-  Emergency works!
-</lib-text>
+
+@for (layout of layouts(); track layout.title) {
+  <section
+    [attr.aria-description]="layout.ariaDescription"
+  >
+    <header class="{{layout.class}} flex gap-4 items-center">
+      <span class="text-purple-600 dark:text-purple-400"><mat-icon [svgIcon]="layout.icon"/></span>
+      <lib-text styleText="Title_1">{{layout.title}}</lib-text>
+    </header>
+  </section>
+}
