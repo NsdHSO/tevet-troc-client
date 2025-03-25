@@ -3,10 +3,18 @@ import { CommonModule } from '@angular/common';
 import { TextComponent, TextDirective } from '@tevet-troc-client/text';
 import { EmergencyService } from '../service/emergency.service';
 import { MatIcon } from '@angular/material/icon';
+import { ColumnTextComponent, TableComponent } from 'ngx-liburg';
 
 @Component({
   selector: 'lib-emergency',
-  imports: [CommonModule, TextComponent, TextDirective, MatIcon],
+  imports: [
+    CommonModule,
+    TextComponent,
+    TextDirective,
+    MatIcon,
+    TableComponent,
+    ColumnTextComponent,
+  ],
   templateUrl: './emergency.component.html',
   styleUrl: './emergency.component.scss',
   providers: [EmergencyService],
@@ -22,6 +30,7 @@ export default class EmergencyComponent {
         ariaLabel: string;
         ariaDescription: string;
         class: string;
+        sectionClass: string;
       }
     ]
   >();

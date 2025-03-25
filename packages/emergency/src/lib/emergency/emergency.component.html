@@ -1,11 +1,35 @@
-
-@for (layout of layouts(); track layout.title) {
+@for (layout of layouts(); track layout.title; let idx = $index) {
   <section
     [attr.aria-description]="layout.ariaDescription"
   >
     <header class="{{layout.class}} flex gap-4 items-center">
-      <span class="text-purple-600 dark:text-purple-400"><mat-icon [svgIcon]="layout.icon"/></span>
-      <lib-text styleText="Title_1">{{layout.title}}</lib-text>
+      <span class="text-purple-600 dark:text-purple-400"><mat-icon [svgIcon]="layout.icon" /></span>
+      <lib-text styleText="Title_1">{{ layout.title }}</lib-text>
     </header>
+    <main class="{{layout.sectionClass}}">
+      @if (emergencyService.dataSourceForTable()[idx]?.value()?.length > 0) {
+        <elix-table
+          [dataSource]="emergencyService.dataSourceForTable()[idx].value()"
+          [zebraColor]="true"
+        >
+          <elix-column-text
+            className="ambulance-id"
+            field="ambulanceIc"
+            name="Ambulance ID" />
+          <elix-column-text
+            className="fuell-type"
+            field="fuelType"
+            name="Fuel Type" />
+          <elix-column-text
+            className="ambulance-type"
+            field="type"
+            name="Type of Ambulance" />
+          <elix-column-text
+            className="driver-name"
+            field="driverName"
+            name="Driver Name" />
+        </elix-table>
+      }
+    </main>
   </section>
 }

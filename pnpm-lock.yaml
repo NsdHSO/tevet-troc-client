@@ -159,6 +159,9 @@ devDependencies:
   jest-preset-angular:
     specifier: ~14.4.0
     version: 14.4.0(@angular-devkit/build-angular@19.2.0)(@angular/compiler-cli@19.2.0)(@angular/core@19.2.0)(@angular/platform-browser-dynamic@19.2.0)(@babel/core@7.26.10)(jest@29.7.0)(typescript@5.7.2)
+  ngx-liburg:
+    specifier: ^19.0.1
+    version: 19.0.1(@angular/common@19.2.0)(@angular/core@19.2.0)(@angular/material@19.2.0)
   ngx-liburg-frame-side:
     specifier: ^19.0.10
     version: 19.0.10(@angular/common@19.2.0)(@angular/core@19.2.0)
@@ -732,7 +735,6 @@ packages:
       tslib: 2.8.1
     optionalDependencies:
       parse5: 7.2.1
-    dev: false
 
   /@angular/cli@19.2.0(@types/node@18.16.9):
     resolution: {integrity: sha512-LUxuku6obwigdDJozAvmXyhMcm3rSXFoZK4+Al7r/JE80pjQEE+bGpu7jCb6JsH813DTNauN+BB66qk8bXSgRw==}
@@ -832,7 +834,6 @@ packages:
       '@angular/platform-browser': 19.2.0(@angular/animations@19.2.0)(@angular/common@19.2.0)(@angular/core@19.2.0)
       rxjs: 7.8.1
       tslib: 2.8.1
-    dev: false
 
   /@angular/language-service@19.2.0:
     resolution: {integrity: sha512-45utEVXwCYE5vQSMX0ImBjgkcMQ8cqPN4xGHLqYiFEkp/hgbixejA4sMPP1Jn7YrjpfK4DmAaO5z5Hzp11zJ7A==}
@@ -856,7 +857,6 @@ packages:
       '@angular/platform-browser': 19.2.0(@angular/animations@19.2.0)(@angular/common@19.2.0)(@angular/core@19.2.0)
       rxjs: 7.8.1
       tslib: 2.8.1
-    dev: false
 
   /@angular/platform-browser-dynamic@19.2.0(@angular/common@19.2.0)(@angular/compiler@19.2.0)(@angular/core@19.2.0)(@angular/platform-browser@19.2.0):
     resolution: {integrity: sha512-664OAYxzRYx9WjZu+o0VT+vMM0OqPOb0OnbwnyvIVNBuufWK7/IxWZ/U+Kh9A/XJYpDPtB5N1WEfeiO8AAzWnQ==}
@@ -11634,6 +11634,19 @@ packages:
     dependencies:
       '@angular/common': 19.2.0(@angular/core@19.2.0)(rxjs@7.8.1)
       '@angular/core': 19.2.0(rxjs@7.8.1)(zone.js@0.15.0)
+      tslib: 2.8.1
+    dev: true
+
+  /ngx-liburg@19.0.1(@angular/common@19.2.0)(@angular/core@19.2.0)(@angular/material@19.2.0):
+    resolution: {integrity: sha512-E9MXcoOW3q2jA3ty4p5FaBJLyzUAgTsY8JKVT6UF9sLllLgQXjSNUOLBjEdNzyuzfZUuaFqJVphXPq6OcOf6qg==}
+    peerDependencies:
+      '@angular/common': ^19.0.0
+      '@angular/core': ^19.0.0
+      '@angular/material': ^19.0.0
+    dependencies:
+      '@angular/common': 19.2.0(@angular/core@19.2.0)(rxjs@7.8.1)
+      '@angular/core': 19.2.0(rxjs@7.8.1)(zone.js@0.15.0)
+      '@angular/material': 19.2.0(@angular/cdk@19.2.0)(@angular/common@19.2.0)(@angular/core@19.2.0)(@angular/forms@19.2.0)(@angular/platform-browser@19.2.0)(rxjs@7.8.1)
       tslib: 2.8.1
     dev: true
 

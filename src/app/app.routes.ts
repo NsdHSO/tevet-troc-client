@@ -27,12 +27,14 @@ export const appRoutes: Route[] = [
           icon: 'fa_solid:truck-medical',
           class: 'emergency-ambulance',
           ariaLabel: 'Ambulance Vehicle',
+          sectionClass: 'emergency-ambulance-content',
           ariaDescription: 'Icon representing an emergency ambulance vehicle.',
         },
         {
           title: 'Ambulatory',
           class: 'emergency-ambulatory',
           icon: 'fa_solid:wheelchair-move',
+          sectionClass: 'emergency-ambulatory-content',
           ariaLabel: 'Ambulatory Transport',
           ariaDescription:
             'Icon representing non-emergency ambulatory patient transport.',
