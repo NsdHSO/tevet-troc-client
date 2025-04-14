@@ -23,6 +23,9 @@ import { PageEvent } from '@angular/material/paginator';
 export default class EmergencyComponent {
   readonly emergencyService = inject(EmergencyService);
 
+  /**
+   * Layout
+   */
   readonly layouts = input<
     [
       {
