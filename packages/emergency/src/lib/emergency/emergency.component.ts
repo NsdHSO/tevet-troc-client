@@ -4,6 +4,7 @@ import { TextComponent, TextDirective } from '@tevet-troc-client/text';
 import { EmergencyService } from '../service/emergency.service';
 import { MatIcon } from '@angular/material/icon';
 import { ColumnTextComponent, TableComponent } from 'ngx-liburg';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'lib-emergency',
@@ -34,4 +35,13 @@ export default class EmergencyComponent {
       }
     ]
   >();
+
+  changePage($event: PageEvent) {
+    console.log($event);
+    if ($event.pageIndex === 0) {
+      ++$event.pageIndex;
+    }
+    this.emergencyService.page.set($event.pageIndex);
+    this.emergencyService.pageSize.set($event.pageSize);
+  }
 }

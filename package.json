@@ -67,7 +67,7 @@
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "jest-preset-angular": "~14.4.0",
-    "ngx-liburg": "^19.0.1",
+    "ngx-liburg": "^19.0.2",
     "ngx-liburg-frame-side": "^19.0.10",
     "ngx-liburg-icon": "^19.0.2",
     "nx": "20.4.6",

@@ -13,16 +13,26 @@ export class EmergencyApiService {
   hospitalId = signal('Hospital of the University of Pennsylvania');
   /**
    *
+   */
+  pageSize = signal(10);
+  /**
+   *
+   */
+  page = signal(1);
+  /**
+   *
    * @private
    */
   private apiConfigEmergency = inject(API_CONFIG_AMBULANCE);
 
   httpResourceRes = httpResource(
     () =>
-      `${this.apiConfigEmergency.baseUrl}?filterBy=hospitalId=${this.hospitalId()}`,
+      `${
+        this.apiConfigEmergency.baseUrl
+      }?filterBy=hospitalId=${this.hospitalId()},page=${this.page()},pageSize=${this.pageSize()}`,
     {
-      parse: (e: any) =>
-        e.message.map(
+      parse: (e: any) => ({
+        data: e.message.data.map(
           (item: any) =>
             ({
               actions: [
@@ -38,6 +48,8 @@ export class EmergencyApiService {
               },
             } as DataSourceMaterialTable<any>)
         ),
+        length: e.message.length,
+      }),
     }
-  )
+  );
 }

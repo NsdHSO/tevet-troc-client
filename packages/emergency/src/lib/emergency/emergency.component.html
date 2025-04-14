@@ -7,10 +7,15 @@
       <lib-text styleText="Title_1">{{ layout.title }}</lib-text>
     </header>
     <main class="{{layout.sectionClass}}">
-      @if (emergencyService.dataSourceForTable()[idx]?.value()?.length > 0) {
+      @if (emergencyService.dataSourceForTable()[idx]?.value()?.data?.length > 0) {
         <elix-table
-          [dataSource]="emergencyService.dataSourceForTable()[idx].value()"
+          [dataSource]="emergencyService.dataSourceForTable()[idx].value().data"
           [zebraColor]="true"
+          [showPagination]="true"
+          (onPaginationChange)="changePage($event)"
+          [lenghtPagination]="emergencyService.dataSourceForTable()[idx].value().length"
+          [pageIndex]="emergencyService.page()"
+          [pageSize]="emergencyService.pageSize()"
         >
           <elix-column-text
             className="ambulance-id"
