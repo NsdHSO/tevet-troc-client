@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input, linkedSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TextComponent, TextDirective } from '@tevet-troc-client/text';
 import { EmergencyService } from '../service/emergency.service';
@@ -39,11 +39,8 @@ export default class EmergencyComponent {
     ]
   >();
 
+
   changePage($event: PageEvent) {
-    console.log($event);
-    if ($event.pageIndex === 0) {
-      ++$event.pageIndex;
-    }
     this.emergencyService.page.set($event.pageIndex);
     this.emergencyService.pageSize.set($event.pageSize);
   }

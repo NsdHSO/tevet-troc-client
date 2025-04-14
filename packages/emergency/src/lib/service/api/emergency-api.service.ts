@@ -18,7 +18,7 @@ export class EmergencyApiService {
   /**
    *
    */
-  page = signal(1);
+  page = signal(0);
   /**
    *
    * @private
