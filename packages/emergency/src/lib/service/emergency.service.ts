@@ -1,4 +1,4 @@
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, Signal, signal } from '@angular/core';
 import { EmergencyApiService } from './api/emergency-api.service';
 import { DataSourceMaterialTable } from 'ngx-liburg';
 
@@ -22,7 +22,6 @@ export class EmergencyService {
    */
   dataSourceForTable = computed(() => {
     const dataSource: DataSourceMaterialTable<any>[] = [];
-    console.log(this._ambulanceApi.httpResourceRes.value());
     dataSource.push(this._ambulanceApi.httpResourceRes as any);
 
     return dataSource;
