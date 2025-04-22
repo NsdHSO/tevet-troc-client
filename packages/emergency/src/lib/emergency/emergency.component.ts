@@ -38,10 +38,4 @@ export default class EmergencyComponent {
       }
     ]
   >();
-
-
-  changePage($event: PageEvent) {
-    this.emergencyService.page.set($event.pageIndex);
-    this.emergencyService.pageSize.set($event.pageSize);
-  }
 }
