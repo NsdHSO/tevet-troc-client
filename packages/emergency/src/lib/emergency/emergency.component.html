@@ -12,7 +12,6 @@
           [dataSource]="emergencyService.dataSourceForTable()[idx].value().data"
           [zebraColor]="true"
           [showPagination]="true"
-          (onPaginationChange)="changePage($event)"
           [lenghtPagination]="emergencyService.dataSourceForTable()[idx].value().length"
           [pageIndex]="emergencyService.page()"
           [pageSize]="emergencyService.pageSize()"
