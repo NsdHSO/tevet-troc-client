@@ -11,6 +11,7 @@ export const API_CONFIG_CARD = new InjectionToken('API_CONFIG_CARD', {
     const apiUrl = process.env['TEVET_API'] || '';
     return {
       baseUrl: apiUrl + '/v1/card',
+
     };
   },
 });

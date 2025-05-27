@@ -17,10 +17,13 @@ export class DashboardApiService {
   >(
     () => ({
       url: this.apiConfigCard.baseUrl,
+      params:{
+        filter:'dashboard=home_entry'
+      }
     }),
     {
       parse: (e: any) =>
-        e.message.map((message: any) => ({
+        e.message.data.map((message: any) => ({
           content: message.content,
           title: message.title.toLowerCase(),
           icon: message.icon,
