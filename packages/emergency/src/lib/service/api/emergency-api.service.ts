@@ -2,6 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { API_CONFIG_AMBULANCE } from '../../provider/api.token';
 import { httpResource } from '@angular/common/http';
 import { DataSourceMaterialTable } from 'ngx-liburg';
+import { AmbulanceDetails, AmbulanceType, ambulanceTypeDisplayNames } from '../../maps/ambulance-type';
 
 @Injectable({
   providedIn: 'root',
@@ -33,7 +34,7 @@ export class EmergencyApiService {
     {
       parse: (e: any) => ({
         data: e.message.data.map(
-          (item: any) =>
+          (item: AmbulanceDetails) =>
             ({
               actions: [
                 {
@@ -45,6 +46,7 @@ export class EmergencyApiService {
               editable: true,
               model: {
                 ...item,
+                type: ambulanceTypeDisplayNames[item.type],
               },
             } as DataSourceMaterialTable<any>)
         ),
