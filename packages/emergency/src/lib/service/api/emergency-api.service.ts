@@ -3,6 +3,7 @@ import { API_CONFIG_AMBULANCE } from '../../provider/api.token';
 import { httpResource } from '@angular/common/http';
 import { DataSourceMaterialTable } from 'ngx-liburg';
 import { AmbulanceDetails, AmbulanceType, ambulanceTypeDisplayNames } from '../../maps/ambulance-type';
+import { PaginatedBackendResponse } from '../../../../../utils/http-response/src/lib/models';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +33,7 @@ export class EmergencyApiService {
         this.apiConfigEmergency.baseUrl
       }?filterBy=hospitalId=${this.hospitalId()},page=${this.page()},pageSize=${this.pageSize()}`,
     {
-      parse: (e: any) => ({
+      parse: (e:any) => ({
         data: e.message.data.map(
           (item: AmbulanceDetails) =>
             ({
@@ -48,9 +49,9 @@ export class EmergencyApiService {
                 ...item,
                 type: ambulanceTypeDisplayNames[item.type],
               },
-            } as DataSourceMaterialTable<any>)
+            } as DataSourceMaterialTable<AmbulanceDetails>)
         ),
-        length: e.message.length,
+        length: e.message.data.length,
       }),
     }
   );
