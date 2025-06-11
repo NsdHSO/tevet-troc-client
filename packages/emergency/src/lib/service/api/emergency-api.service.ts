@@ -28,31 +28,36 @@ export class EmergencyApiService {
   private apiConfigEmergency = inject(API_CONFIG_AMBULANCE);
 
   httpResourceRes = httpResource(
-    () =>
-      `${
+    () => ({
+      url: `${
         this.apiConfigEmergency.baseUrl
-      }?filterBy=hospitalId=${this.hospitalId()},page=${this.page()},pageSize=${this.pageSize()}`,
+      }?filterBy=hospitalId=${this.hospitalId()},page=${this.page()},pageSize=${this.pageSize()}`
+    }),
     {
-      parse: (e:any) => ({
-        data: e.message.data.map(
-          (item: AmbulanceDetails) =>
-            ({
-              actions: [
-                {
-                  iconClass: 'fa_solid:d',
-                  classCss: 'edit',
-                  method: (row: any) => console.log(row),
+      parse: (e: unknown ) => {
+        const backendResponse = e as PaginatedBackendResponse<AmbulanceDetails>;
+        return {
+          data: backendResponse.message.data.map(
+            (item: AmbulanceDetails) =>
+              ({
+                actions: [
+                  {
+                    iconClass: 'fa_solid:d',
+                    classCss: 'edit',
+                    method: (row: any) => console.log(row),
+                  },
+                ],
+                editable: true,
+                model: {
+                  ...item,
+                  // Ensure type lookup is correct:
+                  type: ambulanceTypeDisplayNames[item.type as AmbulanceType],
                 },
-              ],
-              editable: true,
-              model: {
-                ...item,
-                type: ambulanceTypeDisplayNames[item.type],
-              },
-            } as DataSourceMaterialTable<AmbulanceDetails>)
-        ),
-        length: e.message.data.length,
-      }),
+              } as DataSourceMaterialTable<AmbulanceDetails>)
+          ),
+          length: backendResponse.message.pagination.totalItems,
+        };
+      },
     }
   );
 }
