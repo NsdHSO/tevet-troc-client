@@ -28,6 +28,7 @@
       ],
       "@tevet-troc-client/jumbotron": ["packages/ui/jumbotron/src/index.ts"],
       "@tevet-troc-client/landing": ["packages/landing/src/index.ts"],
+      "@tevet-troc-client/models": ["packages/utils/models/src/index.ts"],
       "@tevet-troc-client/not-found": ["packages/not-found/src/index.ts"],
       "@tevet-troc-client/text": ["packages/ui/text/src/index.ts"],
       "@tevet-troc-client/transition": [

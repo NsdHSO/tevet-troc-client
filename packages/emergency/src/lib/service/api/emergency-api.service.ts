@@ -4,6 +4,7 @@ import { httpResource } from '@angular/common/http';
 import { DataSourceMaterialTable } from 'ngx-liburg';
 import { AmbulanceDetails, AmbulanceType, ambulanceTypeDisplayNames } from '../../maps/ambulance-type';
 import { PaginatedBackendResponse } from '../../../../../utils/http-response/src/lib/models';
+import { fuelTypeDisplayNames, FuelTypes } from '@tevet-troc-client/models';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,7 @@ export class EmergencyApiService {
   /**
    *
    */
-  page = signal(0);
+  page = signal(1);
   /**
    *
    * @private
@@ -31,7 +32,7 @@ export class EmergencyApiService {
     () => ({
       url: `${
         this.apiConfigEmergency.baseUrl
-      }?filterBy=hospitalId=${this.hospitalId()},page=${this.page()},pageSize=${this.pageSize()}`
+      }?filterBy=hospitalId=${this.hospitalId()}&page=${this.page()}&per_page=${this.pageSize()}`
     }),
     {
       parse: (e: unknown ) => {
@@ -52,6 +53,8 @@ export class EmergencyApiService {
                   ...item,
                   // Ensure type lookup is correct:
                   type: ambulanceTypeDisplayNames[item.type as AmbulanceType],
+                  fuel_type: fuelTypeDisplayNames[item.fuel_type as FuelTypes],
+                  driver_name: item.driver_name ?? "Not set",
                 },
               } as DataSourceMaterialTable<AmbulanceDetails>)
           ),

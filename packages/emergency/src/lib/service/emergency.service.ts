@@ -1,4 +1,4 @@
-import { computed, inject, Injectable, Signal, signal } from '@angular/core';
+import { computed, inject, Injectable } from '@angular/core';
 import { EmergencyApiService } from './api/emergency-api.service';
 import { DataSourceMaterialTable } from 'ngx-liburg';
 
@@ -12,7 +12,13 @@ export class EmergencyService {
   /**
    *
    */
-  pageSize = this._ambulanceApi.pageSize
+  pageSize = this._ambulanceApi.pageSize;
+
+  changePageSize(event: any) {
+    this._ambulanceApi.pageSize.set(event.pageSize);
+    this._ambulanceApi.page.set(++event.pageIndex);
+  }
+
   /**
    *
    */

@@ -15,14 +15,16 @@
           [lenghtPagination]="emergencyService.dataSourceForTable()[idx].value().length"
           [pageIndex]="emergencyService.page()"
           [pageSize]="emergencyService.pageSize()"
+          (onPaginationChange)="emergencyService.changePageSize($event)"
+
         >
           <elix-column-text
             className="ambulance-id"
-            field="ambulanceIc"
+            field="ambulance_ic"
             name="Ambulance ID" />
           <elix-column-text
             className="fuell-type"
-            field="fuelType"
+            field="fuel_type"
             name="Fuel Type" />
           <elix-column-text
             className="ambulance-type"
@@ -30,7 +32,7 @@
             name="Type of Ambulance" />
           <elix-column-text
             className="driver-name"
-            field="driverName"
+            field="driver_name"
             name="Driver Name" />
         </elix-table>
       }
