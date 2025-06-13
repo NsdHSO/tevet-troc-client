@@ -1,9 +1,9 @@
 import { Component, HostBinding, input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'lib-jumbotron',
-  imports: [CommonModule],
+  imports: [],
   template: `
     <ng-content />
   `,
