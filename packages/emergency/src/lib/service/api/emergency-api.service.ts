@@ -1,8 +1,12 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { API_CONFIG_AMBULANCE } from '../../provider/api.token';
 import { httpResource } from '@angular/common/http';
 import { DataSourceMaterialTable } from 'ngx-liburg';
-import { AmbulanceDetails, AmbulanceType, ambulanceTypeDisplayNames } from '../../maps/ambulance-type';
+import {
+  AmbulanceDetails,
+  AmbulanceType,
+  ambulanceTypeDisplayNames,
+} from '../../maps/ambulance-type';
 import { PaginatedBackendResponse } from '../../../../../utils/http-response/src/lib/models';
 import { fuelTypeDisplayNames, FuelTypes } from '@tevet-troc-client/models';
 
@@ -21,7 +25,8 @@ export class EmergencyApiService {
   /**
    *
    */
-  page = signal(1);
+  page = signal(0);
+
   /**
    *
    * @private
@@ -32,10 +37,10 @@ export class EmergencyApiService {
     () => ({
       url: `${
         this.apiConfigEmergency.baseUrl
-      }?filterBy=hospitalId=${this.hospitalId()}&page=${this.page()}&per_page=${this.pageSize()}`
+      }?filterBy=hospitalId=${this.hospitalId()}&page=${this.page()}&per_page=${this.pageSize()}`,
     }),
     {
-      parse: (e: unknown ) => {
+      parse: (e: unknown) => {
         const backendResponse = e as PaginatedBackendResponse<AmbulanceDetails>;
         return {
           data: backendResponse.message.data.map(
@@ -43,9 +48,10 @@ export class EmergencyApiService {
               ({
                 actions: [
                   {
-                    iconClass: 'fa_solid:d',
+                    iconClass: 'fa_solid:pen-to-square',
                     classCss: 'edit',
-                    method: (row: any) => console.log(row),
+                    method: (row: DataSourceMaterialTable<AmbulanceDetails>) =>
+                      console.log(row.model),
                   },
                 ],
                 editable: true,
@@ -54,11 +60,11 @@ export class EmergencyApiService {
                   // Ensure type lookup is correct:
                   type: ambulanceTypeDisplayNames[item.type as AmbulanceType],
                   fuel_type: fuelTypeDisplayNames[item.fuel_type as FuelTypes],
-                  driver_name: item.driver_name ?? "Not set",
+                  driver_name: item.driver_name ?? 'Not set',
                 },
               } as DataSourceMaterialTable<AmbulanceDetails>)
           ),
-          length: backendResponse.message.pagination.totalItems,
+          length: backendResponse.message.pagination.total_items,
         };
       },
     }

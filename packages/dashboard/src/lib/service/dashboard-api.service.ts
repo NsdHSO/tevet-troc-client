@@ -18,7 +18,8 @@ export class DashboardApiService {
     () => ({
       url: this.apiConfigCard.baseUrl,
       params:{
-        filter:'dashboard=Dashboard TjNxu'
+        filter:'dashboard=Dashboard TjNxu',
+        page:0
       }
     }),
     {

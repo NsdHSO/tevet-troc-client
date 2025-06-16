@@ -1,10 +1,9 @@
-import { Component, inject, input, linkedSignal } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TextComponent, TextDirective } from '@tevet-troc-client/text';
 import { EmergencyService } from '../service/emergency.service';
 import { MatIcon } from '@angular/material/icon';
-import { ColumnTextComponent, TableComponent } from 'ngx-liburg';
-import { PageEvent } from '@angular/material/paginator';
+import { ColumnIconActionComponent, ColumnTextComponent, TableComponent } from 'ngx-liburg';
 
 @Component({
   selector: 'lib-emergency',
@@ -15,6 +14,7 @@ import { PageEvent } from '@angular/material/paginator';
     MatIcon,
     TableComponent,
     ColumnTextComponent,
+    ColumnIconActionComponent,
   ],
   templateUrl: './emergency.component.html',
   styleUrl: './emergency.component.scss',

@@ -4,12 +4,12 @@ import { BackendHttpCode } from './backend_response';
  * Represents the pagination information included in paginated responses.
  */
 export interface PaginationInfo {
-  currentPage: number;
-  pageSize: number;
-  totalItems: number;
-  totalPages: number;
-  hasNextPage: boolean;
-  hasPreviousPage: boolean;
+  current_page: number;
+  page_size: number;
+  total_items: number;
+  total_pages: number;
+  has_next_Page: boolean;
+  has_previous_page: boolean;
 }
 
 /**
