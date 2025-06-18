@@ -1,19 +1,27 @@
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { API_CONFIG_AMBULANCE } from '../../provider/api.token';
-import { httpResource } from '@angular/common/http';
+import { HttpClient, httpResource } from '@angular/common/http';
 import { DataSourceMaterialTable } from 'ngx-liburg';
 import {
   AmbulanceDetails,
   AmbulanceType,
   ambulanceTypeDisplayNames,
 } from '../../maps/ambulance-type';
-import { PaginatedBackendResponse } from '../../../../../utils/http-response/src/lib/models';
+import { PaginatedBackendResponse } from '@tevet-troc-client/http-response';
 import { fuelTypeDisplayNames, FuelTypes } from '@tevet-troc-client/models';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EmergencyApiService {
+  private payloadAmbulance = new Subject<Partial<AmbulanceDetails>>();
+
+  /**
+   *
+   */
+  httpClient = inject(HttpClient);
+
   /**
    *
    */
@@ -50,11 +58,22 @@ export class EmergencyApiService {
                   {
                     iconClass: 'fa_solid:pen-to-square',
                     classCss: 'edit',
-                    method: (row: DataSourceMaterialTable<AmbulanceDetails>) =>
-                      console.log(row.model),
+                    method: (
+                      row: DataSourceMaterialTable<AmbulanceDetails>
+                    ) => {
+                      row.editable = !row.editable;
+                      if (!row.editable) {
+                        this.httpClient
+                          .patch(
+                            `${this.apiConfigEmergency.baseUrl}/${row.model.id}`,
+                            item
+                          )
+                          .subscribe();
+                      }
+                    },
                   },
                 ],
-                editable: true,
+                editable: false,
                 model: {
                   ...item,
                   // Ensure type lookup is correct:
