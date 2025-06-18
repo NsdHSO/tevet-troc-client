@@ -6,6 +6,7 @@ import {
   AmbulanceDetails,
   AmbulanceType,
   ambulanceTypeDisplayNames,
+  getAmbulanceTypeFromDisplay,
 } from '../../maps/ambulance-type';
 import { PaginatedBackendResponse } from '@tevet-troc-client/http-response';
 import { fuelTypeDisplayNames, FuelTypes } from '@tevet-troc-client/models';
@@ -63,10 +64,14 @@ export class EmergencyApiService {
                     ) => {
                       row.editable = !row.editable;
                       if (!row.editable) {
+                      console.log(row.model.driver_name);
                         this.httpClient
                           .patch(
                             `${this.apiConfigEmergency.baseUrl}/${row.model.id}`,
-                            item
+                            {
+                              ...row.model,
+                              type: getAmbulanceTypeFromDisplay(row.model.type) || row.model.type as AmbulanceType
+                            }
                           )
                           .subscribe();
                       }

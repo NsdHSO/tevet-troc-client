@@ -124,3 +124,10 @@ export interface AmbulanceDetails {
   car_details_make: string;
   car_details_model: string;
 }
+
+export function getAmbulanceTypeFromDisplay(displayName: string): AmbulanceType | undefined {
+  const entry = Object.entries(ambulanceTypeDisplayNames).find(
+    ([, value]) => value === displayName
+  );
+  return entry ? entry[0] as AmbulanceType : undefined;
+}
