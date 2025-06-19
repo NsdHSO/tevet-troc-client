@@ -81,7 +81,6 @@ export class EmergencyApiService {
                 editable: false,
                 model: {
                   ...item,
-                  // Ensure type lookup is correct:
                   type: ambulanceTypeDisplayNames[item.type as AmbulanceType],
                   fuel_type: fuelTypeDisplayNames[item.fuel_type as FuelTypes],
                   driver_name: item.driver_name ?? 'Not set',
