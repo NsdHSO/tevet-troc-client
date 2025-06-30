@@ -169,8 +169,8 @@ importers:
         specifier: ^19.0.2
         version: 19.0.2(a98b69fc5cfeef3b4e6643ad68675b8b)
       ngx-liburg-frame-side:
-        specifier: ^19.0.12
-        version: 19.0.12(@angular/common@19.2.0(@angular/core@19.2.0(rxjs@7.8.2)(zone.js@0.15.0))(rxjs@7.8.2))(@angular/core@19.2.0(rxjs@7.8.2)(zone.js@0.15.0))
+        specifier: ^19.0.20
+        version: 19.0.20(@angular/common@19.2.0(@angular/core@19.2.0(rxjs@7.8.2)(zone.js@0.15.0))(rxjs@7.8.2))(@angular/core@19.2.0(rxjs@7.8.2)(zone.js@0.15.0))
       ngx-liburg-icon:
         specifier: ^19.0.2
         version: 19.0.3(@angular/common@19.2.0(@angular/core@19.2.0(rxjs@7.8.2)(zone.js@0.15.0))(rxjs@7.8.2))(@angular/core@19.2.0(rxjs@7.8.2)(zone.js@0.15.0))
@@ -5911,8 +5911,8 @@ packages:
   neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
 
-  ngx-liburg-frame-side@19.0.12:
-    resolution: {integrity: sha512-tl7AVgsy2KDuFzoIvlKJA532vOOwCATMYgTQRpZkSrHdU41YvGHSD0F0Uo6kC/0fD/JHgAyUWLgezpKLxbturA==}
+  ngx-liburg-frame-side@19.0.20:
+    resolution: {integrity: sha512-b+XQAI0F58hVs7F1U4OLwpxDTskkNZeliDF0KHKiEdp/7qQ/EQ7xb4Lk0vAwZ+lmKcjImj2u0WXkm3D9I/IeFA==}
     peerDependencies:
       '@angular/common': ^19.0.0
       '@angular/core': ^19.0.0
@@ -15437,7 +15437,7 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  ngx-liburg-frame-side@19.0.12(@angular/common@19.2.0(@angular/core@19.2.0(rxjs@7.8.2)(zone.js@0.15.0))(rxjs@7.8.2))(@angular/core@19.2.0(rxjs@7.8.2)(zone.js@0.15.0)):
+  ngx-liburg-frame-side@19.0.20(@angular/common@19.2.0(@angular/core@19.2.0(rxjs@7.8.2)(zone.js@0.15.0))(rxjs@7.8.2))(@angular/core@19.2.0(rxjs@7.8.2)(zone.js@0.15.0)):
     dependencies:
       '@angular/common': 19.2.0(@angular/core@19.2.0(rxjs@7.8.2)(zone.js@0.15.0))(rxjs@7.8.2)
       '@angular/core': 19.2.0(rxjs@7.8.2)(zone.js@0.15.0)

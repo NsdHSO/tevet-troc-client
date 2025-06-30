@@ -1,3 +1,4 @@
-import EmergencyComponent from './lib/emergency/emergency.component';
+import EmergencyComponent from './lib/components/emergency/emergency.component';
+import IdComponent from './lib/components/id/id.component';
 
-export { EmergencyComponent as C };
+export { EmergencyComponent as C, IdComponent as D };

@@ -2,18 +2,14 @@ import { inject, Injectable, signal } from '@angular/core';
 import { API_CONFIG_AMBULANCE } from '../../provider/api.token';
 import { HttpClient, httpResource } from '@angular/common/http';
 import { DataSourceMaterialTable } from 'ngx-liburg';
-import {
-  AmbulanceDetails,
-  AmbulanceType,
-  ambulanceTypeDisplayNames,
-  getAmbulanceTypeFromDisplay,
-} from '../../maps/ambulance-type';
+import { AmbulanceDetails, AmbulanceType, ambulanceTypeDisplayNames } from '../../maps/ambulance-type';
 import { PaginatedBackendResponse } from '@tevet-troc-client/http-response';
 import { fuelTypeDisplayNames, FuelTypes } from '@tevet-troc-client/models';
 import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class EmergencyApiService {
   private payloadAmbulance = new Subject<Partial<AmbulanceDetails>>();
@@ -37,16 +33,21 @@ export class EmergencyApiService {
   page = signal(0);
 
   /**
+   * @private
+   */
+  private _router = inject(Router);
+
+  /**
    *
    * @private
    */
-  private apiConfigEmergency = inject(API_CONFIG_AMBULANCE);
+  private _apiConfigEmergency = inject(API_CONFIG_AMBULANCE);
 
   httpResourceRes = httpResource(
     () => ({
       url: `${
-        this.apiConfigEmergency.baseUrl
-      }?filterBy=hospitalId=${this.hospitalId()}&page=${this.page()}&per_page=${this.pageSize()}`,
+        this._apiConfigEmergency.baseUrl
+      }?filterBy=hospitalId=${this.hospitalId()}&page=${this.page()}&per_page=${this.pageSize()}`
     }),
     {
       parse: (e: unknown) => {
@@ -62,34 +63,25 @@ export class EmergencyApiService {
                     method: (
                       row: DataSourceMaterialTable<AmbulanceDetails>
                     ) => {
-                      row.editable = !row.editable;
-                      if (!row.editable) {
-                      console.log(row.model.driver_name);
-                        this.httpClient
-                          .patch(
-                            `${this.apiConfigEmergency.baseUrl}/${row.model.id}`,
-                            {
-                              ...row.model,
-                              type: getAmbulanceTypeFromDisplay(row.model.type) || row.model.type as AmbulanceType
-                            }
-                          )
-                          .subscribe();
-                      }
-                    },
-                  },
+
+                        console.log(row.model.driver_name);
+                        this._router.navigate([{ outlets: { drawer: ['details-panel'] } }]);
+
+                    }
+                  }
                 ],
                 editable: false,
                 model: {
                   ...item,
                   type: ambulanceTypeDisplayNames[item.type as AmbulanceType],
                   fuel_type: fuelTypeDisplayNames[item.fuel_type as FuelTypes],
-                  driver_name: item.driver_name ?? 'Not set',
-                },
+                  driver_name: item.driver_name ?? 'Not set'
+                }
               } as DataSourceMaterialTable<AmbulanceDetails>)
           ),
-          length: backendResponse.message.pagination.total_items,
+          length: backendResponse.message.pagination.total_items
         };
-      },
+      }
     }
   );
 }

@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@use '@angular/material/prebuilt-themes/indigo-pink.css';
 @use 'reset-css';
+@use '@angular/material/prebuilt-themes/indigo-pink.css';
 
 @tailwind base;
 @tailwind components;
@@ -17,6 +17,27 @@ body {
       animation-duration: 0.001ms !important;
       transition-duration: 0.001ms !important;
     }
+  }
+}
+
+
+:root {
+  /* Background color for the drawer outlet area */
+  --app-background-drawer-outlet: #eef2ff;
+  --app-background-drawer-outlet-x-button: #eef2ff;
+
+  /* Background color for the drawer component itself */
+  --app-background-drawer: #eef2ff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Background color for the drawer outlet area */
+    --app-background-drawer-outlet: #171717;
+    --app-background-drawer-outlet-x-button: #eef2ff;
+
+    /* Background color for the drawer component itself */
+    --app-background-drawer: #171717;
   }
 }
 

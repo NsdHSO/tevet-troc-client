@@ -45,6 +45,12 @@ export const appRoutes: Route[] = [
       import('@tevet-troc-client/emergency').then((c) => c.C),
   },
   {
+    path: 'details-panel',
+    outlet: 'drawer', // This is the key - specifying the outlet name
+    loadComponent: () =>
+      import('@tevet-troc-client/emergency').then((c) => c.D),
+  },
+  {
     path: '**',
     data: {
       view: 'not-found',
