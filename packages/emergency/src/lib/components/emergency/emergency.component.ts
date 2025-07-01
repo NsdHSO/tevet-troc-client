@@ -3,7 +3,11 @@ import { CommonModule } from '@angular/common';
 import { TextComponent, TextDirective } from '@tevet-troc-client/text';
 import { EmergencyService } from '../../service/emergency/emergency.service';
 import { MatIcon } from '@angular/material/icon';
-import { ColumnIconActionComponent, ColumnTextComponent, TableComponent } from 'ngx-liburg';
+import {
+  ColumnIconActionComponent,
+  ColumnTextComponent,
+  TableComponent,
+} from 'ngx-liburg';
 
 @Component({
   selector: 'lib-emergency',
@@ -18,6 +22,7 @@ import { ColumnIconActionComponent, ColumnTextComponent, TableComponent } from '
   ],
   templateUrl: './emergency.component.html',
   styleUrl: './emergency.component.scss',
+  providers: [EmergencyService],
 })
 export default class EmergencyComponent {
   readonly emergencyService = inject(EmergencyService);
