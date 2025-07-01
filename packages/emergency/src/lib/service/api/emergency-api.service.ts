@@ -96,23 +96,4 @@ export class EmergencyApiService {
       },
     }
   );
-  /**
-   *
-   */
-  idAmbulance = new Subject<string>();
-
-  ambulanceIdRes = this.idAmbulance.pipe(
-    startWith(''), // <- emit initial value for async pipe to react
-    filter((data) => !!data), // skip empty string or null
-    switchMap((data) =>
-      this.httpClient.get(`${this._apiConfigEmergency.baseUrl}`, {
-        params: {
-          per_page: this.pageSize(),
-          page: this.page(),
-          filter: `ic=${data}`,
-        },
-      })
-    ),
-    shareReplay(1)
-  );
 }

@@ -1,7 +1,7 @@
 import { Component, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TextComponent, TextDirective } from '@tevet-troc-client/text';
-import { EmergencyService } from '../../service/emergency.service';
+import { EmergencyService } from '../../service/emergency/emergency.service';
 import { MatIcon } from '@angular/material/icon';
 import { ColumnIconActionComponent, ColumnTextComponent, TableComponent } from 'ngx-liburg';
 

@@ -1,9 +1,9 @@
 import { computed, inject, Injectable } from '@angular/core';
-import { EmergencyApiService } from './api/emergency-api.service';
+import { EmergencyApiService } from '../api/emergency-api.service';
 import { DataSourceMaterialTable } from 'ngx-liburg';
 import { toSignal } from '@angular/core/rxjs-interop';
 
-@Injectable({providedIn: 'root'})
+@Injectable()
 export class EmergencyService {
   /**
    *
@@ -24,10 +24,7 @@ export class EmergencyService {
    *
    */
   page = this._ambulanceApi.page;
-  /**
-   *
-   */
-  ambulance_ic = this._ambulanceApi.idAmbulance;
+
   /**
    * Computed value for resource
    */
@@ -37,6 +34,4 @@ export class EmergencyService {
 
     return dataSource;
   }) as any;
-
-  dataForId = this._ambulanceApi.ambulanceIdRes
 }

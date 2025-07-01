@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import EmergencyComponent from './emergency.component';
 
-describe('IdComponent', () => {
+describe('IdAmbulanceComponent', () => {
   let component: EmergencyComponent;
   let fixture: ComponentFixture<EmergencyComponent>;
 
