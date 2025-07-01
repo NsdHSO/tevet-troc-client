@@ -1,32 +1,20 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { API_CONFIG_AMBULANCE } from '../../provider/api.token';
-import { HttpClient, httpResource } from '@angular/common/http';
+import { API_CONFIG_AMBULANCE } from '../../../provider/api.token';
+import { httpResource } from '@angular/common/http';
 import { DataSourceMaterialTable } from 'ngx-liburg';
 import {
   AmbulanceDetails,
   AmbulanceType,
   ambulanceTypeDisplayNames,
-} from '../../maps/ambulance-type';
+} from '../../../maps/ambulance-type';
 import { PaginatedBackendResponse } from '@tevet-troc-client/http-response';
 import { fuelTypeDisplayNames, FuelTypes } from '@tevet-troc-client/models';
-import {
-  BehaviorSubject,
-  filter,
-  shareReplay,
-  startWith,
-  Subject,
-  switchMap,
-} from 'rxjs';
+import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class EmergencyApiService {
   private payloadAmbulance = new Subject<Partial<AmbulanceDetails>>();
-
-  /**
-   *
-   */
-  httpClient = inject(HttpClient);
 
   /**
    *

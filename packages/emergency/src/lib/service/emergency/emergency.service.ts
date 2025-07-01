@@ -1,5 +1,5 @@
 import { computed, inject, Injectable } from '@angular/core';
-import { EmergencyApiService } from '../api/emergency-api.service';
+import { EmergencyApiService } from '../api/emergency-api/emergency-api.service';
 import { DataSourceMaterialTable } from 'ngx-liburg';
 import { toSignal } from '@angular/core/rxjs-interop';
 
