@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'lib-text',
-  imports: [CommonModule],
+  imports: [],
   template: '<ng-content/>',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
