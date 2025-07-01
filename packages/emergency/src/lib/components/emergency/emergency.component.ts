@@ -18,7 +18,6 @@ import { ColumnIconActionComponent, ColumnTextComponent, TableComponent } from '
   ],
   templateUrl: './emergency.component.html',
   styleUrl: './emergency.component.scss',
-  providers: [EmergencyService],
 })
 export default class EmergencyComponent {
   readonly emergencyService = inject(EmergencyService);
