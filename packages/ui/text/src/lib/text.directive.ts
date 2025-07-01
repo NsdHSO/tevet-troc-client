@@ -6,8 +6,9 @@ import {
   Input,
   input,
   Renderer2,
+  DOCUMENT
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+
 import { Observable, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AccessibilityDirective } from '@tevet-troc-client/accessibility';

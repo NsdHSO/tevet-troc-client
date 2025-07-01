@@ -1,5 +1,5 @@
 import { Component, inject, input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { TextComponent, TextDirective } from '@tevet-troc-client/text';
 import { EmergencyService } from '../../service/emergency/emergency.service';
 import { MatIcon } from '@angular/material/icon';
@@ -12,14 +12,13 @@ import {
 @Component({
   selector: 'lib-emergency',
   imports: [
-    CommonModule,
     TextComponent,
     TextDirective,
     MatIcon,
     TableComponent,
     ColumnTextComponent,
-    ColumnIconActionComponent,
-  ],
+    ColumnIconActionComponent
+],
   templateUrl: './emergency.component.html',
   styleUrl: './emergency.component.scss',
   providers: [EmergencyService],
