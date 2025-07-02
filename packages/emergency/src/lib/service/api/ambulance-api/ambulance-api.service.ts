@@ -3,11 +3,8 @@ import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, switchMap } from 'rxjs';
 import { API_CONFIG_AMBULANCE } from '../../../provider/api.token';
 import { PaginatedBackendResponse } from '@tevet-troc-client/http-response';
-import {
-  AmbulanceDetails,
-  AmbulanceIdUi, ambulanceTypeDisplayNames,
-  getAmbulanceTypeFromDisplay
-} from '../../../maps/ambulance-type';
+import { AmbulanceDetails, AmbulanceIdUi, ambulanceTypeDisplayNames } from '@tevet-troc-client/models';
+
 
 @Injectable({
   providedIn: 'root',

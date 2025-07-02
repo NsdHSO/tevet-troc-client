@@ -6,7 +6,7 @@ import { switchMap } from 'rxjs';
 import { TextComponent, TextDirective } from '@tevet-troc-client/text';
 import { JumbotronComponent } from '@tevet-troc-client/jumbotron';
 import { InfoLineComponent } from '@tevet-troc-client/info-line';
-import { AmbulanceStatusEnum } from '../../maps/ambulance-type';
+import { BadgeComponent } from '@tevet-troc-client/badge';
 
 @Component({
   selector: 'lib-emergency',
@@ -16,6 +16,7 @@ import { AmbulanceStatusEnum } from '../../maps/ambulance-type';
     TextComponent,
     JumbotronComponent,
     InfoLineComponent,
+    BadgeComponent,
   ],
   templateUrl: './id-ambulance.component.html',
   styleUrl: './id-ambulance.component.scss',
@@ -41,8 +42,4 @@ export default class IdAmbulanceComponent {
       return this.ambulanceService.ambulanceApiService.ambulanceResource;
     })
   );
-
-  get ambulanceStatus(): typeof AmbulanceStatusEnum {
-    return AmbulanceStatusEnum;
-  }
 }

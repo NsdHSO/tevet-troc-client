@@ -2,13 +2,14 @@ import { inject, Injectable, signal } from '@angular/core';
 import { API_CONFIG_AMBULANCE } from '../../../provider/api.token';
 import { httpResource } from '@angular/common/http';
 import { DataSourceMaterialTable } from 'ngx-liburg';
+import { PaginatedBackendResponse } from '@tevet-troc-client/http-response';
 import {
   AmbulanceDetails,
   AmbulanceType,
   ambulanceTypeDisplayNames,
-} from '../../../maps/ambulance-type';
-import { PaginatedBackendResponse } from '@tevet-troc-client/http-response';
-import { fuelTypeDisplayNames, FuelTypes } from '@tevet-troc-client/models';
+  fuelTypeDisplayNames,
+  FuelTypes
+} from '@tevet-troc-client/models';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 
