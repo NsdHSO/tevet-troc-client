@@ -26,6 +26,7 @@
       "@tevet-troc-client/http-response": [
         "packages/utils/http-response/src/index.ts"
       ],
+      "@tevet-troc-client/info-line": ["packages/ui/info-line/src/index.ts"],
       "@tevet-troc-client/jumbotron": ["packages/ui/jumbotron/src/index.ts"],
       "@tevet-troc-client/landing": ["packages/landing/src/index.ts"],
       "@tevet-troc-client/models": ["packages/utils/models/src/index.ts"],

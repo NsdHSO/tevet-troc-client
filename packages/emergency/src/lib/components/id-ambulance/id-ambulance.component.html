@@ -18,8 +18,8 @@
 
       <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
         <!-- General Information -->
-        <section
-          class="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
+        <lib-jumbotron
+        >
           <lib-text styleText="Title_1">
             General Information
           </lib-text>
@@ -52,11 +52,11 @@
           <lib-text> {{ data.hospital_id }}
           </lib-text>
 
-        </section>
+        </lib-jumbotron>
 
         <!-- Driver & Service Information -->
-        <section
-          class="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
+        <lib-jumbotron
+        >
           <lib-text styleText="Title_1">
             Driver & Service
           </lib-text>
@@ -91,11 +91,11 @@
           <lib-text styleText="Small_1">Insurance Expiry:</lib-text>
           <lib-text> {{ data.insurance_expiry_date || 'N/A' }}
           </lib-text>
-        </section>
+        </lib-jumbotron>
 
         <!-- Car Details -->
-        <section
-          class="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
+        <lib-jumbotron
+        >
           <lib-text styleText="Title_2">
             Car Specifics
           </lib-text>
@@ -117,11 +117,11 @@
           <lib-text styleText="Small_1">Car Mileage:</lib-text>
           <lib-text> {{ data.car_details_mileage?.toLocaleString() }} km
           </lib-text>
-        </section>
+        </lib-jumbotron>
 
         <!-- Mission & Notes -->
-        <section
-          class="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
+        <lib-jumbotron
+        >
           <lib-text styleText="Title_1">
             Mission & Notes
           </lib-text>
@@ -138,10 +138,10 @@
           <lib-text> {{ data.location_latitude }}, {{ data.location_longitude }}
           </lib-text>
 
-        </section>
+        </lib-jumbotron>
 
         <!-- Timestamps -->
-        <section
+        <lib-jumbotron
           class="md:col-span-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
           <lib-text styleText="Title_1">
             Timestamps
@@ -151,7 +151,7 @@
           </lib-text>
           <lib-text styleText="Small_1">Updated At:</lib-text>
           <lib-text>{{ data.updated_at | date:'medium' }}</lib-text>
-        </section>
+        </lib-jumbotron>
       </div>
     </div>
   </div>

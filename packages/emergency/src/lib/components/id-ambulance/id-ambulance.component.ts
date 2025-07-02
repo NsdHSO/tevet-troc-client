@@ -5,10 +5,11 @@ import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { AmbulanceStatusEnum } from '../../maps/ambulance-type';
 import { TextComponent, TextDirective } from '@tevet-troc-client/text';
+import { JumbotronComponent } from '@tevet-troc-client/jumbotron';
 
 @Component({
   selector: 'lib-emergency',
-  imports: [CommonModule, TextDirective, TextComponent],
+  imports: [CommonModule, TextDirective, TextComponent, JumbotronComponent],
   templateUrl: './id-ambulance.component.html',
   styleUrl: './id-ambulance.component.scss',
   providers: [AmbulanceService],
