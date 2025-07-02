@@ -3,7 +3,7 @@
   <div class="min-h-screen p-4 sm:p-6 lg:p-8">
     <div class="mx-auto max-w-4xl rounded-lg p-6 shadow-lg">
       <div class="mb-6 flex items-center justify-between">
-        <lib-text styleText="Title_1">Ambulance Overview</lib-text>
+        <lib-text styleText="Title_3_1">Ambulance Overview</lib-text>
         <lib-text
           class="rounded-full px-3 py-1 font-semibold"
           styleText="Small_1"
@@ -18,8 +18,9 @@
 
       <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
         <!-- General Information -->
-        <section class="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
-          <lib-text styleText="Medium_1" class="mb-3">
+        <section
+          class="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
+          <lib-text styleText="Title_1">
             General Information
           </lib-text>
           <lib-text styleText="Small_1">Vehicle Number:</lib-text>
@@ -29,13 +30,12 @@
           <lib-text styleText="Small_1">Type:</lib-text>
           <lib-text>{{ data.type }}</lib-text>
           <lib-text styleText="Small_1">Make:</lib-text>
-          <lib-text>{{ data.make }}</lib-text>
+          <lib-text>{{ data.car_details_make }}</lib-text>
           <lib-text styleText="Small_1">Model:</lib-text>
-          <lib-text></lib-text>
+          <lib-text>{{ data.car_details_model }}</lib-text>
           <lib-text styleText="Small_1">Year:</lib-text>
           <lib-text> {{ data.year }}
           </lib-text>
-
           <lib-text styleText="Small_1">Capacity:</lib-text>
           <lib-text> {{ data.capacity }} passengers
           </lib-text>
@@ -55,10 +55,9 @@
         </section>
 
         <!-- Driver & Service Information -->
-        <section class="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
-          <lib-text styleText="Medium_1" class="mb-3">
-            <lib-text></lib-text>
-
+        <section
+          class="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
+          <lib-text styleText="Title_1">
             Driver & Service
           </lib-text>
           <lib-text styleText="Small_1">Driver Name:</lib-text>
@@ -95,8 +94,9 @@
         </section>
 
         <!-- Car Details -->
-        <section class="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
-          <lib-text styleText="Medium_1" class="mb-3">
+        <section
+          class="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
+          <lib-text styleText="Title_2">
             Car Specifics
           </lib-text>
           <lib-text styleText="Small_1">Car Year:</lib-text>
@@ -120,8 +120,9 @@
         </section>
 
         <!-- Mission & Notes -->
-        <section class="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
-          <lib-text styleText="Medium_1" class="mb-3">
+        <section
+          class="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
+          <lib-text styleText="Title_1">
             Mission & Notes
           </lib-text>
           <lib-text styleText="Small_1">Mission:</lib-text>
@@ -140,8 +141,9 @@
         </section>
 
         <!-- Timestamps -->
-        <section class="md:col-span-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
-          <lib-text styleText="Medium_1" class="mb-3">
+        <section
+          class="md:col-span-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
+          <lib-text styleText="Title_1">
             Timestamps
           </lib-text>
           <lib-text styleText="Small_1">Created At:</lib-text>

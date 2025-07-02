@@ -1,12 +1,12 @@
 import {
   DestroyRef,
   Directive,
+  DOCUMENT,
   ElementRef,
   inject,
-  Input,
   input,
+  Input,
   Renderer2,
-  DOCUMENT
 } from '@angular/core';
 
 import { Observable, tap } from 'rxjs';
@@ -17,6 +17,8 @@ export type StyleTextType =
   | 'Title_1'
   | 'Title_2'
   | 'Title_3'
+  | 'Title_3_1'
+  | 'Title_4'
   | 'Medium_1'
   | 'Medium_2'
   | 'Medium_3'
@@ -28,6 +30,8 @@ export enum StyleTextEnum {
   Title_1 = 'Title_1',
   Title_2 = 'Title_2',
   Title_3 = 'Title_3',
+  Title_3_1 = 'Title_3_1',
+  Title_4 = 'Title_4',
   Medium_1 = 'Medium_1',
   Medium_2 = 'Medium_2',
   Medium_3 = 'Medium_3',
@@ -126,6 +130,8 @@ export class TextDirective {
       case StyleTextEnum.Title_2:
         return 'h2';
       case StyleTextEnum.Title_3:
+      case StyleTextEnum.Title_3_1:
+      case StyleTextEnum.Title_4:
         return 'h1';
       default:
         if (content.length > 8) {
@@ -149,12 +155,41 @@ export class TextDirective {
         return ['text-2xl', ...this.colorText().split(' ')];
       case StyleTextEnum.Small_3:
         return ['text-5xl', ...this.colorText().split(' ')];
+      case StyleTextEnum.Title_4:
+        return [
+          'text-7xl',
+          ...this.colorText().split(' '),
+          'font-bold',
+          'mb-3',
+        ];
       case StyleTextEnum.Title_3:
-        return ['text-7xl', ...this.colorText().split(' '), 'font-bold'];
+        return [
+          'text-5xl',
+          ...this.colorText().split(' '),
+          'font-bold',
+          'mb-3',
+        ];
+      case StyleTextEnum.Title_3_1:
+        return [
+          'text-4xl',
+          ...this.colorText().split(' '),
+          'font-bold',
+          'mb-3',
+        ];
       case StyleTextEnum.Title_2:
-        return ['text-3xl', ...this.colorText().split(' '), 'font-bold'];
+        return [
+          'text-3xl',
+          ...this.colorText().split(' '),
+          'font-bold',
+          'mb-2',
+        ];
       case StyleTextEnum.Title_1:
-        return ['text-1xl', ...this.colorText().split(' '), 'font-bold'];
+        return [
+          'text-1xl',
+          ...this.colorText().split(' '),
+          'font-bold',
+          'mb-1',
+        ];
       // Add cases for other styles as needed
       default:
         return ['bg-red-500'];
