@@ -1,160 +1,155 @@
 @let data = ambulance | async;
 @if (data) {
-  <div class="min-h-screen bg-gray-100 p-4 sm:p-6 lg:p-8">
-    <div class="mx-auto max-w-4xl rounded-lg bg-white p-6 shadow-lg">
+  <div class="min-h-screen p-4 sm:p-6 lg:p-8">
+    <div class="mx-auto max-w-4xl rounded-lg p-6 shadow-lg">
       <div class="mb-6 flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-800">Ambulance Overview</h1>
-        <span
-          class="rounded-full px-3 py-1 text-sm font-semibold"
+        <lib-text styleText="Title_1">Ambulance Overview</lib-text>
+        <lib-text
+          class="rounded-full px-3 py-1 font-semibold"
+          styleText="Small_1"
           [class.bg-green-200]="data.status === ambulanceStatus.AVAILABLE"
-          [class.text-green-800]="data.status === ambulanceStatus.AVAILABLE"
           [class.bg-red-200]="data.status === ambulanceStatus.OUT_OF_SERVICE"
-          [class.text-red-800]="data.status === ambulanceStatus.OUT_OF_SERVICE"
           [class.bg-blue-200]="data.status === ambulanceStatus.DISPATCHED"
-          [class.text-blue-800]="data.status === ambulanceStatus.DISPATCHED"
           [class.bg-yellow-200]="data.status === ambulanceStatus.AWAITING_DISPATCH"
-          [class.text-yellow-800]="data.status === ambulanceStatus.AWAITING_DISPATCH"
           [class.bg-purple-200]="data.status === ambulanceStatus.MAINTENANCE"
-          [class.text-purple-800]="data.status === ambulanceStatus.MAINTENANCE"
-
-        >{{ data.status }}</span
-        >
+        >{{ data.status }}
+        </lib-text>
       </div>
 
       <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <div class="rounded-lg bg-gray-50 p-4 shadow-sm">
-          <h2 class="mb-3 text-xl font-semibold text-gray-700">
+        <!-- General Information -->
+        <section class="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
+          <lib-text styleText="Medium_1" class="mb-3">
             General Information
-          </h2>
-          <p class="mb-2 text-gray-600">
-            <strong class="text-gray-800">Vehicle Number:</strong>
+          </lib-text>
+          <lib-text styleText="Small_1">Vehicle Number:</lib-text>
+          <lib-text>
             {{ data.vehicle_number }}
-          </p>
-          <p class="mb-2 text-gray-600">
-            <strong class="text-gray-800">Type:</strong>
-            {{ data.type }}
-          </p>
-          <p class="mb-2 text-gray-600">
-            <strong class="text-gray-800">Make:</strong> {{ data.make }}
-          </p>
-          <p class="mb-2 text-gray-600">
-            <strong class="text-gray-800">Model:</strong>
-            {{ data.car_details_model }}
-          </p>
-          <p class="mb-2 text-gray-600">
-            <strong class="text-gray-800">Year:</strong> {{ data.year }}
-          </p>
-          <p class="mb-2 text-gray-600">
-            <strong class="text-gray-800">Capacity:</strong>
-            {{ data.capacity }} passengers
-          </p>
-          <p class="mb-2 text-gray-600">
-            <strong class="text-gray-800">Fuel Type:</strong>
-            {{ data.fuel_type }}
-          </p>
-          <p class="mb-2 text-gray-600">
-            <strong class="text-gray-800">Ambulance IC:</strong>
-            {{ data.ambulance_ic }}
-          </p>
-          <p class="text-gray-600">
-            <strong class="text-gray-800">Hospital ID:</strong>
-            {{ data.hospital_id }}
-          </p>
-        </div>
+          </lib-text>
+          <lib-text styleText="Small_1">Type:</lib-text>
+          <lib-text>{{ data.type }}</lib-text>
+          <lib-text styleText="Small_1">Make:</lib-text>
+          <lib-text>{{ data.make }}</lib-text>
+          <lib-text styleText="Small_1">Model:</lib-text>
+          <lib-text></lib-text>
+          <lib-text styleText="Small_1">Year:</lib-text>
+          <lib-text> {{ data.year }}
+          </lib-text>
 
-        <div class="rounded-lg bg-gray-50 p-4 shadow-sm">
-          <h2 class="mb-3 text-xl font-semibold text-gray-700">
+          <lib-text styleText="Small_1">Capacity:</lib-text>
+          <lib-text> {{ data.capacity }} passengers
+          </lib-text>
+
+          <lib-text styleText="Small_1">Fuel Type:</lib-text>
+          <lib-text> {{ data.fuel_type }}
+          </lib-text>
+
+          <lib-text styleText="Small_1">Ambulance IC:</lib-text>
+          <lib-text> {{ data.ambulance_ic }}
+          </lib-text>
+
+          <lib-text styleText="Small_1">Hospital ID:</lib-text>
+          <lib-text> {{ data.hospital_id }}
+          </lib-text>
+
+        </section>
+
+        <!-- Driver & Service Information -->
+        <section class="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
+          <lib-text styleText="Medium_1" class="mb-3">
+            <lib-text></lib-text>
+
             Driver & Service
-          </h2>
-          <p class="mb-2 text-gray-600">
-            <strong class="text-gray-800">Driver Name:</strong>
-            {{ data.driver_name || 'N/A' }}
-          </p>
-          <p class="mb-2 text-gray-600">
-            <strong class="text-gray-800">Driver License:</strong>
-            {{ data.driver_license || 'N/A' }}
-          </p>
-          <p class="mb-2 text-gray-600">
-            <strong class="text-gray-800">Mileage:</strong>
-            {{ data.mileage?.toLocaleString() }} km
-          </p>
-          <p class="mb-2 text-gray-600">
-            <strong class="text-gray-800">Last Service:</strong>
-            {{ data.last_service_date || 'N/A' }}
-          </p>
-          <p class="mb-2 text-gray-600">
-            <strong class="text-gray-800">Next Service:</strong>
-            {{ data.next_service_date || 'N/A' }}
-          </p>
-          <p class="mb-2 text-gray-600">
-            <strong class="text-gray-800">Registration Number:</strong>
-            {{ data.registration_number || 'N/A' }}
-          </p>
-          <p class="mb-2 text-gray-600">
-            <strong class="text-gray-800">Insurance Provider:</strong>
-            {{ data.insurance_provider || 'N/A' }}
-          </p>
-          <p class="text-gray-600">
-            <strong class="text-gray-800">Insurance Expiry:</strong>
-            {{ data.insurance_expiry_date || 'N/A' }}
-          </p>
-        </div>
+          </lib-text>
+          <lib-text styleText="Small_1">Driver Name:</lib-text>
+          <lib-text> {{ data.driver_name || 'N/A' }}
+          </lib-text>
 
-        <div class="rounded-lg bg-gray-50 p-4 shadow-sm">
-          <h2 class="mb-3 text-xl font-semibold text-gray-700">Car Specifics</h2>
-          <p class="mb-2 text-gray-600">
-            <strong class="text-gray-800">Car Year:</strong>
-            {{ data.car_details_year }}
-          </p>
-          <p class="mb-2 text-gray-600">
-            <strong class="text-gray-800">Color:</strong>
-            {{ data.car_details_color }}
-          </p>
-          <p class="mb-2 text-gray-600">
-            <strong class="text-gray-800">Is Ambulance:</strong>
-            {{ data.car_details_is_ambulance ? 'Yes' : 'No' }}
-          </p>
-          <p class="mb-2 text-gray-600">
-            <strong class="text-gray-800">License Plate:</strong>
-            {{ data.car_details_license_plate || 'N/A' }}
-          </p>
-          <p class="text-gray-600">
-            <strong class="text-gray-800">Car Mileage:</strong>
-            {{ data.car_details_mileage?.toLocaleString() }} km
-          </p>
-        </div>
+          <lib-text styleText="Small_1">Driver License:</lib-text>
+          <lib-text> {{ data.driver_license || 'N/A' }}
+          </lib-text>
 
-        <div class="rounded-lg bg-gray-50 p-4 shadow-sm">
-          <h2 class="mb-3 text-xl font-semibold text-gray-700">
+          <lib-text styleText="Small_1">Mileage:</lib-text>
+          <lib-text> {{ data.mileage?.toLocaleString() }} km
+          </lib-text>
+
+          <lib-text styleText="Small_1">Last Service:</lib-text>
+          <lib-text> {{ data.last_service_date || 'N/A' }}
+          </lib-text>
+
+          <lib-text styleText="Small_1">Next Service:</lib-text>
+          <lib-text> {{ data.next_service_date || 'N/A' }}
+          </lib-text>
+
+          <lib-text styleText="Small_1">Registration Number:</lib-text>
+          <lib-text> {{ data.registration_number || 'N/A' }}
+          </lib-text>
+
+          <lib-text styleText="Small_1">Insurance Provider:</lib-text>
+          <lib-text> {{ data.insurance_provider || 'N/A' }}
+          </lib-text>
+
+          <lib-text styleText="Small_1">Insurance Expiry:</lib-text>
+          <lib-text> {{ data.insurance_expiry_date || 'N/A' }}
+          </lib-text>
+        </section>
+
+        <!-- Car Details -->
+        <section class="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
+          <lib-text styleText="Medium_1" class="mb-3">
+            Car Specifics
+          </lib-text>
+          <lib-text styleText="Small_1">Car Year:</lib-text>
+          <lib-text> {{ data.car_details_year }}
+          </lib-text>
+          <lib-text styleText="Small_1">Color:</lib-text>
+          <lib-text> {{ data.car_details_color }}
+          </lib-text>
+
+          <lib-text styleText="Small_1">Is Ambulance:</lib-text>
+          <lib-text> {{ data.car_details_is_ambulance ? 'Yes' : 'No' }}
+          </lib-text>
+
+          <lib-text styleText="Small_1">License Plate:</lib-text>
+          <lib-text> {{ data.car_details_license_plate || 'N/A' }}
+          </lib-text>
+
+          <lib-text styleText="Small_1">Car Mileage:</lib-text>
+          <lib-text> {{ data.car_details_mileage?.toLocaleString() }} km
+          </lib-text>
+        </section>
+
+        <!-- Mission & Notes -->
+        <section class="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
+          <lib-text styleText="Medium_1" class="mb-3">
             Mission & Notes
-          </h2>
-          <p class="mb-2 text-gray-600">
-            <strong class="text-gray-800">Mission:</strong> {{ data.mission }}
-          </p>
-          <p class="mb-2 text-gray-600">
-            <strong class="text-gray-800">Notes:</strong> {{ data.notes }}
-          </p>
-          <p class="mb-2 text-gray-600">
-            <strong class="text-gray-800">Passengers:</strong>
-            {{ data.passengers && data.passengers.length > 0 ? data.passengers.join(', ') : 'None' }}
-          </p>
-          <p class="mb-2 text-gray-600">
-            <strong class="text-gray-800">Location (Lat/Lon):</strong>
-            {{ data.location_latitude }}, {{ data.location_longitude }}
-          </p>
-        </div>
+          </lib-text>
+          <lib-text styleText="Small_1">Mission:</lib-text>
+          <lib-text> {{ data.mission }}
+          </lib-text>
+          <lib-text styleText="Small_1">Notes:</lib-text>
+          <lib-text> {{ data.notes }}
+          </lib-text>
+          <lib-text styleText="Small_1">Passengers:</lib-text>
+          <lib-text> {{ data.passengers && data.passengers.length > 0 ? data.passengers.join(', ') : 'None' }}
+          </lib-text>
+          <lib-text styleText="Small_1">Location (Lat/Lon):</lib-text>
+          <lib-text> {{ data.location_latitude }}, {{ data.location_longitude }}
+          </lib-text>
 
-        <div class="md:col-span-2 rounded-lg bg-gray-50 p-4 shadow-sm">
-          <h2 class="mb-3 text-xl font-semibold text-gray-700">Timestamps</h2>
-          <p class="mb-2 text-gray-600">
-            <strong class="text-gray-800">Created At:</strong>
-            {{ data.created_at | date:'medium' }}
-          </p>
-          <p class="text-gray-600">
-            <strong class="text-gray-800">Updated At:</strong>
-            {{ data.updated_at | date:'medium' }}
-          </p>
-        </div>
+        </section>
+
+        <!-- Timestamps -->
+        <section class="md:col-span-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
+          <lib-text styleText="Medium_1" class="mb-3">
+            Timestamps
+          </lib-text>
+          <lib-text styleText="Small_1">Created At:</lib-text>
+          <lib-text> {{ data.created_at | date:'medium' }}
+          </lib-text>
+          <lib-text styleText="Small_1">Updated At:</lib-text>
+          <lib-text>{{ data.updated_at | date:'medium' }}</lib-text>
+        </section>
       </div>
     </div>
   </div>
