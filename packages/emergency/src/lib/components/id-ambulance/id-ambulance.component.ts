@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { AmbulanceService } from '../../service/ambulance/ambulance.service';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
-import { TextDirective } from '@tevet-troc-client/text';
+import { AmbulanceStatusEnum } from '../../maps/ambulance-type';
 
 @Component({
   selector: 'lib-emergency',
-  imports: [CommonModule, TextDirective],
+  imports: [CommonModule],
   templateUrl: './id-ambulance.component.html',
   styleUrl: './id-ambulance.component.scss',
   providers: [AmbulanceService],
@@ -32,4 +32,8 @@ export default class IdAmbulanceComponent {
       return this.ambulanceService.ambulanceApiService.ambulanceResource;
     })
   );
+
+  get ambulanceStatus(): typeof AmbulanceStatusEnum {
+    return AmbulanceStatusEnum;
+  }
 }

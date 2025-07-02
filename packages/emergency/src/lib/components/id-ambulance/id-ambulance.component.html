@@ -1,3 +1,161 @@
-<pre>
-  {{ambulance | async | json}}
-</pre>
+@let data = ambulance | async;
+@if (data) {
+  <div class="min-h-screen bg-gray-100 p-4 sm:p-6 lg:p-8">
+    <div class="mx-auto max-w-4xl rounded-lg bg-white p-6 shadow-lg">
+      <div class="mb-6 flex items-center justify-between">
+        <h1 class="text-3xl font-bold text-gray-800">Ambulance Overview</h1>
+        <span
+          class="rounded-full px-3 py-1 text-sm font-semibold"
+          [class.bg-green-200]="data.status === ambulanceStatus.AVAILABLE"
+          [class.text-green-800]="data.status === ambulanceStatus.AVAILABLE"
+          [class.bg-red-200]="data.status === ambulanceStatus.OUT_OF_SERVICE"
+          [class.text-red-800]="data.status === ambulanceStatus.OUT_OF_SERVICE"
+          [class.bg-blue-200]="data.status === ambulanceStatus.DISPATCHED"
+          [class.text-blue-800]="data.status === ambulanceStatus.DISPATCHED"
+          [class.bg-yellow-200]="data.status === ambulanceStatus.AWAITING_DISPATCH"
+          [class.text-yellow-800]="data.status === ambulanceStatus.AWAITING_DISPATCH"
+          [class.bg-purple-200]="data.status === ambulanceStatus.MAINTENANCE"
+          [class.text-purple-800]="data.status === ambulanceStatus.MAINTENANCE"
+
+        >{{ data.status }}</span
+        >
+      </div>
+
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div class="rounded-lg bg-gray-50 p-4 shadow-sm">
+          <h2 class="mb-3 text-xl font-semibold text-gray-700">
+            General Information
+          </h2>
+          <p class="mb-2 text-gray-600">
+            <strong class="text-gray-800">Vehicle Number:</strong>
+            {{ data.vehicle_number }}
+          </p>
+          <p class="mb-2 text-gray-600">
+            <strong class="text-gray-800">Type:</strong>
+            {{ data.type }}
+          </p>
+          <p class="mb-2 text-gray-600">
+            <strong class="text-gray-800">Make:</strong> {{ data.make }}
+          </p>
+          <p class="mb-2 text-gray-600">
+            <strong class="text-gray-800">Model:</strong>
+            {{ data.car_details_model }}
+          </p>
+          <p class="mb-2 text-gray-600">
+            <strong class="text-gray-800">Year:</strong> {{ data.year }}
+          </p>
+          <p class="mb-2 text-gray-600">
+            <strong class="text-gray-800">Capacity:</strong>
+            {{ data.capacity }} passengers
+          </p>
+          <p class="mb-2 text-gray-600">
+            <strong class="text-gray-800">Fuel Type:</strong>
+            {{ data.fuel_type }}
+          </p>
+          <p class="mb-2 text-gray-600">
+            <strong class="text-gray-800">Ambulance IC:</strong>
+            {{ data.ambulance_ic }}
+          </p>
+          <p class="text-gray-600">
+            <strong class="text-gray-800">Hospital ID:</strong>
+            {{ data.hospital_id }}
+          </p>
+        </div>
+
+        <div class="rounded-lg bg-gray-50 p-4 shadow-sm">
+          <h2 class="mb-3 text-xl font-semibold text-gray-700">
+            Driver & Service
+          </h2>
+          <p class="mb-2 text-gray-600">
+            <strong class="text-gray-800">Driver Name:</strong>
+            {{ data.driver_name || 'N/A' }}
+          </p>
+          <p class="mb-2 text-gray-600">
+            <strong class="text-gray-800">Driver License:</strong>
+            {{ data.driver_license || 'N/A' }}
+          </p>
+          <p class="mb-2 text-gray-600">
+            <strong class="text-gray-800">Mileage:</strong>
+            {{ data.mileage?.toLocaleString() }} km
+          </p>
+          <p class="mb-2 text-gray-600">
+            <strong class="text-gray-800">Last Service:</strong>
+            {{ data.last_service_date || 'N/A' }}
+          </p>
+          <p class="mb-2 text-gray-600">
+            <strong class="text-gray-800">Next Service:</strong>
+            {{ data.next_service_date || 'N/A' }}
+          </p>
+          <p class="mb-2 text-gray-600">
+            <strong class="text-gray-800">Registration Number:</strong>
+            {{ data.registration_number || 'N/A' }}
+          </p>
+          <p class="mb-2 text-gray-600">
+            <strong class="text-gray-800">Insurance Provider:</strong>
+            {{ data.insurance_provider || 'N/A' }}
+          </p>
+          <p class="text-gray-600">
+            <strong class="text-gray-800">Insurance Expiry:</strong>
+            {{ data.insurance_expiry_date || 'N/A' }}
+          </p>
+        </div>
+
+        <div class="rounded-lg bg-gray-50 p-4 shadow-sm">
+          <h2 class="mb-3 text-xl font-semibold text-gray-700">Car Specifics</h2>
+          <p class="mb-2 text-gray-600">
+            <strong class="text-gray-800">Car Year:</strong>
+            {{ data.car_details_year }}
+          </p>
+          <p class="mb-2 text-gray-600">
+            <strong class="text-gray-800">Color:</strong>
+            {{ data.car_details_color }}
+          </p>
+          <p class="mb-2 text-gray-600">
+            <strong class="text-gray-800">Is Ambulance:</strong>
+            {{ data.car_details_is_ambulance ? 'Yes' : 'No' }}
+          </p>
+          <p class="mb-2 text-gray-600">
+            <strong class="text-gray-800">License Plate:</strong>
+            {{ data.car_details_license_plate || 'N/A' }}
+          </p>
+          <p class="text-gray-600">
+            <strong class="text-gray-800">Car Mileage:</strong>
+            {{ data.car_details_mileage?.toLocaleString() }} km
+          </p>
+        </div>
+
+        <div class="rounded-lg bg-gray-50 p-4 shadow-sm">
+          <h2 class="mb-3 text-xl font-semibold text-gray-700">
+            Mission & Notes
+          </h2>
+          <p class="mb-2 text-gray-600">
+            <strong class="text-gray-800">Mission:</strong> {{ data.mission }}
+          </p>
+          <p class="mb-2 text-gray-600">
+            <strong class="text-gray-800">Notes:</strong> {{ data.notes }}
+          </p>
+          <p class="mb-2 text-gray-600">
+            <strong class="text-gray-800">Passengers:</strong>
+            {{ data.passengers && data.passengers.length > 0 ? data.passengers.join(', ') : 'None' }}
+          </p>
+          <p class="mb-2 text-gray-600">
+            <strong class="text-gray-800">Location (Lat/Lon):</strong>
+            {{ data.location_latitude }}, {{ data.location_longitude }}
+          </p>
+        </div>
+
+        <div class="md:col-span-2 rounded-lg bg-gray-50 p-4 shadow-sm">
+          <h2 class="mb-3 text-xl font-semibold text-gray-700">Timestamps</h2>
+          <p class="mb-2 text-gray-600">
+            <strong class="text-gray-800">Created At:</strong>
+            {{ data.created_at | date:'medium' }}
+          </p>
+          <p class="text-gray-600">
+            <strong class="text-gray-800">Updated At:</strong>
+            {{ data.updated_at | date:'medium' }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+}
