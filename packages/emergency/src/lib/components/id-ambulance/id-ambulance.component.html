@@ -1,154 +1,35 @@
 @let data = ambulance | async;
 @if (data) {
   <div class="min-h-screen p-4 sm:p-6 lg:p-8">
-    <div class="mx-auto max-w-4xl rounded-lg p-6 shadow-lg">
-      <div class="mb-6 flex items-center justify-between">
-        <lib-text styleText="Title_3_1">Ambulance Overview</lib-text>
-        <lib-text
-          class="rounded-full px-3 py-1 font-semibold"
-          styleText="Small_1"
-          [class.bg-green-200]="data.status === ambulanceStatus.AVAILABLE"
-          [class.bg-red-200]="data.status === ambulanceStatus.OUT_OF_SERVICE"
-          [class.bg-blue-200]="data.status === ambulanceStatus.DISPATCHED"
-          [class.bg-yellow-200]="data.status === ambulanceStatus.AWAITING_DISPATCH"
-          [class.bg-purple-200]="data.status === ambulanceStatus.MAINTENANCE"
-        >{{ data.status }}
-        </lib-text>
-      </div>
-
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+    <div class="mb-6 flex items-center justify-between">
+      <lib-text styleText="Title_3_1">Ambulance Overview</lib-text>
+      <lib-text
+        class="rounded-full px-3 py-1 font-semibold"
+        styleText="Small_1"
+        [class.bg-green-200]="data.status === ambulanceStatus.AVAILABLE"
+        [class.bg-red-200]="data.status === ambulanceStatus.OUT_OF_SERVICE"
+        [class.bg-blue-200]="data.status === ambulanceStatus.DISPATCHED"
+        [class.bg-yellow-200]="data.status === ambulanceStatus.AWAITING_DISPATCH"
+        [class.bg-purple-200]="data.status === ambulanceStatus.MAINTENANCE"
+      >{{ data.status }}
+      </lib-text>
+    </div>
+    <ul class="grid grid-cols-1 gap-6 md:grid-cols-2">
+      @for (cards of data.uiElements; track cards; let first = $first) {
         <!-- General Information -->
         <lib-jumbotron
+          [attr.aria-label]=" cards[0].title "
         >
-          <lib-info-line title="General Information" type="Title_2"/>
-          <lib-info-line title="Vehicle Number" [description]="data.vehicle_number"/>
-
-          <lib-text styleText="Small_1">Type:</lib-text>
-          <lib-text>{{ data.type }}</lib-text>
-          <lib-text styleText="Small_1">Make:</lib-text>
-          <lib-text>{{ data.car_details_make }}</lib-text>
-          <lib-text styleText="Small_1">Model:</lib-text>
-          <lib-text>{{ data.car_details_model }}</lib-text>
-          <lib-text styleText="Small_1">Year:</lib-text>
-          <lib-text> {{ data.year }}
-          </lib-text>
-          <lib-text styleText="Small_1">Capacity:</lib-text>
-          <lib-text> {{ data.capacity }} passengers
-          </lib-text>
-
-          <lib-text styleText="Small_1">Fuel Type:</lib-text>
-          <lib-text> {{ data.fuel_type }}
-          </lib-text>
-
-          <lib-text styleText="Small_1">Ambulance IC:</lib-text>
-          <lib-text> {{ data.ambulance_ic }}
-          </lib-text>
-
-          <lib-text styleText="Small_1">Hospital ID:</lib-text>
-          <lib-text> {{ data.hospital_id }}
-          </lib-text>
-
+        <ul>
+          @for (element of cards; track element) {
+            <lib-info-line [description]="element.description" [title]="element.title"
+                           [ariaName]="element.title + ' ' + element.description"
+                           [type]="element.description ? 'Title_1' : 'Title_2'" />
+          }
+        </ul>
         </lib-jumbotron>
 
-        <!-- Driver & Service Information -->
-        <lib-jumbotron
-        >
-          <lib-text styleText="Title_1">
-            Driver & Service
-          </lib-text>
-          <lib-text styleText="Small_1">Driver Name:</lib-text>
-          <lib-text> {{ data.driver_name || 'N/A' }}
-          </lib-text>
-
-          <lib-text styleText="Small_1">Driver License:</lib-text>
-          <lib-text> {{ data.driver_license || 'N/A' }}
-          </lib-text>
-
-          <lib-text styleText="Small_1">Mileage:</lib-text>
-          <lib-text> {{ data.mileage?.toLocaleString() }} km
-          </lib-text>
-
-          <lib-text styleText="Small_1">Last Service:</lib-text>
-          <lib-text> {{ data.last_service_date || 'N/A' }}
-          </lib-text>
-
-          <lib-text styleText="Small_1">Next Service:</lib-text>
-          <lib-text> {{ data.next_service_date || 'N/A' }}
-          </lib-text>
-
-          <lib-text styleText="Small_1">Registration Number:</lib-text>
-          <lib-text> {{ data.registration_number || 'N/A' }}
-          </lib-text>
-
-          <lib-text styleText="Small_1">Insurance Provider:</lib-text>
-          <lib-text> {{ data.insurance_provider || 'N/A' }}
-          </lib-text>
-
-          <lib-text styleText="Small_1">Insurance Expiry:</lib-text>
-          <lib-text> {{ data.insurance_expiry_date || 'N/A' }}
-          </lib-text>
-        </lib-jumbotron>
-
-        <!-- Car Details -->
-        <lib-jumbotron
-        >
-          <lib-text styleText="Title_2">
-            Car Specifics
-          </lib-text>
-          <lib-text styleText="Small_1">Car Year:</lib-text>
-          <lib-text> {{ data.car_details_year }}
-          </lib-text>
-          <lib-text styleText="Small_1">Color:</lib-text>
-          <lib-text> {{ data.car_details_color }}
-          </lib-text>
-
-          <lib-text styleText="Small_1">Is Ambulance:</lib-text>
-          <lib-text> {{ data.car_details_is_ambulance ? 'Yes' : 'No' }}
-          </lib-text>
-
-          <lib-text styleText="Small_1">License Plate:</lib-text>
-          <lib-text> {{ data.car_details_license_plate || 'N/A' }}
-          </lib-text>
-
-          <lib-text styleText="Small_1">Car Mileage:</lib-text>
-          <lib-text> {{ data.car_details_mileage?.toLocaleString() }} km
-          </lib-text>
-        </lib-jumbotron>
-
-        <!-- Mission & Notes -->
-        <lib-jumbotron
-        >
-          <lib-text styleText="Title_1">
-            Mission & Notes
-          </lib-text>
-          <lib-text styleText="Small_1">Mission:</lib-text>
-          <lib-text> {{ data.mission }}
-          </lib-text>
-          <lib-text styleText="Small_1">Notes:</lib-text>
-          <lib-text> {{ data.notes }}
-          </lib-text>
-          <lib-text styleText="Small_1">Passengers:</lib-text>
-          <lib-text> {{ data.passengers && data.passengers.length > 0 ? data.passengers.join(', ') : 'None' }}
-          </lib-text>
-          <lib-text styleText="Small_1">Location (Lat/Lon):</lib-text>
-          <lib-text> {{ data.location_latitude }}, {{ data.location_longitude }}
-          </lib-text>
-
-        </lib-jumbotron>
-
-        <!-- Timestamps -->
-        <lib-jumbotron
-          class="md:col-span-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
-          <lib-text styleText="Title_1">
-            Timestamps
-          </lib-text>
-          <lib-text styleText="Small_1">Created At:</lib-text>
-          <lib-text> {{ data.created_at | date:'medium' }}
-          </lib-text>
-          <lib-text styleText="Small_1">Updated At:</lib-text>
-          <lib-text>{{ data.updated_at | date:'medium' }}</lib-text>
-        </lib-jumbotron>
-      </div>
-    </div>
+      }
+    </ul>
   </div>
 }

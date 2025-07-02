@@ -7,6 +7,9 @@ import { Component, HostBinding, input } from '@angular/core';
   template: `
     <ng-content />
   `,
+  host:{
+    role: 'li'
+  },
   styleUrl: './jumbotron.component.scss',
 })
 export class JumbotronComponent {

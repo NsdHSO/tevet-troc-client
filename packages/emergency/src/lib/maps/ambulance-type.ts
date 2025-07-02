@@ -86,6 +86,19 @@ export const AmbulanceStatusDisplayNames: Record<AmbulanceStatus, string> = {
   UNDER_REPAIR: 'Under Repair',
 };
 
+/**
+ *
+ */
+export interface AmbulanceIdUi {
+  status: AmbulanceStatus | null;
+  uiElements: AmbulanceIdData[][];
+}
+
+export interface AmbulanceIdData {
+  title: string;
+  description?: string;
+}
+
 // Example usage:
 // const currentStatus: AmbulanceStatus = "TRANSPORTING_PATIENT";
 // console.log(`Current status: ${AmbulanceStatusDisplayNames[currentStatus]}`); // Output: "Current status: Transporting Patient"

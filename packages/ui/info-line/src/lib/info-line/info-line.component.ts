@@ -2,6 +2,7 @@ import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StyleTextEnum, StyleTextType } from '@tevet-troc-client/models';
 import { TextComponent, TextDirective } from '@tevet-troc-client/text';
+import { AccessibilityDirective } from '@tevet-troc-client/accessibility';
 
 @Component({
   selector: 'lib-info-line',
@@ -10,8 +11,13 @@ import { TextComponent, TextDirective } from '@tevet-troc-client/text';
   styleUrl: './info-line.component.scss',
   host: {
     '[attr.data-test]': "'info-line'",
-    'class': "flex justify-between"
+    class: 'flex justify-between gap-4',
   },
+  hostDirectives: [
+    {
+      directive: AccessibilityDirective,
+    },
+  ],
 })
 export class InfoLineComponent {
   /**
@@ -25,5 +31,13 @@ export class InfoLineComponent {
   /**
    * Title
    */
-  description = input<string | null>(null);
+  description = input('', {
+    // Make the transform function accept 'string | undefined'
+    transform: (v: string | undefined): string | null => {
+      if (v === undefined || v === '') {
+        return null;
+      }
+      return v;
+    },
+  });
 }
