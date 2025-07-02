@@ -20,13 +20,9 @@
         <!-- General Information -->
         <lib-jumbotron
         >
-          <lib-text styleText="Title_1">
-            General Information
-          </lib-text>
-          <lib-text styleText="Small_1">Vehicle Number:</lib-text>
-          <lib-text>
-            {{ data.vehicle_number }}
-          </lib-text>
+          <lib-info-line title="General Information" type="Title_2"/>
+          <lib-info-line title="Vehicle Number" [description]="data.vehicle_number"/>
+
           <lib-text styleText="Small_1">Type:</lib-text>
           <lib-text>{{ data.type }}</lib-text>
           <lib-text styleText="Small_1">Make:</lib-text>

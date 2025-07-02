@@ -3,13 +3,20 @@ import { CommonModule } from '@angular/common';
 import { AmbulanceService } from '../../service/ambulance/ambulance.service';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
-import { AmbulanceStatusEnum } from '../../maps/ambulance-type';
 import { TextComponent, TextDirective } from '@tevet-troc-client/text';
 import { JumbotronComponent } from '@tevet-troc-client/jumbotron';
+import { InfoLineComponent } from '@tevet-troc-client/info-line';
+import { AmbulanceStatusEnum } from '../../maps/ambulance-type';
 
 @Component({
   selector: 'lib-emergency',
-  imports: [CommonModule, TextDirective, TextComponent, JumbotronComponent],
+  imports: [
+    CommonModule,
+    TextDirective,
+    TextComponent,
+    JumbotronComponent,
+    InfoLineComponent,
+  ],
   templateUrl: './id-ambulance.component.html',
   styleUrl: './id-ambulance.component.scss',
   providers: [AmbulanceService],

@@ -1,0 +1,12 @@
+<lib-text
+  [styleText]="type()"
+>
+  {{ title() }} @if (description()) {:}
+</lib-text>
+@if (description()) {
+  <lib-text
+    styleText="Small_1"
+  >
+    {{ description() }}
+  </lib-text>
+}
