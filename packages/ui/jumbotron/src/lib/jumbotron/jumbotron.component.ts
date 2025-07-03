@@ -3,7 +3,6 @@ import { Component, HostBinding, input } from '@angular/core';
 
 @Component({
   selector: 'lib-jumbotron',
-  imports: [],
   template: `
     <ng-content />
   `,
