@@ -61,7 +61,6 @@ export class EmergencyApiService {
                     method: (
                       row: DataSourceMaterialTable<AmbulanceDetails>
                     ) => {
-                      console.log(row.model.driver_name);
                       this._router.navigate(
                         [{ outlets: { drawer: ['details_panel'] } }],
                         {

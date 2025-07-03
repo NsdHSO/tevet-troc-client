@@ -3,8 +3,12 @@ import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, switchMap } from 'rxjs';
 import { API_CONFIG_AMBULANCE } from '../../../provider/api.token';
 import { PaginatedBackendResponse } from '@tevet-troc-client/http-response';
-import { AmbulanceDetails, AmbulanceIdUi, ambulanceTypeDisplayNames } from '@tevet-troc-client/models';
-
+import {
+  AmbulanceDetails,
+  AmbulanceIdUi, AmbulanceStatus,
+  ambulanceStsDisplayNames,
+  ambulanceTypeDisplayNames
+} from '@tevet-troc-client/models';
 
 @Injectable({
   providedIn: 'root',
@@ -56,7 +60,7 @@ export class AmbulanceApiService {
         }; // Return an empty array if no data is found
       }
       return {
-        status: data.status,
+        status: ambulanceStsDisplayNames()[data.status] as AmbulanceStatus,
         uiElements: [
           // General Information Section
           [

@@ -1,3 +1,4 @@
+
 /**
  * Defines the possible types of fuel for a vehicle.
  */

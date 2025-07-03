@@ -64,28 +64,6 @@ export type AmbulanceStatus =
   | 'PREPARING_FOR_MISSION'
   | 'UNDER_REPAIR';
 
-// Then, a mapping for display purposes
-export const AmbulanceStatusDisplayNames: Record<AmbulanceStatus, string> = {
-  AVAILABLE: 'Available',
-  IN_SERVICE: 'In Service',
-  MAINTENANCE: 'Maintenance',
-  DISPATCHED: 'Dispatched',
-  EN_ROUTE_TO_SCENE: 'En Route to Scene',
-  AT_SCENE: 'At Scene',
-  TRANSPORTING_PATIENT: 'Transporting Patient',
-  EN_ROUTE_TO_HOSPITAL: 'En Route to Hospital',
-  AT_HOSPITAL: 'At Hospital',
-  RETURNING_TO_BASE: 'Returning to Base',
-  UNAVAILABLE: 'Unavailable',
-  OUT_OF_SERVICE: 'Out of Service',
-  ON_BREAK: 'On Break',
-  FUELING: 'Fueling',
-  CLEANING: 'Cleaning',
-  AWAITING_DISPATCH: 'Awaiting Dispatch',
-  PREPARING_FOR_MISSION: 'Preparing for Mission',
-  UNDER_REPAIR: 'Under Repair',
-};
-
 /**
  *
  */
@@ -101,7 +79,7 @@ export interface AmbulanceIdData {
 
 // Example usage:
 // const currentStatus: AmbulanceStatus = "TRANSPORTING_PATIENT";
-// console.log(`Current status: ${AmbulanceStatusDisplayNames[currentStatus]}`); // Output: "Current status: Transporting Patient"
+// console.log(`Current status: ${ambulanceStatusDisplayNames[currentStatus]}`); // Output: "Current status: Transporting Patient"
 
 export interface AmbulanceDetails {
   created_at: string;
@@ -167,3 +145,28 @@ export function getAmbulanceTypeFromDisplay(
   );
   return entry ? (entry[0] as AmbulanceType) : undefined;
 }
+
+// Then, a mapping for display purposes
+export const ambulanceStsDisplayNames: () => Record<
+  AmbulanceStatus,
+  string
+> = () => ({
+  AVAILABLE: 'Available',
+  IN_SERVICE: 'In Service',
+  MAINTENANCE: 'Maintenance',
+  DISPATCHED: 'Dispatched',
+  EN_ROUTE_TO_SCENE: 'En Route to Scene',
+  AT_SCENE: 'At Scene',
+  TRANSPORTING_PATIENT: 'Transporting Patient',
+  EN_ROUTE_TO_HOSPITAL: 'En Route to Hospital',
+  AT_HOSPITAL: 'At Hospital',
+  RETURNING_TO_BASE: 'Returning to Base',
+  UNAVAILABLE: 'Unavailable',
+  OUT_OF_SERVICE: 'Out of Service',
+  ON_BREAK: 'On Break',
+  FUELING: 'Fueling',
+  CLEANING: 'Cleaning',
+  AWAITING_DISPATCH: 'Awaiting Dispatch',
+  PREPARING_FOR_MISSION: 'Preparing for Mission',
+  UNDER_REPAIR: 'Under Repair',
+});
