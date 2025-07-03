@@ -1,10 +1,12 @@
 <lib-text
+  [attr.aria-hidden]="true"
   [styleText]="type()"
 >
   {{ title() }} @if (description()) {:}
 </lib-text>
 @if (description()) {
   <lib-text
+    [attr.aria-hidden]="true"
     styleText="Small_1"
   >
     {{ description() }}

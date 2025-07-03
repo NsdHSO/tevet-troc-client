@@ -14,9 +14,10 @@
         >
           <ul>
             @for (element of cards; track element) {
-              <lib-info-line [description]="element.description" [title]="element.title"
-                             [ariaName]="element.title + ' ' + element.description"
-                             [type]="element.description ? 'Title_1' : 'Title_2'" />
+              <lib-info-line
+                [description]="element.description" [title]="element.title"
+                [ariaName]="element.title + ' ' + element.description"
+                [type]="element.description ? 'Title_1' : 'Title_2'" />
             }
           </ul>
         </lib-jumbotron>

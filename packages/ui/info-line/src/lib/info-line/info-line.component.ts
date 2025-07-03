@@ -11,7 +11,6 @@ import { AccessibilityDirective } from '@tevet-troc-client/accessibility';
   styleUrl: './info-line.component.scss',
   host: {
     '[attr.data-test]': "'info-line'",
-    class: '',
   },
   hostDirectives: [
     {

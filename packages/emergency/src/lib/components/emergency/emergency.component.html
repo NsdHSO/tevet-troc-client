@@ -41,6 +41,9 @@
             name="Edit Ambulance IC" />
         </elix-table>
       }
+      @if (emergencyService.dataSourceForTable()[idx]?.loading) {
+        <lib-text>Loading</lib-text>
+      }
     </main>
   </section>
 }
