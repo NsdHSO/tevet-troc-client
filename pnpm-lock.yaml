@@ -169,8 +169,8 @@ importers:
         specifier: ^19.0.2
         version: 19.0.3(@angular/common@20.0.5(@angular/core@20.0.5(@angular/compiler@20.0.5)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.0.5(@angular/compiler@20.0.5)(rxjs@7.8.2)(zone.js@0.15.1))(@angular/material@20.0.4(e421f00bbaa23dc1d987ff80b76305a0))
       ngx-liburg-frame-side:
-        specifier: ^19.0.20
-        version: 19.0.20(@angular/common@20.0.5(@angular/core@20.0.5(@angular/compiler@20.0.5)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.0.5(@angular/compiler@20.0.5)(rxjs@7.8.2)(zone.js@0.15.1))
+        specifier: ^19.0.21
+        version: 19.0.21(@angular/common@20.0.5(@angular/core@20.0.5(@angular/compiler@20.0.5)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.0.5(@angular/compiler@20.0.5)(rxjs@7.8.2)(zone.js@0.15.1))
       ngx-liburg-icon:
         specifier: ^19.0.2
         version: 19.0.3(@angular/common@20.0.5(@angular/core@20.0.5(@angular/compiler@20.0.5)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.0.5(@angular/compiler@20.0.5)(rxjs@7.8.2)(zone.js@0.15.1))
@@ -5597,8 +5597,8 @@ packages:
   neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
 
-  ngx-liburg-frame-side@19.0.20:
-    resolution: {integrity: sha512-b+XQAI0F58hVs7F1U4OLwpxDTskkNZeliDF0KHKiEdp/7qQ/EQ7xb4Lk0vAwZ+lmKcjImj2u0WXkm3D9I/IeFA==}
+  ngx-liburg-frame-side@19.0.21:
+    resolution: {integrity: sha512-rzMceg3hySmklmvzwqb6Dp+aTxE6qeGq1cU/QTakDx8mMr+xH+PjAZrciRmorulE10B+cK7O9bDB3jAR30B1HQ==}
     peerDependencies:
       '@angular/common': ^19.0.0
       '@angular/core': ^19.0.0
@@ -14884,7 +14884,7 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  ngx-liburg-frame-side@19.0.20(@angular/common@20.0.5(@angular/core@20.0.5(@angular/compiler@20.0.5)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.0.5(@angular/compiler@20.0.5)(rxjs@7.8.2)(zone.js@0.15.1)):
+  ngx-liburg-frame-side@19.0.21(@angular/common@20.0.5(@angular/core@20.0.5(@angular/compiler@20.0.5)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.0.5(@angular/compiler@20.0.5)(rxjs@7.8.2)(zone.js@0.15.1)):
     dependencies:
       '@angular/common': 20.0.5(@angular/core@20.0.5(@angular/compiler@20.0.5)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2)
       '@angular/core': 20.0.5(@angular/compiler@20.0.5)(rxjs@7.8.2)(zone.js@0.15.1)
