@@ -6,14 +6,14 @@
       <lib-badge [title]="data.status" />
     </div>
     <ul class="grid grid-cols-1 gap-6 md:grid-cols-2">
-      @for (cards of data.uiElements; track cards; let first = $first) {
+      @for (cards of data.uiElements; track $index) {
         <!-- General Information -->
         <lib-jumbotron
           [hover]="true"
           [attr.aria-label]=" cards[0].title "
         >
           <ul>
-            @for (element of cards; track element) {
+            @for (element of cards; track $index) {
               <lib-info-line
                 [description]="element.description" [title]="element.title"
                 [ariaName]="element.title + ' ' + element.description"
