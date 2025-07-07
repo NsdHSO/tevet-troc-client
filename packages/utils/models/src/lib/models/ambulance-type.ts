@@ -75,6 +75,7 @@ export interface AmbulanceIdUi {
 export interface AmbulanceIdData {
   title: string;
   description?: string;
+  edit: boolean;
 }
 
 // Example usage:
