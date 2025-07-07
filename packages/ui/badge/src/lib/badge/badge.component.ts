@@ -1,14 +1,12 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { TextComponent, TextDirective } from '@tevet-troc-client/text';
-import {
-  AmbulanceStatusEnum,
-  ambulanceStsDisplayNames,
-} from '@tevet-troc-client/models';
+import { AmbulanceStatusEnum, ambulanceStsDisplayNames } from '@tevet-troc-client/models';
 
 @Component({
   selector: 'lib-badge',
   template: ` <lib-text styleText="Small_1">{{ title() }} </lib-text>`,
   styleUrl: './badge.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [TextComponent, TextDirective],
   host: {
     '[class.available]':
