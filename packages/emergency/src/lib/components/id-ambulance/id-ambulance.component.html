@@ -32,10 +32,9 @@
 } @else {
 
   <lib-selector [options]="statuses.value()?.message" [selectedTemplateRef]="selectedTemplate">
-    <!-- Using @ContentChild to pass template into component -->
     <ng-template #optionTemplate let-status >
       <lib-text>
-        {{ status.value }}
+        {{ status.label }}
       </lib-text>
     </ng-template>
   </lib-selector>
@@ -43,6 +42,6 @@
 
 <ng-template #selectedTemplate let-status>
   <lib-text [content]="status">
-    {{  "Tractor" }}
+      Select Status
   </lib-text>
 </ng-template>
