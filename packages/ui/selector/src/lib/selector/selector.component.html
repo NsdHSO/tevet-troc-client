@@ -1,0 +1,37 @@
+<div class="app-selector btn-group">
+  <button (click)="toggleDropdown()">
+    <ng-template #defaultSelected>
+      <lib-text>
+        {{ picked || label }}
+        {{picked}}'iacu
+      </lib-text>
+    </ng-template>
+
+    <ng-container
+      [ngTemplateOutlet]="selectedTemplateRef || defaultSelected"
+      [ngTemplateOutletContext]="{ $implicit: picked }"
+    >
+    </ng-container>
+  </button>
+
+  @if (isOpen) {
+    <ul>
+      @for (option of options; track $index) {
+        <li
+          (click)="selectOption(option)"
+        >
+          <ng-template #defaultOption>
+            <lib-text>
+              {{ option || option }}
+            </lib-text>
+          </ng-template>
+
+          <ng-container
+            [ngTemplateOutlet]="optionTemplateRef || defaultOption"
+            [ngTemplateOutletContext]="{ $implicit: option, index: $index }"
+          />
+        </li>
+      }
+    </ul>
+  }
+</div>

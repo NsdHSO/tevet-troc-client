@@ -7,6 +7,7 @@ import { TextComponent, TextDirective } from '@tevet-troc-client/text';
 import { JumbotronComponent } from '@tevet-troc-client/jumbotron';
 import { InfoLineComponent } from '@tevet-troc-client/info-line';
 import { BadgeComponent } from '@tevet-troc-client/badge';
+import { SelectorComponent } from '@tevet-troc-client/selector';
 
 @Component({
   selector: 'lib-emergency',
@@ -17,6 +18,7 @@ import { BadgeComponent } from '@tevet-troc-client/badge';
     JumbotronComponent,
     InfoLineComponent,
     BadgeComponent,
+    SelectorComponent,
   ],
   templateUrl: './id-ambulance.component.html',
   styleUrl: './id-ambulance.component.scss',

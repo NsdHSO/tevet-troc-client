@@ -6,7 +6,9 @@ import {
   inject,
   input,
   Input,
+  OnChanges,
   Renderer2,
+  SimpleChanges,
 } from '@angular/core';
 
 import { Observable, tap } from 'rxjs';
@@ -24,7 +26,7 @@ import { StyleTextEnum, StyleTextType } from '@tevet-troc-client/models';
     },
   ],
 })
-export class TextDirective {
+export class TextDirective implements OnChanges {
   /**
    * Instance of element Ref
    */
@@ -38,6 +40,7 @@ export class TextDirective {
    */
   private _document = inject(DOCUMENT);
   /**
+   * Instance of DestroyRef
    *
    */
   private _destroyed$ = inject(DestroyRef);
@@ -46,6 +49,10 @@ export class TextDirective {
    */
   @Input()
   reactiveValueChange?: Observable<unknown>;
+  /**
+   * Content
+   */
+  content = input<string | any>(null);
   /**
    * An input what wanted to put it on the element
    */
@@ -77,6 +84,12 @@ export class TextDirective {
     setTimeout(() => {
       this.verifiedIfIsReactiveOrNot();
     }, 0);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['content']&&changes['content']['currentValue']&&changes['content']['currentValue']['label']) {
+      this.checkContentAndApplied(changes['content']['currentValue']['label']);
+    }
   }
 
   /**
