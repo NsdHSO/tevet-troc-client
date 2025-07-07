@@ -30,7 +30,7 @@ export default class IdAmbulanceComponent {
   /**
    *
    */
-  private ambulanceService = inject(AmbulanceService);
+  ambulanceService = inject(AmbulanceService);
   /**
    *
    */

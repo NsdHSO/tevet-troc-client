@@ -70,12 +70,19 @@ export type AmbulanceStatus =
 export interface AmbulanceIdUi {
   status: AmbulanceStatus | null;
   uiElements: AmbulanceIdData[][];
+  id?: string;
+  ambulance_ic?: number;
 }
 
 export interface AmbulanceIdData {
   title: string;
   description?: string;
   edit: boolean;
+}
+
+export interface AmbulanceStatusDao {
+  value: AmbulanceStatus;
+  label: string;
 }
 
 // Example usage:

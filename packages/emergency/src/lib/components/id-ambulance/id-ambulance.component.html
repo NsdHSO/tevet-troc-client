@@ -1,25 +1,43 @@
-@let data = ambulance | async; @if (data) {
-<div class="min-h-screen p-4 sm:p-6 lg:p-8">
-  <div class="mb-6 flex items-center justify-between">
-    <lib-text styleText="Title_3_1">Ambulance Overview</lib-text>
-    <lib-badge [title]="data.status" />
+@let data = ambulance | async;
+@if (data) {
+  <div class="p-4 sm:p-6 lg:p-8">
+    <div class="mb-6 flex items-center justify-between">
+      <lib-text styleText="Title_3_1">Ambulance Overview</lib-text>
+      <lib-badge [title]="data.status" />
+    </div>
+    <ul class="grid grid-cols-1 gap-6 md:grid-cols-2">
+      @for (cards of data.uiElements; track $index) {
+        <!-- General Information -->
+        <lib-jumbotron [hover]="true" [attr.aria-label]="cards[0].title">
+          <ul>
+            @for (element of cards; track $index) {
+              <lib-info-line
+                [description]="element.description"
+                [title]="element.title"
+                [ariaName]="element.title + ' ' + element.description"
+                [type]="element.description ? 'Title_1' : 'Title_2'"
+              />
+            }
+          </ul>
+        </lib-jumbotron>
+      }
+    </ul>
   </div>
-  <ul class="grid grid-cols-1 gap-6 md:grid-cols-2">
-    @for (cards of data.uiElements; track $index) {
-    <!-- General Information -->
-    <lib-jumbotron [hover]="true" [attr.aria-label]="cards[0].title">
-      <ul>
-        @for (element of cards; track $index) {
-        <lib-info-line
-          [description]="element.description"
-          [title]="element.title"
-          [ariaName]="element.title + ' ' + element.description"
-          [type]="element.description ? 'Title_1' : 'Title_2'"
-        />
-        }
-      </ul>
-    </lib-jumbotron>
+}
+
+@let statuses = ambulanceService.ambulanceApiService.ambulanceStatus;
+
+@if (statuses.isLoading()) {
+  <lib-text>Loading</lib-text>
+} @else {
+  <ul>
+    @for (status of statuses.value()?.message; track $index) {
+      <li style="list-style: none;">
+        <lib-text>{{ status.label }}</lib-text>
+      </li>
+    } @empty {
+      <lib-text>No data</lib-text>
     }
   </ul>
-</div>
 }
+
