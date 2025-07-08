@@ -39,6 +39,9 @@ jobs:
         if: steps.check_label.outputs.result == 'true'
         run: |
           echo "Attempting to merge PR #${{ github.event.pull_request.number }}"
-          gh pr merge ${{ github.event.pull_request.number }} --merge --auto
+          # Get PR title to use as commit message
+          PR_TITLE=$(gh pr view ${{ github.event.pull_request.number }} --json title -q .title)
+          # Use PR title as commit message
+          gh pr merge ${{ github.event.pull_request.number }} --merge --subject="$PR_TITLE"
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
