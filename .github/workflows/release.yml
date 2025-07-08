@@ -22,15 +22,15 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '18'
+        node-version: '20'
 
-    - name: Install dependencies
-      run: npm install
+    # Skip dependency installation to avoid conflicts
+    # Instead, we'll directly install and use semantic-release
 
-    - name: Install semantic-release
+    - name: Install semantic-release and plugins
       run: npm install -g semantic-release @semantic-release/changelog @semantic-release/git @semantic-release/github
 
-    - name: Release
+    - name: Run semantic-release
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       run: semantic-release
