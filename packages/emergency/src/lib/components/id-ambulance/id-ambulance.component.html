@@ -4,6 +4,26 @@
 
 <div class="p-4 sm:p-6 lg:p-8">
   @if (data) {
+
+    @if (statuses.isLoading()) {
+      <lib-text>Loading</lib-text>
+    } @else {
+      <lib-selector [options]="statuses.value()?.message" [selectedTemplateRef]="selectedTemplate"
+                    (optionSelected)="ambulanceService.changeStatus($event, data.id, data.hospital_id, data.ambulance_ic)"
+      >
+        <ng-template #optionTemplate let-status>
+          <lib-text>
+            {{ status.label }}
+          </lib-text>
+        </ng-template>
+      </lib-selector>
+    }
+
+    <ng-template #selectedTemplate let-status>
+      <lib-text [content]="status" styleText="Small_1">
+        Change status
+      </lib-text>
+    </ng-template>
     <div class="mb-6 flex items-center justify-between">
       <lib-text styleText="Title_3_1">Ambulance Overview</lib-text>
       <lib-badge [title]="data.status" />
@@ -25,26 +45,6 @@
         </lib-jumbotron>
       }
     </ul>
-
-    @if (statuses.isLoading()) {
-      <lib-text>Loading</lib-text>
-    } @else {
-      <lib-selector [options]="statuses.value()?.message" [selectedTemplateRef]="selectedTemplate"
-      (optionSelected)="ambulanceService.changeStatus($event, data.id, data.hospital_id, data.ambulance_ic)"
-      >
-        <ng-template #optionTemplate let-status>
-          <lib-text>
-            {{ status.label }}
-          </lib-text>
-        </ng-template>
-      </lib-selector>
-    }
-
-    <ng-template #selectedTemplate let-status>
-      <lib-text [content]="status" styleText="Small_1">
-        Change status
-      </lib-text>
-    </ng-template>
   }
 </div>
 

@@ -1,9 +1,10 @@
 import {
+  AfterViewChecked,
   Component,
-  contentChild,
+  contentChild, ElementRef,
   input,
   output,
-  TemplateRef,
+  TemplateRef, viewChild
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TextComponent, TextDirective } from '@tevet-troc-client/text';
@@ -25,49 +26,86 @@ import { animate, group, query, stagger, state, style, transition, trigger } fro
   styleUrl: './selector.component.css',
   animations: [
     trigger('slideInOut', [
-      state('void', style({
-        maxHeight: '0',
-        opacity: '0',
-        transform: 'translateY(-10px)'
-      })),
-      transition('void => *', [
-        style({ // Start with parent hidden for a cleaner transition
+      state(
+        'void',
+        style({
           maxHeight: '0',
           opacity: '0',
-          transform: 'translateY(-10px)'
+          transform: 'translateY(-10px)',
+        })
+      ),
+      transition('void => *', [
+        style({
+          // Start with parent hidden for a cleaner transition
+          maxHeight: '0',
+          opacity: '0',
+          transform: 'translateY(-10px)',
         }),
-        group([ // Animate parent properties simultaneously
-          animate('200ms ease-out', style({
-            maxHeight: '300px', // Adjust this to be large enough
-            opacity: '1',
-            transform: 'translateY(0)'
-          })),
-          query('li', [ // Query for all 'li' elements inside
-            style({ opacity: 0, transform: 'translateY(20px)' }), // Initial state for list items
-            stagger(10, [ // Stagger each 'li' by 50ms
-              animate('200ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
-            ])
-          ], { optional: true }) // optional: true prevents errors if no 'li' elements exist
-        ])
+        group([
+          // Animate parent properties simultaneously
+          animate(
+            '200ms ease-out',
+            style({
+              maxHeight: '300px', // Adjust this to be large enough
+              opacity: '1',
+              transform: 'translateY(0)',
+            })
+          ),
+          query(
+            'li',
+            [
+              // Query for all 'li' elements inside
+              style({ opacity: 0, transform: 'translateY(20px)' }), // Initial state for list items
+              stagger(10, [
+                // Stagger each 'li' by 50ms
+                animate(
+                  '200ms ease-out',
+                  style({ opacity: 1, transform: 'translateY(0)' })
+                ),
+              ]),
+            ],
+            { optional: true }
+          ), // optional: true prevents errors if no 'li' elements exist
+        ]),
       ]),
       transition('* => void', [
-        group([ // Animate parent properties simultaneously
-          animate('200ms ease-in', style({
-            maxHeight: '0',
-            opacity: '0',
-            transform: 'translateY(-10px)'
-          })),
-          query('li', [ // Query for all 'li' elements inside
-            stagger(-50, [ // Stagger each 'li' by -50ms (reverse order for exiting)
-              animate('200ms ease-in', style({ opacity: 0, transform: 'translateY(20px)' }))
-            ])
-          ], { optional: true })
-        ])
-      ])
-    ])
+        group([
+          // Animate parent properties simultaneously
+          animate(
+            '200ms ease-in',
+            style({
+              maxHeight: '0',
+              opacity: '0',
+              transform: 'translateY(-10px)',
+            })
+          ),
+          query(
+            'li',
+            [
+              // Query for all 'li' elements inside
+              stagger(-50, [
+                // Stagger each 'li' by -50ms (reverse order for exiting)
+                animate(
+                  '200ms ease-in',
+                  style({ opacity: 0, transform: 'translateY(20px)' })
+                ),
+              ]),
+            ],
+            { optional: true }
+          ),
+        ]),
+      ]),
+    ]),
   ],
 })
-export class SelectorComponent<T> {
+export class SelectorComponent<T> implements AfterViewChecked {
+  ngAfterViewChecked(): void {
+    if (this.isOpen && this.dropdownList()) {
+      setTimeout(() => {
+        this.dropdownList()?.nativeElement.focus();
+      },0)
+    }
+  }
   /**
    * @description The currently picked (selected) option of type T.
    * This property is marked with the definite assignment assertion '!' because it's
@@ -102,7 +140,15 @@ export class SelectorComponent<T> {
    * The context provided to this template includes `$implicit` (the option itself) and `index`.
    * This is an Angular content child signal, looking for a template with a `#optionTemplate` reference.
    */
-  optionTemplateRef = contentChild<TemplateRef<{ $implicit: any; index: number }>>('optionTemplate');
+  optionTemplateRef =
+    contentChild<TemplateRef<{ $implicit: any; index: number }>>(
+      'optionTemplate'
+    );
+
+  /**
+   * view Child
+   */
+  dropdownList = viewChild<ElementRef>('dropdownList');
 
   /**
    * @description An output event that emits the selected option (`T`) when an option is chosen.
@@ -130,7 +176,8 @@ export class SelectorComponent<T> {
    * @param option The option that was selected. The type is `any` but ideally
    * should match `T` if type safety is desired for the `options` input.
    */
-  selectOption(option: T): void { // Changed option type to T for consistency
+  selectOption(option: T): void {
+    // Changed option type to T for consistency
     this.picked = option;
     this.optionSelected.emit(option);
     this.isOpen = false;
