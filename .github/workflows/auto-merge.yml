@@ -57,12 +57,17 @@ jobs:
             }
             
             try {
+              // Create commit message with PR title and description
+              const commitTitle = prData.title;
+              const commitMessage = prData.body || '';
+              
               const mergeResult = await github.rest.pulls.merge({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: pr.number,
-                commit_title: prData.title,
-                merge_method: 'merge'
+                commit_title: commitTitle,
+                commit_message: commitMessage,
+                merge_method: 'squash'
               });
               console.log(`PR successfully merged with title: ${prData.title}`);
               console.log(`Merge SHA: ${mergeResult.data.sha}`);
