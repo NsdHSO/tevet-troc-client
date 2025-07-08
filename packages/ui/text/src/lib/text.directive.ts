@@ -179,7 +179,7 @@ export class TextDirective implements OnChanges {
         ];
       // Add cases for other styles as needed
       default:
-        return ['bg-red-500'];
+        return ['bg-red-700'];
     }
   }
 

@@ -1,6 +1,8 @@
 @let data = ambulance | async;
-@if (data) {
-  <div class="p-4 sm:p-6 lg:p-8">
+@let statuses = ambulanceService.ambulanceApiService.ambulanceStatus;
+
+<div class="p-4 sm:p-6 lg:p-8">
+  @if (data) {
     <div class="mb-6 flex items-center justify-between">
       <lib-text styleText="Title_3_1">Ambulance Overview</lib-text>
       <lib-badge [title]="data.status" />
@@ -22,26 +24,26 @@
         </lib-jumbotron>
       }
     </ul>
-  </div>
-}
 
-@let statuses = ambulanceService.ambulanceApiService.ambulanceStatus;
+    @if (statuses.isLoading()) {
+      <lib-text>Loading</lib-text>
+    } @else {
 
-@if (statuses.isLoading()) {
-  <lib-text>Loading</lib-text>
-} @else {
+      <lib-selector [options]="statuses.value()?.message" [selectedTemplateRef]="selectedTemplate">
+        <ng-template #optionTemplate let-status>
+          <lib-text>
+            {{ status.label }}
+          </lib-text>
+        </ng-template>
+      </lib-selector>
+    }
 
-  <lib-selector [options]="statuses.value()?.message" [selectedTemplateRef]="selectedTemplate">
-    <ng-template #optionTemplate let-status >
-      <lib-text>
-        {{ status.label }}
+    <ng-template #selectedTemplate let-status>
+      <lib-text [content]="status" styleText="Small_1">
+        Select Status
       </lib-text>
     </ng-template>
-  </lib-selector>
-}
 
-<ng-template #selectedTemplate let-status>
-  <lib-text [content]="status">
-      Select Status
-  </lib-text>
-</ng-template>
+  }
+</div>
+

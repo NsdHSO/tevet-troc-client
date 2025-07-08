@@ -1,7 +1,6 @@
-<div class="">
   <button (click)="toggleDropdown()">
     <ng-template #defaultSelected>
-      <lib-text>
+      <lib-text styleText="Small_1">
         {{ picked || label }}
       </lib-text>
     </ng-template>
@@ -21,11 +20,12 @@
         aria-label="Select an option"
         tabindex="0"
         [attr.focusable]="true"
+        [@slideInOut]
     >
       <lib-jumbotron>
         @for (option of options(); track $index) {
           <li
-            class="hover:bg-gray-100 hover:dark:bg-gray-700 hover:cursor-pointer rounded-lg"
+            class="hover:bg-gray-100 hover:dark:bg-gray-600 hover:cursor-pointer rounded-lg"
             role="option"
             [attr.aria-selected]="option === picked"
             [class.bg-gray-100]="option === picked"
@@ -48,4 +48,3 @@
       </lib-jumbotron>
     </ul>
   }
-</div>

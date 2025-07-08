@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { TextComponent, TextDirective } from '@tevet-troc-client/text';
 import { JumbotronComponent } from '@tevet-troc-client/jumbotron';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { animate, group, query, stagger, state, style, transition, trigger } from '@angular/animations';
 
 /**
  * @title Selector Component
@@ -22,6 +23,49 @@ import { provideAnimations } from '@angular/platform-browser/animations';
   imports: [CommonModule, TextComponent, TextDirective, JumbotronComponent],
   templateUrl: './selector.component.html',
   styleUrl: './selector.component.css',
+  animations: [
+    trigger('slideInOut', [
+      state('void', style({
+        maxHeight: '0',
+        opacity: '0',
+        transform: 'translateY(-10px)'
+      })),
+      transition('void => *', [
+        style({ // Start with parent hidden for a cleaner transition
+          maxHeight: '0',
+          opacity: '0',
+          transform: 'translateY(-10px)'
+        }),
+        group([ // Animate parent properties simultaneously
+          animate('200ms ease-out', style({
+            maxHeight: '300px', // Adjust this to be large enough
+            opacity: '1',
+            transform: 'translateY(0)'
+          })),
+          query('li', [ // Query for all 'li' elements inside
+            style({ opacity: 0, transform: 'translateY(20px)' }), // Initial state for list items
+            stagger(10, [ // Stagger each 'li' by 50ms
+              animate('200ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+            ])
+          ], { optional: true }) // optional: true prevents errors if no 'li' elements exist
+        ])
+      ]),
+      transition('* => void', [
+        group([ // Animate parent properties simultaneously
+          animate('200ms ease-in', style({
+            maxHeight: '0',
+            opacity: '0',
+            transform: 'translateY(-10px)'
+          })),
+          query('li', [ // Query for all 'li' elements inside
+            stagger(-50, [ // Stagger each 'li' by -50ms (reverse order for exiting)
+              animate('200ms ease-in', style({ opacity: 0, transform: 'translateY(20px)' }))
+            ])
+          ], { optional: true })
+        ])
+      ])
+    ])
+  ],
 })
 export class SelectorComponent<T> {
   /**
