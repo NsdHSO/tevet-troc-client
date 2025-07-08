@@ -1,24 +1,29 @@
-name: Release
+name: Semantic Release
 
 on:
-  push:
-    tags:
-      - 'v*.*.*'  # Matches version tags like v1.0.0
+  workflow_run:
+    workflows: ["Publish In github page"]
+    types:
+      - completed
+    branches:
+      - master
 
 jobs:
-  build_and_release:
+  semantic_release:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
+        persist-credentials: false
 
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '18'
+        node-version: '20'
         cache: 'pnpm'
 
     - name: Install pnpm
@@ -27,26 +32,49 @@ jobs:
         version: 8
         run_install: false
 
-    - name: Get version from tag
-      id: get_version
-      run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
-
     - name: Install dependencies
       run: pnpm install
-
-    - name: Build project
-      run: pnpm run build
-
-    - name: Create GitHub Release
-      uses: softprops/action-gh-release@v1
+      
+    - name: Download build artifacts
+      uses: actions/download-artifact@v4
       with:
-        name: Release v${{ steps.get_version.outputs.VERSION }}
-        tag_name: ${{ github.ref }}
-        draft: false
-        prerelease: false
-        generate_release_notes: true
-        token: ${{ secrets.GH_TOKEN }}
-        files: |
-          dist/**/*.zip
-          LICENSE
-          README.md
+        name: deploy_dist
+        path: dist/tevet-troc-client
+        
+    - name: Install semantic-release
+      run: pnpm add -D semantic-release @semantic-release/changelog @semantic-release/git @semantic-release/github
+      
+    - name: Create .releaserc.json
+      run: |
+        cat > .releaserc.json << 'EOF'
+        {
+          "branches": ["master"],
+          "plugins": [
+            "@semantic-release/commit-analyzer",
+            "@semantic-release/release-notes-generator",
+            ["@semantic-release/changelog", {
+              "changelogFile": "CHANGELOG.md"
+            }],
+            ["@semantic-release/npm", {
+              "npmPublish": false
+            }],
+            ["@semantic-release/git", {
+              "assets": ["package.json", "CHANGELOG.md"],
+              "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+            }],
+            ["@semantic-release/github", {
+              "assets": [
+                {"path": "dist/**/*.zip", "label": "Distribution"},
+                {"path": "LICENSE", "label": "License"},
+                {"path": "README.md", "label": "Readme"}
+              ]
+            }]
+          ]
+        }
+        EOF
+        
+    - name: Run semantic-release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: npx semantic-release
+
