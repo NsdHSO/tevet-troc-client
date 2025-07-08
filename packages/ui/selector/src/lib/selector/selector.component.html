@@ -11,16 +11,23 @@
     >
     </ng-container>
   </button>
-
+  <div aria-live="polite" aria-atomic="true" class="sr-only">
+    @if (isOpen) {
+      Dropdown opened.
+    } @else {
+      Dropdown closed.
+    }
+  </div>
   @if (isOpen) {
     <ul class="flex w-max"
         role="listbox"
         aria-expanded="true"
         aria-haspopup="listbox"
         aria-label="Select an option"
-        tabindex="0"
+        tabindex="-1"
         [attr.focusable]="true"
         [@slideInOut]
+        #dropdownList
     >
       <lib-jumbotron>
         @for (option of options(); track $index) {
