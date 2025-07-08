@@ -4,7 +4,7 @@ import { AmbulanceStatusEnum, ambulanceStsDisplayNames } from '@tevet-troc-clien
 
 @Component({
   selector: 'lib-badge',
-  template: ` <lib-text styleText="Small_1">{{ title() }} </lib-text>`,
+  template: ` <lib-text styleText="Small_1" [content]="{label:title()}"/>`,
   styleUrl: './badge.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [TextComponent, TextDirective],

@@ -1,14 +1,25 @@
 import { HttpClient, httpResource } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, switchMap } from 'rxjs';
+import {
+  BehaviorSubject,
+  concatMap,
+  map,
+  Observable, of,
+  Subject,
+  switchMap, tap
+} from 'rxjs';
 import { API_CONFIG_AMBULANCE } from '../../../provider/api.token';
-import { BackendResponse, PaginatedBackendResponse } from '@tevet-troc-client/http-response';
+import {
+  BackendResponse,
+  PaginatedBackendResponse,
+} from '@tevet-troc-client/http-response';
 import {
   AmbulanceDetails,
   AmbulanceIdUi,
-  AmbulanceStatus, AmbulanceStatusDao,
+  AmbulanceStatus,
+  AmbulanceStatusDao,
   ambulanceStsDisplayNames,
-  ambulanceTypeDisplayNames
+  ambulanceTypeDisplayNames,
 } from '@tevet-troc-client/models';
 
 @Injectable({
@@ -25,6 +36,15 @@ export class AmbulanceApiService {
    */
   private ambulanceIc = new BehaviorSubject<string>('');
 
+  /**
+   * Status
+   */
+  status$ = new Subject<{
+    status: AmbulanceStatusDao;
+    id: string | unknown;
+    hospital_id: string | unknown;
+    ambulance_ic: number | unknown;
+  }>();
   /**
    *
    */
@@ -231,12 +251,28 @@ export class AmbulanceApiService {
           ],
         ],
         id: data.id,
-        ambulance_id: data.ambulance_ic,
+        ambulance_ic: data.ambulance_ic,
+        hospital_id: data.hospital_id,
       };
     })
   );
 
   ambulanceStatus = httpResource<BackendResponse<AmbulanceStatusDao[]>>(
     () => this._apiConfigEmergency.baseUrl + '/status'
+  );
+
+  changeAmbulanceStatus = this.status$.pipe(
+    switchMap((value) =>
+      this.httpClient.patch(
+        this._apiConfigEmergency.baseUrl + '/' + `${value.id}`,
+        {
+          status: value.status.value,
+          hospital_name: value.hospital_id,
+        }
+      ).pipe(switchMap(()=> of(value.ambulance_ic)))
+    ),
+    tap((ambulance_ic) => {
+      this.ambulanceIc.next(ambulance_ic as string);
+    })
   );
 }

@@ -50,9 +50,11 @@ export class TextDirective implements OnChanges {
   @Input()
   reactiveValueChange?: Observable<unknown>;
   /**
-   * Content
+   * Content to be displayed. This can be:
+   * - An object with a 'label' property (string).
+   * @type {string | { label: string } | any}
    */
-  content = input<string | any>(null);
+  content = input<string |{label:string}| any>(null);
   /**
    * An input what wanted to put it on the element
    */
