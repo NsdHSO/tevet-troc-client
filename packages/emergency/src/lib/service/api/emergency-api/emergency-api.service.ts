@@ -8,22 +8,12 @@ import {
   AmbulanceType,
   ambulanceTypeDisplayNames,
   fuelTypeDisplayNames,
-  FuelTypes
+  FuelTypes,
 } from '@tevet-troc-client/models';
-import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class EmergencyApiService {
-  /**
-   * A private Subject used to emit partial updates to ambulance details.
-   * This can be used to trigger side effects or other reactive operations
-   * based on specific ambulance detail changes within the component/service.
-   *
-   * @type {Subject<Partial<AmbulanceDetails>>}
-   */
-  private payloadAmbulance = new Subject<Partial<AmbulanceDetails>>();
-
   /**
    * A signal holding the ID of the hospital currently being filtered by.
    * This value is reactive and automatically updates the `httpAmbulanceResourceRes`
