@@ -35,13 +35,21 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
           fetch-depth: 0
           
-      - name: Auto-merge PR
+      - name: Direct merge PR
         if: steps.check_label.outputs.result == 'true'
         run: |
           echo "Attempting to merge PR #${{ github.event.pull_request.number }}"
           # Get PR title to use as commit message
           PR_TITLE=$(gh pr view ${{ github.event.pull_request.number }} --json title -q .title)
-          # Use PR title as commit message
-          gh pr merge ${{ github.event.pull_request.number }} --merge --subject="$PR_TITLE"
+          # Check if PR is mergeable
+          IS_MERGEABLE=$(gh pr view ${{ github.event.pull_request.number }} --json mergeable -q .mergeable)
+          if [ "$IS_MERGEABLE" == "true" ]; then
+            # Use PR title as commit message and merge immediately (without auto-merge)
+            gh pr merge ${{ github.event.pull_request.number }} --merge --subject="$PR_TITLE" --admin
+            echo "PR successfully merged with title: $PR_TITLE"
+          else
+            echo "PR is not in a mergeable state. Please resolve conflicts or wait for checks to complete."
+            exit 1
+          fi
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
