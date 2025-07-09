@@ -32,7 +32,6 @@ export class InfoLineComponent {
    * Title
    */
   description = input('', {
-    // Make the transform function accept 'string | undefined'
     transform: (v: string | undefined): string | null => {
       if (v === undefined || v === '') {
         return null;
