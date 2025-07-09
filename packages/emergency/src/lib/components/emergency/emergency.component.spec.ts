@@ -4,7 +4,7 @@ import { EmergencyService } from '../../service/emergency/emergency.service';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 
-describe('IdAmbulanceComponent', () => {
+describe('EmergencyComponent', () => {
   let component: EmergencyComponent;
   let fixture: ComponentFixture<EmergencyComponent>;
 
