@@ -4,7 +4,7 @@ import { EmergencyService } from './emergency.service';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 
-fdescribe('EmergencyService', () => {
+describe('EmergencyService', () => {
   let service: EmergencyService;
 
   beforeEach(() => {
