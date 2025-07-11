@@ -204,6 +204,10 @@ export class TextDirective implements OnChanges {
     this._renderer2.appendChild(this._elementRef.nativeElement, element);
     this._renderer2.setStyle(
       this._elementRef.nativeElement.firstChild,
+      'color',
+      'var(--app-text-color)'
+    );    this._renderer2.setStyle(
+      this._elementRef.nativeElement.firstChild,
       'hyphens',
       'auto'
     );

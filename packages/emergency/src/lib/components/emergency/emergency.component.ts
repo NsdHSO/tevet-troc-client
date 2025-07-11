@@ -17,8 +17,8 @@ import {
     MatIcon,
     TableComponent,
     ColumnTextComponent,
-    ColumnIconActionComponent
-],
+    ColumnIconActionComponent,
+  ],
   templateUrl: './emergency.component.html',
   styleUrl: './emergency.component.scss',
   providers: [EmergencyService],

@@ -1,3 +1,6 @@
+<main
+style="height: 100vh"
+>
 @for (layout of layouts(); track layout.title; let idx = $index) {
   <section
     [attr.aria-description]="layout.ariaDescription"
@@ -6,42 +9,32 @@
       <span class="text-purple-600 dark:text-purple-400"><mat-icon [svgIcon]="layout.icon" /></span>
       <lib-text styleText="Title_1">{{ layout.title }}</lib-text>
     </header>
-    <main class="{{layout.sectionClass}}">
-      @if (emergencyService.dataSourceForTable()[idx]?.value()?.data?.length > 0) {
+    <div  class="{{layout.sectionClass}}">
+      @if (emergencyService.dataSourceForTable()[idx]?.value.value()?.data?.length > 0) {
         <elix-table
-          [dataSource]="emergencyService.dataSourceForTable()[idx].value().data"
+          [dataSource]="emergencyService.dataSourceForTable()[idx].value.value().data"
           [zebraColor]="true"
           [showPagination]="true"
-          [lenghtPagination]="emergencyService.dataSourceForTable()[idx].value().length"
-          [pageIndex]="emergencyService.page()"
-          [pageSize]="emergencyService.pageSize()"
           (onPaginationChange)="emergencyService.changePageSize($event)"
         >
-          <elix-column-text
-            className="ambulance-id"
-            field="ambulance_ic"
-            name="Ambulance ID" />
-          <elix-column-text
-            className="fuell-type"
-            field="fuel_type"
-            name="Fuel Type" />
-          <elix-column-text
-            className="ambulance-type"
-            field="type"
-            name="Type of Ambulance" />
-          <elix-column-text
-            [editRow]="true"
-            className="driver-name"
-            field="driver_name"
-            name="Driver Name" />
-          <elix-column-icon-action
-            className="action2"
-            field="ambulanceIc"
-            name="Edit Ambulance IC" />
+          @for (row of emergencyService.dataSourceForTable()[idx].rows; track row) {
+            @if (!$last) {
+              <elix-column-text
+                [className]="row.className"
+                [field]="row.field"
+                [name]="row.name" />
+            } @else {
+              <elix-column-icon-action
+                [className]="row.className"
+                [field]="row.field"
+                [name]="row.name" />
+            }
+          }
         </elix-table>
-      } @else if (emergencyService.dataSourceForTable()[idx]?.isLoading()) {
+      } @else if (emergencyService.dataSourceForTable()[idx]?.value.isLoading()) {
         <lib-text styleText="Title_3">Loading...</lib-text>
       }
-    </main>
+    </div>
   </section>
 }
+</main>

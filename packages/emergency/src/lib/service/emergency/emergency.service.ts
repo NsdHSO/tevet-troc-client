@@ -1,7 +1,6 @@
 import { computed, inject, Injectable } from '@angular/core';
 import { EmergencyApiService } from '../api/emergency-api/emergency-api.service';
 import { DataSourceMaterialTable } from 'ngx-liburg';
-import { toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable()
 export class EmergencyService {
@@ -29,9 +28,47 @@ export class EmergencyService {
    * Computed value for resource
    */
   dataSourceForTable = computed(() => {
-    const dataSource: DataSourceMaterialTable<any>[] = [];
-    dataSource.push(this._ambulanceApi.httpAmbulanceResourceRes as any);
-
+    const dataSource = [];
+    dataSource.push({
+      value: this._ambulanceApi.httpAmbulanceResourceRes as any,
+      rows: [
+        {
+          className: 'ambulance-id',
+          field: 'ambulance_ic',
+          name: 'Ambulance ID',
+        },
+        {
+          className: 'fuell-type',
+          field: 'fuel_type',
+          name: 'Fuell Type',
+        },
+        {
+          className: 'ambulance-type',
+          field: 'type',
+          name: 'Type of Ambulance',
+        },
+        {
+          className: 'action2',
+          field: 'ambulanceIc',
+          name: 'Edit Ambulance IC ',
+        },
+      ],
+    });
+    dataSource.push({
+      value: this._ambulanceApi.httpEmergencyResourceRes as any,
+      rows: [
+        {
+          className: 'emergency-ic',
+          field: 'emergency_ic',
+          name: 'Edit Emergency IC',
+        },
+        {
+          className: 'action3',
+          field: 'id',
+          name: 'Action',
+        },
+      ],
+    })
     return dataSource;
   }) as any;
 }
