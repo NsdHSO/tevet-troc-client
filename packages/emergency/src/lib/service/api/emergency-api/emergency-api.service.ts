@@ -1,14 +1,14 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { API_CONFIG_AMBULANCE } from '../../../provider/api.token';
+import { API_CONFIG_AMBULANCE, API_CONFIG_EMERGENCY } from '../../../provider/api.token';
 import { httpResource } from '@angular/common/http';
 import { DataSourceMaterialTable } from 'ngx-liburg';
 import { PaginatedBackendResponse } from '@tevet-troc-client/http-response';
 import {
   AmbulanceDetails,
   AmbulanceType,
-  ambulanceTypeDisplayNames,
+  ambulanceTypeDisplayNames, Emergency,
   fuelTypeDisplayNames,
-  FuelTypes,
+  FuelTypes
 } from '@tevet-troc-client/models';
 import { Router } from '@angular/router';
 
@@ -43,8 +43,12 @@ export class EmergencyApiService {
    * Injects the API configuration for ambulance-related endpoints.
    * @private
    */
-  private _apiConfigEmergency = inject(API_CONFIG_AMBULANCE);
+  private _apiConfigAmbulance = inject(API_CONFIG_AMBULANCE);  /**
 
+   * Injects the API configuration for ambulance-related endpoints.
+   * @private
+   */
+  private _apiConfigEmergency = inject(API_CONFIG_EMERGENCY);
   /**
    * An httpResource that fetches paginated ambulance data from the backend,
    * filtered by `hospitalId`, `page`, and `pageSize` signals.
@@ -69,7 +73,7 @@ export class EmergencyApiService {
   httpAmbulanceResourceRes = httpResource(
     () => ({
       url: `${
-        this._apiConfigEmergency.baseUrl
+        this._apiConfigAmbulance.baseUrl
       }?filterBy=hospitalId=${this.hospitalId()}&page=${this.page()}&per_page=${this.pageSize()}`,
     }),
     {
@@ -109,4 +113,28 @@ export class EmergencyApiService {
       },
     }
   );
+
+  /**
+   *
+   */
+  httpEmergencyResourceRes = httpResource(
+    () => ({
+      url: `${
+        this._apiConfigEmergency.baseUrl
+      }?page=${this.pageEmergency()}&per_page=${this.pageSizeEmergency()}`,
+    }),
+    {
+      parse: (e: unknown) => {
+        const backendResponse = e as PaginatedBackendResponse<Emergency>;
+        return {
+          data: backendResponse.message.data.map(
+            (item: Emergency) =>({...item})
+          ),
+          length: backendResponse.message.pagination.total_items,
+        };
+      },
+    }
+  );
+  pageEmergency = signal(0);
+  pageSizeEmergency = signal(10);
 }

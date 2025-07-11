@@ -15,6 +15,9 @@ import {
 } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { TransitionViewService } from '@tevet-troc-client/transition';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { providePrimeNG } from 'primeng/config';
+import Aura from '@primeng/themes/aura';
 
 export const CONFIG_MAIN = Object.freeze({
   routerDataConfig: [
@@ -44,6 +47,12 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(FrameWholeModule.forRoot(CONFIG_MAIN)),
     importProvidersFrom(IconCoreModule),
     TransitionViewService,
+    provideAnimationsAsync(),
+    providePrimeNG({
+      theme: {
+        preset: Aura
+      }
+    })
   ],
 };
 
