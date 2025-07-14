@@ -10,14 +10,24 @@ style="height: 100vh"
       <lib-text styleText="Title_1">{{ layout.title }}</lib-text>
     </header>
     <div  class="{{layout.sectionClass}}">
-      @if (emergencyService.dataSourceForTable()[idx]?.value.value()?.data?.length > 0) {
+      @if (emergencyService.dataSourceForTable[idx]?.value.value()?.data?.length > 0) {
+        <pre>
+          {{emergencyService.dataSourceForTable[idx].pageIndex}}
+        </pre>
         <elix-table
-          [dataSource]="emergencyService.dataSourceForTable()[idx].value.value().data"
+          [dataSource]="emergencyService.dataSourceForTable[idx].value.value().data"
           [zebraColor]="true"
+          (onPaginationChange)="
+          emergencyService.changePageSize($event,
+          emergencyService.dataSourceForTable[idx].pageIndex, 
+          emergencyService.dataSourceForTable[idx].pageSize)"
+          [pageIndex]="emergencyService.dataSourceForTable[idx].pageIndex()"
+          [pageSize]="emergencyService.dataSourceForTable[idx].pageSize()"
           [showPagination]="true"
-          (onPaginationChange)="emergencyService.changePageSize($event)"
+          [lengthPagination]="emergencyService.dataSourceForTable[idx].value.value().length"
+
         >
-          @for (row of emergencyService.dataSourceForTable()[idx].rows; track row) {
+          @for (row of emergencyService.dataSourceForTable[idx].rows; track row) {
             @if (!$last) {
               <elix-column-text
                 [className]="row.className"
@@ -31,7 +41,7 @@ style="height: 100vh"
             }
           }
         </elix-table>
-      } @else if (emergencyService.dataSourceForTable()[idx]?.value.isLoading()) {
+      } @else if (emergencyService.dataSourceForTable[idx]?.value.isLoading()) {
         <lib-text styleText="Title_3">Loading...</lib-text>
       }
     </div>

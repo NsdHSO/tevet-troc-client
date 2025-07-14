@@ -8,6 +8,7 @@ import {
   ColumnTextComponent,
   TableComponent,
 } from 'ngx-liburg';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'lib-emergency',
@@ -18,6 +19,7 @@ import {
     TableComponent,
     ColumnTextComponent,
     ColumnIconActionComponent,
+    JsonPipe
   ],
   templateUrl: './emergency.component.html',
   styleUrl: './emergency.component.scss',

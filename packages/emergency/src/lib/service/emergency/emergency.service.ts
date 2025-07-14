@@ -1,4 +1,4 @@
-import { computed, inject, Injectable } from '@angular/core';
+import { computed, inject, Injectable, Signal, WritableSignal } from '@angular/core';
 import { EmergencyApiService } from '../api/emergency-api/emergency-api.service';
 import { DataSourceMaterialTable } from 'ngx-liburg';
 
@@ -14,9 +14,11 @@ export class EmergencyService {
    */
   pageSize = this._ambulanceApi.pageSize;
 
-  changePageSize(event: any) {
-    this._ambulanceApi.pageSize.set(event.pageSize);
-    this._ambulanceApi.page.set(++event.pageIndex);
+  changePageSize(event: any, pageIndex: WritableSignal<any>, pageSize: WritableSignal<any>): void {
+      pageSize.set(event.pageSize);
+      pageIndex.set(event.pageIndex);
+
+    console.log(event);
   }
 
   /**
@@ -27,48 +29,30 @@ export class EmergencyService {
   /**
    * Computed value for resource
    */
-  dataSourceForTable = computed(() => {
-    const dataSource = [];
-    dataSource.push({
+  private readonly ambulanceRows = [
+    { className: 'ambulance-id', field: 'ambulance_ic', name: 'Ambulance ID' },
+    { className: 'fuell-type', field: 'fuel_type', name: 'Fuell Type' },
+    { className: 'ambulance-type', field: 'type', name: 'Type of Ambulance' },
+    { className: 'action2', field: 'ambulanceIc', name: 'Edit Ambulance IC ' },
+  ];
+
+  private readonly emergencyRows = [
+    { className: 'emergency-ic', field: 'emergency_ic', name: 'Edit Emergency IC' },
+    { className: 'action2', field: 'reported_by', name: 'Action' },
+  ];
+
+  dataSourceForTable = [
+    {
       value: this._ambulanceApi.httpAmbulanceResourceRes as any,
-      rows: [
-        {
-          className: 'ambulance-id',
-          field: 'ambulance_ic',
-          name: 'Ambulance ID',
-        },
-        {
-          className: 'fuell-type',
-          field: 'fuel_type',
-          name: 'Fuell Type',
-        },
-        {
-          className: 'ambulance-type',
-          field: 'type',
-          name: 'Type of Ambulance',
-        },
-        {
-          className: 'action2',
-          field: 'ambulanceIc',
-          name: 'Edit Ambulance IC ',
-        },
-      ],
-    });
-    dataSource.push({
+      pageIndex: this.page,
+      pageSize: this.pageSize,
+      rows: this.ambulanceRows,
+    },
+    {
       value: this._ambulanceApi.httpEmergencyResourceRes as any,
-      rows: [
-        {
-          className: 'emergency-ic',
-          field: 'emergency_ic',
-          name: 'Edit Emergency IC',
-        },
-        {
-          className: 'action3',
-          field: 'id',
-          name: 'Action',
-        },
-      ],
-    })
-    return dataSource;
-  }) as any;
+      pageIndex: this._ambulanceApi.pageEmergency,
+      pageSize: this._ambulanceApi.pageSizeEmergency,
+      rows: this.emergencyRows,
+    }
+  ]
 }

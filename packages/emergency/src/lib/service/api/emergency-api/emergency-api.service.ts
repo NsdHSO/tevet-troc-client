@@ -31,7 +31,7 @@ export class EmergencyApiService {
    * This value is reactive and automatically updates the `httpAmbulanceResourceRes`
    * when changed.
    */
-  page = signal(0);
+  page = signal(1);
 
   /**
    * Injects Angular's Router service, primarily used for navigation.
@@ -128,13 +128,29 @@ export class EmergencyApiService {
         const backendResponse = e as PaginatedBackendResponse<Emergency>;
         return {
           data: backendResponse.message.data.map(
-            (item: Emergency) =>({...item})
+            (item: Emergency) =>({
+              actions: [
+                {
+                  iconClass: 'fa_solid:pen-to-square',
+                  classCss: 'edit',
+                  method: (
+                    row: DataSourceMaterialTable<Emergency>
+                  ) => {
+                    console.log(row);
+                  },
+                },
+              ],
+              editable: false,
+              model: {
+                ...item
+              }
+            })
           ),
           length: backendResponse.message.pagination.total_items,
         };
       },
     }
   );
-  pageEmergency = signal(0);
+  pageEmergency = signal(1);
   pageSizeEmergency = signal(10);
 }
