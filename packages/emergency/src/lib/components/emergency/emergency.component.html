@@ -11,9 +11,7 @@ style="height: 100vh"
     </header>
     <div  class="{{layout.sectionClass}}">
       @if (emergencyService.dataSourceForTable[idx]?.value.value()?.data?.length > 0) {
-        <pre>
-          {{emergencyService.dataSourceForTable[idx].pageIndex}}
-        </pre>
+    
         <elix-table
           [dataSource]="emergencyService.dataSourceForTable[idx].value.value().data"
           [zebraColor]="true"
