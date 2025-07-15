@@ -1,14 +1,13 @@
-@let data = ambulance | async;
-@let statuses = ambulanceService.ambulanceApiService.ambulanceStatus;
-@if (ambulanceService.ambulanceApiService.changeAmbulanceStatus | async) {
-}
+@let data = ambulance;
+@let statuses = service.ambulanceApiService.ambulanceStatus;
+@let changeRecall = service.ambulanceApiService.changeAmbulanceStatus | async;
+
 
 <div class="p-4 sm:p-6 lg:p-8">
   @if (data) {
-
-    <div class="mb-6 flex items-center justify-between">
-      <lib-text styleText="Title_3_1">Ambulance Overview</lib-text>
-      <lib-badge [title]="data.status" />
+    <div class="mb-6 grid grid-cols-8 items-center gap-4">
+      <lib-text styleText="Title_3_1" class="col-span-6">Ambulance Overview</lib-text>
+      <lib-badge [title]="data.status" class="col-span-2 justify-self-end" />
     </div>
     <ul class="grid grid-cols-1 gap-6 md:grid-cols-2">
       @for (cards of data.uiElements; track $index) {
@@ -32,7 +31,7 @@
       <lib-text>Loading</lib-text>
     } @else {
       <lib-selector [options]="statuses.value()?.message" [selectedTemplateRef]="selectedTemplate"
-                    (optionSelected)="ambulanceService.changeStatus($event, data.id, data.hospital_id, data.ambulance_ic)"
+                    (optionSelected)="service.changeStatus($event, data.id, data.hospital_id, data.ambulance_ic)"
       >
         <ng-template #optionTemplate let-status>
           <lib-text>
@@ -49,4 +48,3 @@
     </ng-template>
   }
 </div>
-

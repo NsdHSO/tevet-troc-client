@@ -1,6 +1,5 @@
-import { computed, inject, Injectable, Signal, WritableSignal } from '@angular/core';
+import { inject, Injectable, WritableSignal } from '@angular/core';
 import { EmergencyApiService } from '../api/emergency-api/emergency-api.service';
-import { DataSourceMaterialTable } from 'ngx-liburg';
 
 @Injectable()
 export class EmergencyService {
@@ -13,12 +12,17 @@ export class EmergencyService {
    *
    */
   pageSize = this._ambulanceApi.pageSize;
-
-  changePageSize(event: any, pageIndex: WritableSignal<any>, pageSize: WritableSignal<any>): void {
-      pageSize.set(event.pageSize);
-      pageIndex.set(event.pageIndex);
-
-    console.log(event);
+  emergencyIdResponse = this._ambulanceApi.httpEmergencyIdResponse
+  set emergencyIc(v:string){
+    this._ambulanceApi.emergencyIdValue = v;
+  }
+  changePageSize(
+    event: any,
+    pageIndex: WritableSignal<any>,
+    pageSize: WritableSignal<any>
+  ): void {
+    pageSize.set(event.pageSize);
+    pageIndex.set(event.pageIndex);
   }
 
   /**
@@ -30,15 +34,39 @@ export class EmergencyService {
    * Computed value for resource
    */
   private readonly ambulanceRows = [
-    { className: 'ambulance-id', field: 'ambulance_ic', name: 'Ambulance ID' },
-    { className: 'fuell-type', field: 'fuel_type', name: 'Fuell Type' },
-    { className: 'ambulance-type', field: 'type', name: 'Type of Ambulance' },
-    { className: 'action2', field: 'ambulanceIc', name: 'Edit Ambulance IC ' },
+    {
+      className: 'ambulance-id',
+      field: 'ambulance_ic',
+      name: 'Ambulance ID',
+    },
+    {
+      className: 'fuell-type',
+      field: 'fuel_type',
+      name: 'Fuell Type',
+    },
+    {
+      className: 'ambulance-type',
+      field: 'type',
+      name: 'Type of Ambulance',
+    },
+    {
+      className: 'action2',
+      field: 'ambulanceIc',
+      name: 'Edit Ambulance IC ',
+    },
   ];
 
   private readonly emergencyRows = [
-    { className: 'emergency-ic', field: 'emergency_ic', name: 'Edit Emergency IC' },
-    { className: 'action2', field: 'reported_by', name: 'Action' },
+    {
+      className: 'emergency-ic',
+      field: 'emergency_ic',
+      name: 'Edit Emergency IC',
+    },
+    {
+      className: 'action2',
+      field: 'reported_by',
+      name: 'Action',
+    },
   ];
 
   dataSourceForTable = [
@@ -53,6 +81,6 @@ export class EmergencyService {
       pageIndex: this._ambulanceApi.pageEmergency,
       pageSize: this._ambulanceApi.pageSizeEmergency,
       rows: this.emergencyRows,
-    }
-  ]
+    },
+  ];
 }

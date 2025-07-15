@@ -1,16 +1,21 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { API_CONFIG_AMBULANCE, API_CONFIG_EMERGENCY } from '../../../provider/api.token';
-import { httpResource } from '@angular/common/http';
+import {
+  API_CONFIG_AMBULANCE,
+  API_CONFIG_EMERGENCY,
+} from '../../../provider/api.token';
+import { HttpClient, httpResource } from '@angular/common/http';
 import { DataSourceMaterialTable } from 'ngx-liburg';
-import { PaginatedBackendResponse } from '@tevet-troc-client/http-response';
+import { BackendResponse, PaginatedBackendResponse } from '@tevet-troc-client/http-response';
 import {
   AmbulanceDetails,
   AmbulanceType,
-  ambulanceTypeDisplayNames, Emergency,
+  ambulanceTypeDisplayNames,
+  Emergency, emergencyStatusDisplayNames, EmergencyUi,
   fuelTypeDisplayNames,
   FuelTypes
 } from '@tevet-troc-client/models';
 import { Router } from '@angular/router';
+import { BehaviorSubject, map, Observable, switchMap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class EmergencyApiService {
@@ -38,12 +43,18 @@ export class EmergencyApiService {
    * @private
    */
   private _router = inject(Router);
+  /**
+   * Injects Angular's HttpClient service, primarily used for navigation.
+   * @private
+   */
+  private _httpClient = inject(HttpClient);
 
   /**
    * Injects the API configuration for ambulance-related endpoints.
    * @private
    */
-  private _apiConfigAmbulance = inject(API_CONFIG_AMBULANCE);  /**
+  private _apiConfigAmbulance = inject(API_CONFIG_AMBULANCE);
+  /**
 
    * Injects the API configuration for ambulance-related endpoints.
    * @private
@@ -127,25 +138,26 @@ export class EmergencyApiService {
       parse: (e: unknown) => {
         const backendResponse = e as PaginatedBackendResponse<Emergency>;
         return {
-          data: backendResponse.message.data.map(
-            (item: Emergency) =>({
-              actions: [
-                {
-                  iconClass: 'fa_solid:pen-to-square',
-                  classCss: 'edit',
-                  method: (
-                    row: DataSourceMaterialTable<Emergency>
-                  ) => {
-                    console.log(row);
-                  },
+          data: backendResponse.message.data.map((item: Emergency) => ({
+            actions: [
+              {
+                iconClass: 'fa_solid:pen-to-square',
+                classCss: 'edit',
+                method: (row: DataSourceMaterialTable<Emergency>) => {
+                  this._router.navigate(
+                    [{ outlets: { drawer: ['details_panel'] } }],
+                    {
+                      queryParams: { emergency_ic: row.model.emergency_ic },
+                    }
+                  );
                 },
-              ],
-              editable: false,
-              model: {
-                ...item
-              }
-            })
-          ),
+              },
+            ],
+            editable: false,
+            model: {
+              ...item,
+            },
+          })),
           length: backendResponse.message.pagination.total_items,
         };
       },
@@ -153,4 +165,151 @@ export class EmergencyApiService {
   );
   pageEmergency = signal(1);
   pageSizeEmergency = signal(10);
+  /**
+   *
+   * @private
+   */
+  private emergencyId = new BehaviorSubject('');
+
+  set emergencyIdValue(value: string) {
+    this.emergencyId.next(value);
+  }
+
+  httpEmergencyIdResponse = this.emergencyId.pipe(
+    switchMap((data): Observable<PaginatedBackendResponse<Emergency>> =>
+      this._httpClient.get<PaginatedBackendResponse<Emergency>>(
+        `${this._apiConfigEmergency.baseUrl}`,
+        {
+          params: {
+            per_page: 1,
+            page: 0,
+            filter: `ic=${data}`,
+          },
+        }
+      )
+    ),
+    map(data => data.message.data[0]),
+    map((data): EmergencyUi => { // Assuming 'data' will be of the IncidentDetails type
+        if (!data) {
+          return {
+            uiElements: [],
+          };
+        }
+
+
+        return {
+          status: emergencyStatusDisplayNames()[data.status] as any,
+          uiElements: [
+            [
+              {
+                title: 'Incident Overview',
+                edit: false,
+              },
+              {
+                title: 'Incident ID',
+                description: data.id,
+                edit: false,
+              },
+              {
+                title: 'Status',
+                description: data.status,
+                edit: false,
+              },
+              {
+                title: 'Severity',
+                description: data.severity,
+                edit: false,
+              },
+              {
+                title: 'Incident Type',
+                description: data.incident_type,
+                edit: false,
+              },
+              {
+                title: 'Description',
+                description: data.description,
+                edit: false,
+              },
+              {
+                title: 'Emergency IC',
+                description: data.emergency_ic.toString(),
+                edit: false,
+              },
+            ],
+            [
+              {
+                title: 'Timeline & Reporting',
+                edit: false,
+              },
+              {
+                title: 'Created At',
+                description: new Date(data.created_at).toLocaleString(),
+                edit: false,
+              },
+              {
+                title: 'Updated At',
+                description: new Date(data.updated_at).toLocaleString(),
+                edit: false,
+              },
+              {
+                title: 'Resolved At',
+                description: data.resolved_at
+                  ? new Date(data.resolved_at).toLocaleString()
+                  : 'N/A',
+                edit: false,
+              },
+              {
+                title: 'Reported By',
+                description: data.reported_by,
+                edit: false,
+              },
+              {
+                title: 'Modification Attempts',
+                description:
+                  data.modification_attempts !== null
+                    ? data.modification_attempts.toString()
+                    : 'N/A',
+                edit: false,
+              },
+            ],
+            [
+              {
+                title: 'Assigned Resources',
+                edit: false,
+              },
+              {
+                title: 'Hospital ID',
+                description: data.hospital_id || 'N/A',
+                edit: false,
+              },
+              {
+                title: 'Ambulance ID',
+                description: data.ambulance_id || 'N/A',
+                edit: false,
+              },
+            ],
+            [
+              {
+                title: 'Location & Notes',
+                edit: false,
+              },
+              {
+                title: 'Emergency Location',
+                description: `${data.emergency_latitude}, ${data.emergency_longitude}`,
+                edit: false,
+              },
+              {
+                title: 'Notes',
+                description: data.notes || 'N/A',
+                edit: false,
+              },
+            ],
+          ],
+          id: data.id,
+          emergency_ic: <number>(<unknown>data.emergency_ic),
+          hospital_id: data.hospital_id || '',
+        };
+      }
+    )
+  );
 }

@@ -1,3 +1,5 @@
+import { AmbulanceStatus } from './ambulance-type';
+
 export interface Emergency {
   created_at: Date;
   updated_at: Date;
@@ -19,26 +21,52 @@ export interface Emergency {
 
 export enum EmergencyStatusEnum {
   // Add your enum values here, for example:
-  Reported = "Reported",
-  Assigned = "Assigned",
-  InProgress = "InProgress",
-  Resolved = "Resolved",
-  Canceled = "Canceled",
+  Reported = 'Reported',
+  Assigned = 'Assigned',
+  InProgress = 'InProgress',
+  Resolved = 'Resolved',
+  Canceled = 'Canceled',
 }
 
 export enum EmergencySeverityEnum {
   // Add your enum values here, for example:
-  Low = "Low",
-  Medium = "Medium",
-  High = "High",
-  Critical = "Critical",
+  Low = 'Low',
+  Medium = 'Medium',
+  High = 'High',
+  Critical = 'Critical',
 }
 
 export enum EmergencyIncidentEnum {
   // Add your enum values here, for example:
-  Medical = "Medical",
-  Fire = "Fire",
-  Accident = "Accident",
-  Crime = "Crime",
-  Other = "Other",
+  Medical = 'Medical',
+  Fire = 'Fire',
+  Accident = 'Accident',
+  Crime = 'Crime',
+  Other = 'Other',
 }
+
+/**
+ *
+ */
+export interface EmergencyUi {
+  status?: EmergencyStatusEnum | string;
+  uiElements: EmergencyIdData[][];
+  id?: string;
+  emergency_ic?: number;
+  hospital_id?: string;
+}
+
+export interface EmergencyIdData {
+  title: string;
+  description?: string;
+  edit: boolean;
+}
+export type EmergencyStatus = `${EmergencyStatusEnum}`;
+
+export const emergencyStatusDisplayNames: () => Record<EmergencyStatus, string> = () => ({
+  [EmergencyStatusEnum.Reported]: 'Reported',
+  [EmergencyStatusEnum.Assigned]: 'Assigned',
+  [EmergencyStatusEnum.InProgress]: 'In Progress',
+  [EmergencyStatusEnum.Resolved]: 'Resolved',
+  [EmergencyStatusEnum.Canceled]: 'Canceled',
+});

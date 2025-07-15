@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import IdAmbulanceComponent from './id-ambulance.component';
+import IdComponent from './id.component';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { EmergencyService } from '../../service/emergency/emergency.service';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
-describe('IdAmbulanceComponent', () => {
-  let component: IdAmbulanceComponent;
-  let fixture: ComponentFixture<IdAmbulanceComponent>;
+describe('IdComponent', () => {
+  let component: IdComponent;
+  let fixture: ComponentFixture<IdComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [IdAmbulanceComponent],
+      imports: [IdComponent],
       providers:[
         {
           provide: ActivatedRoute,
@@ -26,7 +26,7 @@ describe('IdAmbulanceComponent', () => {
       ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(IdAmbulanceComponent);
+    fixture = TestBed.createComponent(IdComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
