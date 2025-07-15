@@ -36,7 +36,7 @@ export class EmergencyApiService {
    * This value is reactive and automatically updates the `httpAmbulanceResourceRes`
    * when changed.
    */
-  page = signal(1);
+  page = signal(0);
 
   /**
    * Injects Angular's Router service, primarily used for navigation.
@@ -163,7 +163,7 @@ export class EmergencyApiService {
       },
     }
   );
-  pageEmergency = signal(1);
+  pageEmergency = signal(0);
   pageSizeEmergency = signal(10);
   /**
    *
@@ -212,7 +212,7 @@ export class EmergencyApiService {
               },
               {
                 title: 'Status',
-                description: data.status,
+                description: emergencyStatusDisplayNames()[data.status] as any,
                 edit: false,
               },
               {

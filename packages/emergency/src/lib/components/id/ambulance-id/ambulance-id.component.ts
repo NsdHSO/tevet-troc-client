@@ -5,7 +5,6 @@ import { SelectorComponent } from '@tevet-troc-client/selector';
 import { InfoLineComponent } from '@tevet-troc-client/info-line';
 import { JumbotronComponent } from '@tevet-troc-client/jumbotron';
 import { BadgeComponent } from '@tevet-troc-client/badge';
-import { Observable } from 'rxjs';
 import { AmbulanceIdUi } from '@tevet-troc-client/models';
 import { AmbulanceService } from '../../../service/ambulance/ambulance.service';
 
@@ -26,7 +25,7 @@ import { AmbulanceService } from '../../../service/ambulance/ambulance.service';
 })
 export class AmbulanceIdComponent {
   @Input()
-  ambulance!:AmbulanceIdUi;
+  ambulance!: AmbulanceIdUi;
 
   @Input()
   service!: AmbulanceService;

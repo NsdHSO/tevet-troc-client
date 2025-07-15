@@ -39,7 +39,7 @@ style="height: 100vh"
             }
           }
         </elix-table>
-      } @else if (emergencyService.dataSourceForTable[idx]?.value.isLoading()) {
+      } @else if (emergencyService.dataSourceForTable[idx].value.isLoading()) {
         <lib-text styleText="Title_3">Loading...</lib-text>
       }
     </div>
