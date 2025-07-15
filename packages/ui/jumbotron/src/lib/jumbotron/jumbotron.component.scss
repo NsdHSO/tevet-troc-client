@@ -21,6 +21,7 @@
     @apply dark:bg-neutral-700 bg-indigo-50 transition-colors duration-200;
     box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.3);
   }
+
   /* High contrast mode support */
   @media (forced-colors: active) {
     border: 3px solid ButtonText;

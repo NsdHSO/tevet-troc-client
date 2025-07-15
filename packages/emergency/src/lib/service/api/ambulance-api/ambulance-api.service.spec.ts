@@ -9,10 +9,7 @@ describe('AmbulanceApiService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers:[
-        provideHttpClientTesting(),
-        provideHttpClient()
-      ]
+      providers: [provideHttpClientTesting(), provideHttpClient()],
     });
     service = TestBed.inject(AmbulanceApiService);
   });

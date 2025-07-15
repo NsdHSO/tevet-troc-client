@@ -18,7 +18,7 @@ export class AccessibilityDirective {
   /**
    * An input what wanted to put it on the element
    */
-  ariaName= input<string>('');
+  ariaName = input<string>('');
   /**
    * An input what wanted to put it on the element
    */

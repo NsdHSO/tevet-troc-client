@@ -55,7 +55,9 @@ export class InfoLineComponent {
    * @defaultValue `StyleTextEnum.Title_1`
    * @type {StyleTextType}
    */
-  type :InputSignal<StyleTextType>= input(StyleTextEnum.Title_1 as StyleTextType);
+  type: InputSignal<StyleTextType> = input(
+    StyleTextEnum.Title_1 as StyleTextType
+  );
 
   /**
    * The main title text for the information line.

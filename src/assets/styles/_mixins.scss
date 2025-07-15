@@ -1,5 +1,6 @@
 // src/assets/styles/_mixins.scss
-@use 'sass:map'; // Already there, good for map-related functions
+@use 'sass:map';
+// Already there, good for map-related functions
 @use 'sass:meta'; // <<< ADD THIS LINE for meta.type-of()
 
 @mixin apply-theme($theme-map) {

@@ -12,10 +12,12 @@ export class EmergencyService {
    *
    */
   pageSize = this._ambulanceApi.pageSize;
-  emergencyIdResponse = this._ambulanceApi.httpEmergencyIdResponse
-  set emergencyIc(v:string){
+  emergencyIdResponse = this._ambulanceApi.httpEmergencyIdResponse;
+
+  set emergencyIc(v: string) {
     this._ambulanceApi.emergencyIdValue = v;
   }
+
   changePageSize(
     event: any,
     pageIndex: WritableSignal<any>,

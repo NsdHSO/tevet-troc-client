@@ -5,14 +5,16 @@ import {
 } from '../../../provider/api.token';
 import { HttpClient, httpResource } from '@angular/common/http';
 import { DataSourceMaterialTable } from 'ngx-liburg';
-import { BackendResponse, PaginatedBackendResponse } from '@tevet-troc-client/http-response';
+import { PaginatedBackendResponse } from '@tevet-troc-client/http-response';
 import {
   AmbulanceDetails,
   AmbulanceType,
   ambulanceTypeDisplayNames,
-  Emergency, emergencyStatusDisplayNames, EmergencyUi,
+  Emergency,
+  emergencyStatusDisplayNames,
+  EmergencyUi,
   fuelTypeDisplayNames,
-  FuelTypes
+  FuelTypes,
 } from '@tevet-troc-client/models';
 import { Router } from '@angular/router';
 import { BehaviorSubject, map, Observable, switchMap } from 'rxjs';
@@ -176,140 +178,140 @@ export class EmergencyApiService {
   }
 
   httpEmergencyIdResponse = this.emergencyId.pipe(
-    switchMap((data): Observable<PaginatedBackendResponse<Emergency>> =>
-      this._httpClient.get<PaginatedBackendResponse<Emergency>>(
-        `${this._apiConfigEmergency.baseUrl}`,
-        {
-          params: {
-            per_page: 1,
-            page: 0,
-            filter: `ic=${data}`,
-          },
-        }
-      )
+    switchMap(
+      (data): Observable<PaginatedBackendResponse<Emergency>> =>
+        this._httpClient.get<PaginatedBackendResponse<Emergency>>(
+          `${this._apiConfigEmergency.baseUrl}`,
+          {
+            params: {
+              per_page: 1,
+              page: 0,
+              filter: `ic=${data}`,
+            },
+          }
+        )
     ),
-    map(data => data.message.data[0]),
-    map((data): EmergencyUi => { // Assuming 'data' will be of the IncidentDetails type
-        if (!data) {
-          return {
-            uiElements: [],
-          };
-        }
-
-
+    map((data) => data.message.data[0]),
+    map((data): EmergencyUi => {
+      // Assuming 'data' will be of the IncidentDetails type
+      if (!data) {
         return {
-          status: emergencyStatusDisplayNames()[data.status] as any,
-          uiElements: [
-            [
-              {
-                title: 'Incident Overview',
-                edit: false,
-              },
-              {
-                title: 'Incident ID',
-                description: data.id,
-                edit: false,
-              },
-              {
-                title: 'Status',
-                description: emergencyStatusDisplayNames()[data.status] as any,
-                edit: false,
-              },
-              {
-                title: 'Severity',
-                description: data.severity,
-                edit: false,
-              },
-              {
-                title: 'Incident Type',
-                description: data.incident_type,
-                edit: false,
-              },
-              {
-                title: 'Description',
-                description: data.description,
-                edit: false,
-              },
-              {
-                title: 'Emergency IC',
-                description: data.emergency_ic.toString(),
-                edit: false,
-              },
-            ],
-            [
-              {
-                title: 'Timeline & Reporting',
-                edit: false,
-              },
-              {
-                title: 'Created At',
-                description: new Date(data.created_at).toLocaleString(),
-                edit: false,
-              },
-              {
-                title: 'Updated At',
-                description: new Date(data.updated_at).toLocaleString(),
-                edit: false,
-              },
-              {
-                title: 'Resolved At',
-                description: data.resolved_at
-                  ? new Date(data.resolved_at).toLocaleString()
-                  : 'N/A',
-                edit: false,
-              },
-              {
-                title: 'Reported By',
-                description: data.reported_by,
-                edit: false,
-              },
-              {
-                title: 'Modification Attempts',
-                description:
-                  data.modification_attempts !== null
-                    ? data.modification_attempts.toString()
-                    : 'N/A',
-                edit: false,
-              },
-            ],
-            [
-              {
-                title: 'Assigned Resources',
-                edit: false,
-              },
-              {
-                title: 'Hospital ID',
-                description: data.hospital_id || 'N/A',
-                edit: false,
-              },
-              {
-                title: 'Ambulance ID',
-                description: data.ambulance_id || 'N/A',
-                edit: false,
-              },
-            ],
-            [
-              {
-                title: 'Location & Notes',
-                edit: false,
-              },
-              {
-                title: 'Emergency Location',
-                description: `${data.emergency_latitude}, ${data.emergency_longitude}`,
-                edit: false,
-              },
-              {
-                title: 'Notes',
-                description: data.notes || 'N/A',
-                edit: false,
-              },
-            ],
-          ],
-          id: data.id,
-          emergency_ic: <number>(<unknown>data.emergency_ic),
-          hospital_id: data.hospital_id || '',
+          uiElements: [],
         };
       }
-    )
+
+      return {
+        status: emergencyStatusDisplayNames()[data.status] as any,
+        uiElements: [
+          [
+            {
+              title: 'Incident Overview',
+              edit: false,
+            },
+            {
+              title: 'Incident ID',
+              description: data.id,
+              edit: false,
+            },
+            {
+              title: 'Status',
+              description: emergencyStatusDisplayNames()[data.status] as any,
+              edit: false,
+            },
+            {
+              title: 'Severity',
+              description: data.severity,
+              edit: false,
+            },
+            {
+              title: 'Incident Type',
+              description: data.incident_type,
+              edit: false,
+            },
+            {
+              title: 'Description',
+              description: data.description,
+              edit: false,
+            },
+            {
+              title: 'Emergency IC',
+              description: data.emergency_ic.toString(),
+              edit: false,
+            },
+          ],
+          [
+            {
+              title: 'Timeline & Reporting',
+              edit: false,
+            },
+            {
+              title: 'Created At',
+              description: new Date(data.created_at).toLocaleString(),
+              edit: false,
+            },
+            {
+              title: 'Updated At',
+              description: new Date(data.updated_at).toLocaleString(),
+              edit: false,
+            },
+            {
+              title: 'Resolved At',
+              description: data.resolved_at
+                ? new Date(data.resolved_at).toLocaleString()
+                : 'N/A',
+              edit: false,
+            },
+            {
+              title: 'Reported By',
+              description: data.reported_by,
+              edit: false,
+            },
+            {
+              title: 'Modification Attempts',
+              description:
+                data.modification_attempts !== null
+                  ? data.modification_attempts.toString()
+                  : 'N/A',
+              edit: false,
+            },
+          ],
+          [
+            {
+              title: 'Assigned Resources',
+              edit: false,
+            },
+            {
+              title: 'Hospital ID',
+              description: data.hospital_id || 'N/A',
+              edit: false,
+            },
+            {
+              title: 'Ambulance ID',
+              description: data.ambulance_id || 'N/A',
+              edit: false,
+            },
+          ],
+          [
+            {
+              title: 'Location & Notes',
+              edit: false,
+            },
+            {
+              title: 'Emergency Location',
+              description: `${data.emergency_latitude}, ${data.emergency_longitude}`,
+              edit: false,
+            },
+            {
+              title: 'Notes',
+              description: data.notes || 'N/A',
+              edit: false,
+            },
+          ],
+        ],
+        id: data.id,
+        emergency_ic: <number>(<unknown>data.emergency_ic),
+        hospital_id: data.hospital_id || '',
+      };
+    })
   );
 }

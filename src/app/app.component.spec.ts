@@ -8,7 +8,7 @@ describe('AppComponent', () => {
       imports: [AppComponent, RouterModule.forRoot([])],
     }).compileComponents();
   });
-  
+
   it(`should have as title 'tevet-troc-client'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;

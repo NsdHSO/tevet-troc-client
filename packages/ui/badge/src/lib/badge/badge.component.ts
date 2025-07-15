@@ -4,12 +4,12 @@ import {
   AmbulanceStatusEnum,
   ambulanceStsDisplayNames,
   emergencyStatusDisplayNames,
-  EmergencyStatusEnum
+  EmergencyStatusEnum,
 } from '@tevet-troc-client/models';
 
 @Component({
   selector: 'lib-badge',
-  template: ` <lib-text styleText="Small_1" [content]="{label:title()}"/>`,
+  template: ` <lib-text styleText="Small_1" [content]="{ label: title() }" />`,
   styleUrl: './badge.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [TextComponent, TextDirective],

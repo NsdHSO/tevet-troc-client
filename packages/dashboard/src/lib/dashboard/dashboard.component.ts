@@ -7,11 +7,7 @@ import { TextComponent } from '@tevet-troc-client/text';
 
 @Component({
   selector: 'lib-dashboard',
-  imports: [
-    LandingCardComponent,
-    JumbotronComponent,
-    TextComponent
-],
+  imports: [LandingCardComponent, JumbotronComponent, TextComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
   providers: [DashboardApiService],

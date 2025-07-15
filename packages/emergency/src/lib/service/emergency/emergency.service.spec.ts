@@ -9,11 +9,11 @@ describe('EmergencyService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers:[
+      providers: [
         EmergencyService,
         provideHttpClientTesting(),
-        provideHttpClient()
-      ]
+        provideHttpClient(),
+      ],
     });
     service = TestBed.inject(EmergencyService);
   });

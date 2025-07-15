@@ -1,9 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @use 'reset-css';
 @use '@angular/material/prebuilt-themes/indigo-pink.css';
-@use './assets/styles/_colors' as base-colors; // Use a namespace for colors
-@use './assets/styles/_themes' as app-themes;   // Use a namespace for themes
-@use './assets/styles/_mixins' as app-mixins;   // Use a namespace for mixins
+@use './assets/styles/_colors' as base-colors;
+// Use a namespace for colors
+@use './assets/styles/_themes' as app-themes;
+// Use a namespace for themes
+@use './assets/styles/_mixins' as app-mixins; // Use a namespace for mixins
 
 @tailwind base;
 @tailwind components;

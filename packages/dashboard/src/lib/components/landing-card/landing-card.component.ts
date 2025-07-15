@@ -20,5 +20,5 @@ import { MatIcon } from '@angular/material/icon';
   styleUrl: './landing-card.component.scss',
 })
 export class LandingCardComponent {
-   readonly dashboardApi = inject(DashboardApiService, { skipSelf: true });
+  readonly dashboardApi = inject(DashboardApiService, { skipSelf: true });
 }

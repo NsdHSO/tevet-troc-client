@@ -6,7 +6,7 @@ import { EMPTY, finalize, switchMap, tap } from 'rxjs';
 import { AmbulanceIdComponent } from './ambulance-id/ambulance-id.component';
 import { EmergencyIdComponent } from './emergency-id/emergency-id.component';
 import { EmergencyService } from '../../service/emergency/emergency.service';
-import { Emergency, EmergencyUi } from '@tevet-troc-client/models';
+import { EmergencyUi } from '@tevet-troc-client/models';
 
 @Component({
   selector: 'lib-emergency',
@@ -52,7 +52,7 @@ export default class IdComponent {
               // Clear previous components if any
               const componentRef =
                 this.viewContainer.createComponent(EmergencyIdComponent);
-              componentRef.instance.emergencyData = (emergency) as EmergencyUi;
+              componentRef.instance.emergencyData = emergency as EmergencyUi;
               // Trigger change detection for the newly created component if needed
               componentRef.changeDetectorRef.detectChanges();
             }
@@ -61,7 +61,7 @@ export default class IdComponent {
       }
       return EMPTY;
     }),
-    finalize(()=>{
+    finalize(() => {
       this.viewContainer.clear(); // Clear any dynamically created component
     })
   );

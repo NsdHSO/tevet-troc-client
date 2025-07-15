@@ -34,7 +34,7 @@ jobs:
         with:
           token: ${{ secrets.GH_TOKEN }}
           fetch-depth: 0
-          
+
       - name: Merge PR with GitHub API
         if: steps.check_label.outputs.result == 'true'
         uses: actions/github-script@v7
@@ -60,7 +60,7 @@ jobs:
               // Create commit message with PR title and description
               const commitTitle = prData.title;
               const commitMessage = prData.body || '';
-              
+            
               const mergeResult = await github.rest.pulls.merge({
                 owner: context.repo.owner,
                 repo: context.repo.repo,

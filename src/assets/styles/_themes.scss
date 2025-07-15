@@ -1,6 +1,7 @@
 // apps/shell/src/assets/styles/_themes.scss
 @use 'sass:map';
-@use 'sass:color' as color; // Provides rgba() function
+@use 'sass:color' as color;
+// Provides rgba() function
 @use 'colors' as *; // Import _colors.scss and make its variables directly available
 
 // =========================================================
@@ -8,73 +9,65 @@
 // =========================================================
 $light-theme: (
   // General UI
-  background-drawer-outlet: $app-gray-100,
-  background-drawer-outlet-x-button: fuchsia,
-  background-drawer: $app-gray-100,
-
-  text-color: $app-gray-600,
-  text-color-dark: $app-black,
-  primary-color-input: $app-blue-500,
-  primary-border-color: $app-gray-300,
-
+        background-drawer-outlet: $app-gray-100,
+        background-drawer-outlet-x-button: fuchsia,
+        background-drawer: $app-gray-100,
+        text-color: $app-gray-600,
+        text-color-dark: $app-black,
+        primary-color-input: $app-blue-500,
+        primary-border-color: $app-gray-300,
   // Table specific colors
-  background-color-table-datatable: $app-white,
-  background-table-color: $app-gray-100,
-  background-table-header-cell: rgba(203, 197, 197, 0.67),
-  background-color-table-row: $app-white,
-  background-color-table-cell: $app-white,
-  background-table-hover-header-color: $app-gray-200,
-  background-table-zebra-color: $app-gray-100,
-  datatable-header-cell-hover-background: $app-gray-500,
-  datatable-header-cell-hover-color: $app-white,
-
+        background-color-table-datatable: $app-white,
+        background-table-color: $app-gray-100,
+        background-table-header-cell: rgba(203, 197, 197, 0.67),
+        background-color-table-row: $app-white,
+        background-color-table-cell: $app-white,
+        background-table-hover-header-color: $app-gray-200,
+        background-table-zebra-color: $app-gray-100,
+        datatable-header-cell-hover-background: $app-gray-500,
+        datatable-header-cell-hover-color: $app-white,
   // Table specific borders
-  border-color-table-header: rgba($app-black, 0.1),
-  border-color-table-row-left: rgba($app-black, 0.15),
-  border-color-table-row-bottom: rgba($app-black, 0.15),
-  border-color-table-footer: rgba($app-black, 0.15),
-
+        border-color-table-header: rgba($app-black, 0.1),
+        border-color-table-row-left: rgba($app-black, 0.15),
+        border-color-table-row-bottom: rgba($app-black, 0.15),
+        border-color-table-footer: rgba($app-black, 0.15),
   // Shadows - Define as quoted strings for direct CSS output
-  shadow-medium: "rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px",
+        shadow-medium: "rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px",
   // Using `color.rgba` inside string interpolation `#{}`
-  shadow-input-focus: "inset 0px 0px 3px 1px rgba(19, 94, 226, 0.2)",
-  shadow-input-focus-visible: "inset 0px 0px 3px 1px rgba(19, 94, 226, 0.4)",
-  shadow-cdk-drag-preview: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
-
+        shadow-input-focus: "inset 0px 0px 3px 1px rgba(19, 94, 226, 0.2)",
+        shadow-input-focus-visible: "inset 0px 0px 3px 1px rgba(19, 94, 226, 0.4)",
+        shadow-cdk-drag-preview: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
   // CDK Drag and Drop
-  background-color-cdk-drag-preview: $app-white,
-  cdk-drag-preview-border-color: $app-forest-500,
-
+        background-color-cdk-drag-preview: $app-white,
+        cdk-drag-preview-border-color: $app-forest-500,
   // New Entry Button
-  color-new-entry-icon: $app-forest-500,
-
+        color-new-entry-icon: $app-forest-500,
   // Paginator Colors
-  paginator-background: $app-gray-600,
-  paginator-text-color: $app-gray-100,
-  paginator-page-color: $app-gray-100,
-  paginator-page-background: $app-transparent,
-  paginator-page-hover-background: $app-gray-500,
-  paginator-page-hover-color: $app-white,
-  paginator-active-page-background: $app-forest-500,
-  paginator-active-page-color: $app-white,
-  paginator-active-page-border-color: $app-forest-500,
-  paginator-icon-color: $app-gray-100,
-  paginator-icon-hover-background: $app-gray-500,
-  paginator-icon-hover-color: $app-white,
-  paginator-dropdown-background: $app-gray-500,
-  paginator-dropdown-text-color: $app-white,
-  paginator-dropdown-border-color: $app-gray-400,
-  paginator-dropdown-border-radius: 0.25rem,
-
+        paginator-background: $app-gray-600,
+        paginator-text-color: $app-gray-100,
+        paginator-page-color: $app-gray-100,
+        paginator-page-background: $app-transparent,
+        paginator-page-hover-background: $app-gray-500,
+        paginator-page-hover-color: $app-white,
+        paginator-active-page-background: $app-forest-500,
+        paginator-active-page-color: $app-white,
+        paginator-active-page-border-color: $app-forest-500,
+        paginator-icon-color: $app-gray-100,
+        paginator-icon-hover-background: $app-gray-500,
+        paginator-icon-hover-color: $app-white,
+        paginator-dropdown-background: $app-gray-500,
+        paginator-dropdown-text-color: $app-white,
+        paginator-dropdown-border-color: $app-gray-400,
+        paginator-dropdown-border-radius: 0.25rem,
   // Paginator Dropdown Panel
-  paginator-dropdown-panel-background: $app-gray-600,
-  paginator-dropdown-panel-border-color: $app-gray-500,
-  paginator-dropdown-panel-border-radius: 0.25rem,
-  paginator-dropdown-item-color: $app-gray-100,
-  paginator-dropdown-item-hover-background: $app-gray-500,
-  paginator-dropdown-item-hover-color: $app-white,
-  paginator-dropdown-item-active-background: $app-forest-500,
-  paginator-dropdown-item-active-color: $app-white,
+        paginator-dropdown-panel-background: $app-gray-600,
+        paginator-dropdown-panel-border-color: $app-gray-500,
+        paginator-dropdown-panel-border-radius: 0.25rem,
+        paginator-dropdown-item-color: $app-gray-100,
+        paginator-dropdown-item-hover-background: $app-gray-500,
+        paginator-dropdown-item-hover-color: $app-white,
+        paginator-dropdown-item-active-background: $app-forest-500,
+        paginator-dropdown-item-active-color: $app-white,
 );
 
 
@@ -83,50 +76,43 @@ $light-theme: (
 // =========================================================
 $dark-theme: (
   // General UI
-  background-drawer-outlet: $app-black,
-  background-drawer: $app-black,
-
-  text-color: $app-gray-100,
-  text-color-dark: $app-white,
-  primary-color-input: $app-blue-400,
-  primary-border-color: $app-gray-400,
-
+        background-drawer-outlet: $app-black,
+        background-drawer: $app-black,
+        text-color: $app-gray-100,
+        text-color-dark: $app-white,
+        primary-color-input: $app-blue-400,
+        primary-border-color: $app-gray-400,
   // Table specific colors
-  background-color-table-datatable: $app-gray-600,
-  background-table-color: $app-gray-600,
-  background-table-header-cell: $app-gray-500,
-  background-color-table-row: $app-gray-600,
-  background-color-table-cell: $app-gray-600,
-  background-table-hover-header-color: $app-gray-500,
-  background-table-zebra-color: $app-gray-600,
-  datatable-header-cell-hover-background: $app-gray-600,
-
+        background-color-table-datatable: $app-gray-600,
+        background-table-color: $app-gray-600,
+        background-table-header-cell: $app-gray-500,
+        background-color-table-row: $app-gray-600,
+        background-color-table-cell: $app-gray-600,
+        background-table-hover-header-color: $app-gray-500,
+        background-table-zebra-color: $app-gray-600,
+        datatable-header-cell-hover-background: $app-gray-600,
   // Table specific borders (adjust opacity for dark theme)
-  border-color-table-header: rgba($app-white, 0.1),
-  border-color-table-row-left: rgba($app-white, 0.15),
-  border-color-table-row-bottom: rgba($app-white, 0.15),
-  border-color-table-footer: rgba($app-white, 0.15),
-
+        border-color-table-header: rgba($app-white, 0.1),
+        border-color-table-row-left: rgba($app-white, 0.15),
+        border-color-table-row-bottom: rgba($app-white, 0.15),
+        border-color-table-footer: rgba($app-white, 0.15),
   // Shadows - Define as quoted strings for direct CSS output
-  shadow-medium: "rgba(0, 0, 0, 0.3) 0px 15px 25px, rgba(0, 0, 0, 0.1) 0px 5px 10px",
-  shadow-input-focus: "inset 0px 0px 3px 1px rgba(19, 94, 226, 0.3)",
-  shadow-input-focus-visible: "inset 0px 0px 3px 1px rgba(19, 94, 226, 0.5)",
-  shadow-cdk-drag-preview: "rgba(0, 0, 0, 0.4) 0px 6px 12px -2px, rgba(0, 0, 0, 0.5) 0px 3px 7px -3px",
-
+        shadow-medium: "rgba(0, 0, 0, 0.3) 0px 15px 25px, rgba(0, 0, 0, 0.1) 0px 5px 10px",
+        shadow-input-focus: "inset 0px 0px 3px 1px rgba(19, 94, 226, 0.3)",
+        shadow-input-focus-visible: "inset 0px 0px 3px 1px rgba(19, 94, 226, 0.5)",
+        shadow-cdk-drag-preview: "rgba(0, 0, 0, 0.4) 0px 6px 12px -2px, rgba(0, 0, 0, 0.5) 0px 3px 7px -3px",
   // CDK Drag and Drop
-  background-color-cdk-drag-preview: $app-gray-500,
-  cdk-drag-preview-border-color: $app-forest-400,
-
+        background-color-cdk-drag-preview: $app-gray-500,
+        cdk-drag-preview-border-color: $app-forest-400,
   // New Entry Button
-  color-new-entry-icon: $app-forest-400,
-
+        color-new-entry-icon: $app-forest-400,
   // Paginator Colors
-  paginator-background: $app-black,
-  paginator-page-hover-background: $app-gray-500,
-  paginator-icon-hover-background: $app-gray-500,
-  paginator-dropdown-background: $app-gray-500,
-  paginator-dropdown-border-color: $app-gray-400,
-  paginator-dropdown-panel-background: $app-black,
-  paginator-dropdown-panel-border-color: $app-gray-500,
-  paginator-dropdown-item-hover-background: $app-gray-500,
+        paginator-background: $app-black,
+        paginator-page-hover-background: $app-gray-500,
+        paginator-icon-hover-background: $app-gray-500,
+        paginator-dropdown-background: $app-gray-500,
+        paginator-dropdown-border-color: $app-gray-400,
+        paginator-dropdown-panel-background: $app-black,
+        paginator-dropdown-panel-border-color: $app-gray-500,
+        paginator-dropdown-item-hover-background: $app-gray-500,
 );

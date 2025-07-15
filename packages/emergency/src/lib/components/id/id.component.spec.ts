@@ -13,17 +13,17 @@ describe('IdComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [IdComponent],
-      providers:[
+      providers: [
         {
           provide: ActivatedRoute,
           useValue: {
-            queryParams: of({})
-          }
+            queryParams: of({}),
+          },
         },
         EmergencyService,
         provideHttpClientTesting(),
-        provideHttpClient()
-      ]
+        provideHttpClient(),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(IdComponent);

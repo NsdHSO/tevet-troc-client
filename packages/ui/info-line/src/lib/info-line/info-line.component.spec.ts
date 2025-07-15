@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { InfoLineComponent } from './info-line.component';
-import { input } from '@angular/core';
 
 describe('InfoLineComponent', () => {
   let component: InfoLineComponent;
@@ -22,7 +21,7 @@ describe('InfoLineComponent', () => {
 
   it('should have 2 cells', () => {
     const element: HTMLElement = fixture.debugElement.nativeElement;
-    fixture.componentRef.setInput('description','Iacu')
+    fixture.componentRef.setInput('description', 'Iacu');
     fixture.detectChanges();
     expect(element.children.length).toEqual(2);
   });

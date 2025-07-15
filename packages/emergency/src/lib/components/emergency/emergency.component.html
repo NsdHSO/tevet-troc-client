@@ -1,48 +1,48 @@
 <main
-style="height: 100vh"
+  style="height: 100vh"
 >
-@for (layout of layouts(); track layout.title; let idx = $index) {
-  <section
-    [attr.aria-description]="layout.ariaDescription"
-  >
-    <header class="{{layout.class}} flex gap-4 items-center">
-      <span class="text-purple-600 dark:text-purple-400"><mat-icon [svgIcon]="layout.icon" /></span>
-      <lib-text styleText="Title_1">{{ layout.title }}</lib-text>
-    </header>
-    <div  class="{{layout.sectionClass}}">
-      @if (emergencyService.dataSourceForTable[idx]?.value.value()?.data?.length > 0) {
-    
-        <elix-table
-          [dataSource]="emergencyService.dataSourceForTable[idx].value.value().data"
-          [zebraColor]="true"
-          (onPaginationChange)="
+  @for (layout of layouts(); track layout.title; let idx = $index) {
+    <section
+      [attr.aria-description]="layout.ariaDescription"
+    >
+      <header class="{{layout.class}} flex gap-4 items-center">
+        <span class="text-purple-600 dark:text-purple-400"><mat-icon [svgIcon]="layout.icon" /></span>
+        <lib-text styleText="Title_1">{{ layout.title }}</lib-text>
+      </header>
+      <div class="{{layout.sectionClass}}">
+        @if (emergencyService.dataSourceForTable[idx].value.value()?.data.length > 0) {
+
+          <elix-table
+            [dataSource]="emergencyService.dataSourceForTable[idx].value.value().data"
+            [zebraColor]="true"
+            (onPaginationChange)="
           emergencyService.changePageSize($event,
           emergencyService.dataSourceForTable[idx].pageIndex, 
           emergencyService.dataSourceForTable[idx].pageSize)"
-          [pageIndex]="emergencyService.dataSourceForTable[idx].pageIndex()"
-          [pageSize]="emergencyService.dataSourceForTable[idx].pageSize()"
-          [showPagination]="true"
-          [lengthPagination]="emergencyService.dataSourceForTable[idx].value.value().length"
+            [pageIndex]="emergencyService.dataSourceForTable[idx].pageIndex()"
+            [pageSize]="emergencyService.dataSourceForTable[idx].pageSize()"
+            [showPagination]="true"
+            [lengthPagination]="emergencyService.dataSourceForTable[idx].value.value().length"
 
-        >
-          @for (row of emergencyService.dataSourceForTable[idx].rows; track row) {
-            @if (!$last) {
-              <elix-column-text
-                [className]="row.className"
-                [field]="row.field"
-                [name]="row.name" />
-            } @else {
-              <elix-column-icon-action
-                [className]="row.className"
-                [field]="row.field"
-                [name]="row.name" />
+          >
+            @for (row of emergencyService.dataSourceForTable[idx].rows; track row) {
+              @if (!$last) {
+                <elix-column-text
+                  [className]="row.className"
+                  [field]="row.field"
+                  [name]="row.name" />
+              } @else {
+                <elix-column-icon-action
+                  [className]="row.className"
+                  [field]="row.field"
+                  [name]="row.name" />
+              }
             }
-          }
-        </elix-table>
-      } @else if (emergencyService.dataSourceForTable[idx].value.isLoading()) {
-        <lib-text styleText="Title_3">Loading...</lib-text>
-      }
-    </div>
-  </section>
-}
+          </elix-table>
+        } @else if (emergencyService.dataSourceForTable[idx].value.isLoading()) {
+          <lib-text styleText="Title_3">Loading...</lib-text>
+        }
+      </div>
+    </section>
+  }
 </main>

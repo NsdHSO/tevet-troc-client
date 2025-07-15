@@ -1,5 +1,3 @@
-import { AmbulanceStatus } from './ambulance-type';
-
 export interface Emergency {
   created_at: Date;
   updated_at: Date;
@@ -61,9 +59,13 @@ export interface EmergencyIdData {
   description?: string;
   edit: boolean;
 }
+
 export type EmergencyStatus = `${EmergencyStatusEnum}`;
 
-export const emergencyStatusDisplayNames: () => Record<EmergencyStatus, string> = () => ({
+export const emergencyStatusDisplayNames: () => Record<
+  EmergencyStatus,
+  string
+> = () => ({
   [EmergencyStatusEnum.Reported]: 'Reported',
   [EmergencyStatusEnum.Assigned]: 'Assigned',
   [EmergencyStatusEnum.InProgress]: 'In Progress',

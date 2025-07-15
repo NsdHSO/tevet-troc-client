@@ -9,7 +9,17 @@ export class AmbulanceService {
    */
   ambulanceApiService = inject(AmbulanceApiService);
 
-  public changeStatus($event: AmbulanceStatusDao, id: string|unknown, hospital_id: string|undefined, ambulance_ic: number| undefined) {
-    this.ambulanceApiService.status$.next({status: $event, id, hospital_id, ambulance_ic})
+  public changeStatus(
+    $event: AmbulanceStatusDao,
+    id: string | unknown,
+    hospital_id: string | undefined,
+    ambulance_ic: number | undefined
+  ) {
+    this.ambulanceApiService.status$.next({
+      status: $event,
+      id,
+      hospital_id,
+      ambulance_ic,
+    });
   }
 }
