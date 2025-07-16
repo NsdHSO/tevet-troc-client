@@ -196,7 +196,7 @@ export class EmergencyApiService {
       // Assuming 'data' will be of the IncidentDetails type
       if (!data) {
         return {
-          uiElements: [],
+          uiElements: []
         };
       }
 

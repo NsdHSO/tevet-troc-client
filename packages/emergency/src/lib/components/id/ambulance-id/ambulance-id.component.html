@@ -6,9 +6,9 @@
 
 <div class="p-4 sm:p-6 lg:p-8">
   @if (data) {
-    <div class="mb-6 grid grid-cols-8 items-center gap-4">
-      <lib-text styleText="Title_3_1" class="col-span-6">Ambulance Overview</lib-text>
-      <lib-badge [title]="data.status" class="col-span-2 justify-self-end" />
+    <div class="mb-6 grid grid-cols-10 items-center gap-4">
+      <lib-text styleText="Title_3_1" class="col-span-5">Ambulance Overview</lib-text>
+      <lib-badge [title]="data.status" class="col-span-5 justify-self-end flex w-max" />
     </div>
     <ul class="grid grid-cols-1 gap-6 md:grid-cols-2">
       @for (cards of data.uiElements; track $index) {
