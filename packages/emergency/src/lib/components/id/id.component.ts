@@ -22,17 +22,21 @@ export default class IdComponent {
   emergencyService = inject(EmergencyService);
 
   element = this.route.queryParams.pipe(
-    tap(() => {
-      this.viewContainer.clear();
-    }),
+
     switchMap((data) => {
+      this.viewContainer.clear();
       if (data['ambulance_ic'] !== undefined) {
         this.ambulanceService.ambulanceApiService.ic = (
           data as { ambulance_ic: string }
         ).ambulance_ic;
 
         return this.ambulanceService.ambulanceApiService.ambulanceResource.pipe(
+          tap(() => {
+            this.viewContainer.clear();
+
+          }),
           tap((ambulance) => {
+
             if (ambulance) {
               const componentRef =
                 this.viewContainer.createComponent(AmbulanceIdComponent);
@@ -47,6 +51,10 @@ export default class IdComponent {
       if (data['emergency_ic'] !== undefined) {
         this.emergencyService.emergencyIc = data['emergency_ic'];
         return this.emergencyService.emergencyIdResponse.pipe(
+          tap(() => {
+            this.viewContainer.clear();
+
+          }),
           tap((emergency) => {
             if (emergency) {
               // Clear previous components if any
