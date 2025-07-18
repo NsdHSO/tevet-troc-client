@@ -8,25 +8,23 @@ describe('Add Aria label', () => {
     describe('On element', () => {
       @Component({
         selector: 'lib-test',
-        template: `
-          <div>asfsf</div>`,
+        template: ` <div>asfsf</div>`,
         hostDirectives: [
           {
             directive: AddAriaLabelDirective,
-            inputs: ['ariaName']
-          }
+            inputs: ['ariaName'],
+          },
         ],
-        standalone: true
+        standalone: true,
       })
-      class TestComponent {
-      }
+      class TestComponent {}
 
       let component: TestComponent;
       let fixture: ComponentFixture<TestComponent>;
 
       beforeEach(() => {
         TestBed.configureTestingModule({
-          imports: [TestComponent]
+          imports: [TestComponent],
         });
 
         fixture = TestBed.createComponent(TestComponent);
@@ -34,10 +32,12 @@ describe('Add Aria label', () => {
       });
 
       it('should get aria label', () => {
-        fixture.componentRef.setInput('ariaName', 'mamaPauker')
+        fixture.componentRef.setInput('ariaName', 'mamaPauker');
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.getAttribute('aria-label')).toContain('mamaPauker')
+        expect(fixture.nativeElement.getAttribute('aria-label')).toContain(
+          'mamaPauker'
+        );
       });
     });
   });

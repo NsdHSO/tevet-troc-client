@@ -4,11 +4,15 @@
   "sourceRoot": "packages/utils/http-response/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": ["utils®"],
+  "tags": [
+    "utils®"
+  ],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "packages/utils/http-response/jest.config.ts"
       }

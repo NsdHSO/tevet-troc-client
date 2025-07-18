@@ -31,13 +31,19 @@ describe('TextDirective', () => {
   it('should create an instance', () => {
     const element: ElementRef = {
       nativeElement: {
-        remove: () => {console.log("Iancu")},
+        remove: () => {
+          console.log('Iancu');
+        },
         innerText: { trim: () => null },
       },
     } as ElementRef;
     const renderer2 = {} as Renderer2;
     const docuument = {
-      querySelectorAll: () => [{ remove: () => {} }],
+      querySelectorAll: () => [
+        {
+          remove: () => {},
+        },
+      ],
     };
     const directive = setup(element, renderer2, docuument);
 
@@ -118,7 +124,9 @@ describe('TextDirective', () => {
     ({ style, expectedClasses, colorTextMock, elementExpected }) => {
       const element: ElementRef = {
         nativeElement: {
-          remove: () => {console.log("Iancu")},
+          remove: () => {
+            console.log('Iancu');
+          },
           innerText: { trim: () => null },
         },
       } as ElementRef;
@@ -132,8 +140,15 @@ describe('TextDirective', () => {
         appendChild: jest.fn().mockReturnValue(of({}) as any),
       } as unknown as Renderer2;
       const docuument = {
-        createElement: () => ({ remove: () => {}, innerText: '' }),
-        querySelectorAll: () => [{ remove: () => {} }],
+        createElement: () => ({
+          remove: () => {},
+          innerText: '',
+        }),
+        querySelectorAll: () => [
+          {
+            remove: () => {},
+          },
+        ],
         nativeElement: {
           innerText: {
             trim: () => 'fsdf',
@@ -159,7 +174,9 @@ describe('TextDirective', () => {
   it(`should called ng on init`, () => {
     const element: ElementRef = {
       nativeElement: {
-        remove: () => {console.log("Iancu")},
+        remove: () => {
+          console.log('Iancu');
+        },
         innerText: {
           trim: () => null,
         },
@@ -179,10 +196,19 @@ describe('TextDirective', () => {
       appendChild: jest.fn().mockReturnValue(of({}) as any),
     } as unknown as Renderer2;
     const docuument = {
-      createElement: () => ({ remove: () => {}, innerText: '' }),
-      querySelectorAll: () => [{ remove: () => {} }],
+      createElement: () => ({
+        remove: () => {},
+        innerText: '',
+      }),
+      querySelectorAll: () => [
+        {
+          remove: () => {},
+        },
+      ],
       nativeElement: {
-        remove: () => {console.log("Iancu")},
+        remove: () => {
+          console.log('Iancu');
+        },
         innerText: {
           trim: () => 'fsdf',
         },

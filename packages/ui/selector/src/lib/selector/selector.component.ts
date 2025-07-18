@@ -1,15 +1,16 @@
 import {
   AfterViewChecked,
   Component,
-  contentChild, ElementRef,
+  contentChild,
+  ElementRef,
   input,
   output,
-  TemplateRef, viewChild
+  TemplateRef,
+  viewChild
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TextComponent, TextDirective } from '@tevet-troc-client/text';
 import { JumbotronComponent } from '@tevet-troc-client/jumbotron';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { animate, group, query, stagger, state, style, transition, trigger } from '@angular/animations';
 
 /**
@@ -55,12 +56,18 @@ import { animate, group, query, stagger, state, style, transition, trigger } fro
             'li',
             [
               // Query for all 'li' elements inside
-              style({ opacity: 0, transform: 'translateY(20px)' }), // Initial state for list items
+              style({
+                opacity: 0,
+                transform: 'translateY(20px)',
+              }), // Initial state for list items
               stagger(10, [
                 // Stagger each 'li' by 50ms
                 animate(
                   '200ms ease-out',
-                  style({ opacity: 1, transform: 'translateY(0)' })
+                  style({
+                    opacity: 1,
+                    transform: 'translateY(0)',
+                  })
                 ),
               ]),
             ],
@@ -87,7 +94,10 @@ import { animate, group, query, stagger, state, style, transition, trigger } fro
                 // Stagger each 'li' by -50ms (reverse order for exiting)
                 animate(
                   '200ms ease-in',
-                  style({ opacity: 0, transform: 'translateY(20px)' })
+                  style({
+                    opacity: 0,
+                    transform: 'translateY(20px)',
+                  })
                 ),
               ]),
             ],
@@ -103,9 +113,10 @@ export class SelectorComponent<T> implements AfterViewChecked {
     if (this.isOpen && this.dropdownList()) {
       setTimeout(() => {
         this.dropdownList()?.nativeElement.focus();
-      },0)
+      }, 0);
     }
   }
+
   /**
    * @description The currently picked (selected) option of type T.
    * This property is marked with the definite assignment assertion '!' because it's

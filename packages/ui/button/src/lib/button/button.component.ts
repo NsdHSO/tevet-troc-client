@@ -68,8 +68,7 @@ export class ButtonComponent implements OnDestroy {
       event.stopPropagation();
       return;
     }
-    if (!(event.target instanceof HTMLButtonElement) &&
-      !this.disabled()) {
+    if (!(event.target instanceof HTMLButtonElement) && !this.disabled()) {
       this.addRipple();
       this.event.emit();
     }
@@ -78,6 +77,7 @@ export class ButtonComponent implements OnDestroy {
   buttonClick(event: MouseEvent) {
     this.onClick(event);
   }
+
   // Bind the disabled attribute to the host element
   @HostBinding('attr.disabled')
   get isDisabled() {

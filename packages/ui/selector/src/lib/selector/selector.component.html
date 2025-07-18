@@ -1,57 +1,57 @@
-  <button (click)="toggleDropdown()">
-    <ng-template #defaultSelected>
-      <lib-text styleText="Small_1">
-        {{ picked || label }}
-      </lib-text>
-    </ng-template>
+<button (click)="toggleDropdown()">
+  <ng-template #defaultSelected>
+    <lib-text styleText="Small_1">
+      {{ picked || label }}
+    </lib-text>
+  </ng-template>
 
-    <ng-container
-      [ngTemplateOutlet]="selectedTemplateRef() || defaultSelected"
-      [ngTemplateOutletContext]="{ $implicit: picked }"
-    >
-    </ng-container>
-  </button>
-  <div aria-live="polite" aria-atomic="true" class="sr-only">
-    @if (isOpen) {
-      Dropdown opened.
-    } @else {
-      Dropdown closed.
-    }
-  </div>
+  <ng-container
+    [ngTemplateOutlet]="selectedTemplateRef() || defaultSelected"
+    [ngTemplateOutletContext]="{ $implicit: picked }"
+  >
+  </ng-container>
+</button>
+<div aria-live="polite" aria-atomic="true" class="sr-only">
   @if (isOpen) {
-    <ul class="flex w-max"
-        role="listbox"
-        aria-expanded="true"
-        aria-haspopup="listbox"
-        aria-label="Select an option"
-        tabindex="-1"
-        [attr.focusable]="true"
-        [@slideInOut]
-        #dropdownList
-    >
-      <lib-jumbotron>
-        @for (option of options(); track $index) {
-          <li
-            class="hover:bg-gray-100 hover:dark:bg-gray-600 hover:cursor-pointer rounded-lg"
-            role="option"
-            [attr.aria-selected]="option === picked"
-            [class.bg-gray-100]="option === picked"
-            [class.dark:bg-gray-700]="option === picked"
-          >
-            <button (click)="selectOption(option)">
-              <ng-template #defaultOption>
-                <lib-text>
-                  {{ option || option }}
-                </lib-text>
-              </ng-template>
-
-              <ng-container
-                [ngTemplateOutlet]="optionTemplateRef() || defaultOption"
-                [ngTemplateOutletContext]="{ $implicit: option, index: $index }"
-              />
-            </button>
-          </li>
-        }
-      </lib-jumbotron>
-    </ul>
+    Dropdown opened.
+  } @else {
+    Dropdown closed.
   }
+</div>
+@if (isOpen) {
+  <ul class="flex w-max"
+      role="listbox"
+      aria-expanded="true"
+      aria-haspopup="listbox"
+      aria-label="Select an option"
+      tabindex="-1"
+      [attr.focusable]="true"
+      [@slideInOut]
+      #dropdownList
+  >
+    <lib-jumbotron>
+      @for (option of options(); track $index) {
+        <li
+          class="hover:bg-gray-100 hover:dark:bg-gray-600 hover:cursor-pointer rounded-lg"
+          role="option"
+          [attr.aria-selected]="option === picked"
+          [class.bg-gray-100]="option === picked"
+          [class.dark:bg-gray-700]="option === picked"
+        >
+          <button (click)="selectOption(option)">
+            <ng-template #defaultOption>
+              <lib-text>
+                {{ option || option }}
+              </lib-text>
+            </ng-template>
+
+            <ng-container
+              [ngTemplateOutlet]="optionTemplateRef() || defaultOption"
+              [ngTemplateOutletContext]="{ $implicit: option, index: $index }"
+            />
+          </button>
+        </li>
+      }
+    </lib-jumbotron>
+  </ul>
+}

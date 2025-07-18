@@ -21,7 +21,8 @@ describe('InfoLineComponent', () => {
 
   it('should have 2 cells', () => {
     const element: HTMLElement = fixture.debugElement.nativeElement;
-
+    fixture.componentRef.setInput('description', 'Iacu');
+    fixture.detectChanges();
     expect(element.children.length).toEqual(2);
   });
 });

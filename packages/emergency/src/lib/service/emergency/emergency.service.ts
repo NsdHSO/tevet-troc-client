@@ -1,7 +1,5 @@
-import { computed, inject, Injectable } from '@angular/core';
+import { inject, Injectable, WritableSignal } from '@angular/core';
 import { EmergencyApiService } from '../api/emergency-api/emergency-api.service';
-import { DataSourceMaterialTable } from 'ngx-liburg';
-import { toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable()
 export class EmergencyService {
@@ -14,10 +12,19 @@ export class EmergencyService {
    *
    */
   pageSize = this._ambulanceApi.pageSize;
+  emergencyIdResponse = this._ambulanceApi.httpEmergencyIdResponse;
 
-  changePageSize(event: any) {
-    this._ambulanceApi.pageSize.set(event.pageSize);
-    this._ambulanceApi.page.set(++event.pageIndex);
+  set emergencyIc(v: string) {
+    this._ambulanceApi.emergencyIdValue = v;
+  }
+
+  changePageSize(
+    event: any,
+    pageIndex: WritableSignal<any>,
+    pageSize: WritableSignal<any>
+  ): void {
+    pageSize.set(event.pageSize);
+    pageIndex.set(event.pageIndex);
   }
 
   /**
@@ -28,10 +35,54 @@ export class EmergencyService {
   /**
    * Computed value for resource
    */
-  dataSourceForTable = computed(() => {
-    const dataSource: DataSourceMaterialTable<any>[] = [];
-    dataSource.push(this._ambulanceApi.httpAmbulanceResourceRes as any);
+  private readonly ambulanceRows = [
+    {
+      className: 'ambulance-id',
+      field: 'ambulance_ic',
+      name: 'Ambulance ID',
+    },
+    {
+      className: 'fuell-type',
+      field: 'fuel_type',
+      name: 'Fuell Type',
+    },
+    {
+      className: 'ambulance-type',
+      field: 'type',
+      name: 'Type of Ambulance',
+    },
+    {
+      className: 'action2',
+      field: 'ambulanceIc',
+      name: 'Edit Ambulance IC ',
+    },
+  ];
 
-    return dataSource;
-  }) as any;
+  private readonly emergencyRows = [
+    {
+      className: 'emergency-ic',
+      field: 'emergency_ic',
+      name: 'Edit Emergency IC',
+    },
+    {
+      className: 'action2',
+      field: 'reported_by',
+      name: 'Action',
+    },
+  ];
+
+  dataSourceForTable = [
+    {
+      value: this._ambulanceApi.httpAmbulanceResourceRes as any,
+      pageIndex: this.page,
+      pageSize: this.pageSize,
+      rows: this.ambulanceRows,
+    },
+    {
+      value: this._ambulanceApi.httpEmergencyResourceRes as any,
+      pageIndex: this._ambulanceApi.pageEmergency,
+      pageSize: this._ambulanceApi.pageSizeEmergency,
+      rows: this.emergencyRows,
+    },
+  ];
 }

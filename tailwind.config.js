@@ -19,14 +19,14 @@ module.exports = {
       '4xs': '280px', // Added 4xs
       '3xs': '320px',
       '2xs': '400px',
-      'xs': '480px',
-      'sm': '640px',
-      'md': '768px',
-      'lg': '1024px',
-      'xl': '1280px',
+      xs: '480px',
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
       '2xl': '1536px',
       '3xl': '1920px',
-    }
+    },
   },
   plugins: [require('@tailwindcss/typography')],
   postcss: {

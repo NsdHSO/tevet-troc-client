@@ -31,7 +31,7 @@ export class AmbulanceApiService {
    * Injects the API configuration for ambulance-related endpoints.
    * @private
    */
-  private _apiConfigEmergency = inject(API_CONFIG_AMBULANCE);
+  private _apiConfigAmbulance = inject(API_CONFIG_AMBULANCE);
   /**
    * A BehaviorSubject that holds the current ambulance identifier code (IC).
    * It initially emits an empty string.
@@ -91,7 +91,7 @@ export class AmbulanceApiService {
   ambulanceResource: Observable<AmbulanceIdUi> = this.ambulanceIc.pipe(
     switchMap((data) =>
       this.httpClient.get<PaginatedBackendResponse<AmbulanceDetails>>(
-        `${this._apiConfigEmergency.baseUrl}`,
+        `${this._apiConfigAmbulance.baseUrl}`,
         {
           params: {
             per_page: 1,
@@ -298,7 +298,7 @@ export class AmbulanceApiService {
    * when subscribed, providing the list of all ambulance statuses.
    */
   ambulanceStatus = httpResource<BackendResponse<AmbulanceStatusDao[]>>(
-    () => this._apiConfigEmergency.baseUrl + '/status'
+    () => this._apiConfigAmbulance.baseUrl + '/status'
   );
 
   /**
@@ -309,7 +309,7 @@ export class AmbulanceApiService {
    * - Listens for new `AmbulanceStatusUpdatePayload` values emitted by `this.status$`.
    * - Uses `switchMap` to cancel any ongoing PATCH requests if a new update
    * payload is received, preventing race conditions.
-   * - Sends a PATCH request to `_apiConfigEmergency.baseUrl/{ambulanceId}`
+   * - Sends a PATCH request to `_apiConfigAmbulance.baseUrl/{ambulanceId}`
    * with the new status and hospital ID.
    * - After a successful PATCH, it pipes the `ambulance_ic` from the original payload
    * to the next operator.
@@ -330,7 +330,7 @@ export class AmbulanceApiService {
   changeAmbulanceStatus = this.status$.pipe(
     switchMap((value) =>
       this.httpClient
-        .patch(this._apiConfigEmergency.baseUrl + '/' + `${value.id}`, {
+        .patch(this._apiConfigAmbulance.baseUrl + '/' + `${value.id}`, {
           status: value.status.value,
           hospital_name: value.hospital_id,
         })

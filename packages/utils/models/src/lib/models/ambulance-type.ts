@@ -72,7 +72,7 @@ export interface AmbulanceIdUi {
   uiElements: AmbulanceIdData[][];
   id?: string;
   ambulance_ic?: number;
-  hospital_id?:string;
+  hospital_id?: string;
 }
 
 export interface AmbulanceIdData {
