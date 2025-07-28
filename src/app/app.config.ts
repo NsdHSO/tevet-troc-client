@@ -31,6 +31,11 @@ export const CONFIG_MAIN = Object.freeze({
       icon: 'fa_solid:truck-medical',
       text: 'Emergency',
     },
+    {
+      path: 'appointments',
+      icon: 'fa_solid:calendar-check',
+      text: 'Appointments',
+    },
   ],
   iconApp: 'fa_solid:logo',
   appConfig: appRoutes,

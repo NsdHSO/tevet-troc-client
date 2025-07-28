@@ -8,7 +8,6 @@ export const appRoutes: Route[] = [
       view: 'landing',
     },
   },
-
   {
     path: 'dashboard',
     data: {
@@ -16,6 +15,14 @@ export const appRoutes: Route[] = [
     },
     loadComponent: () =>
       import('@tevet-troc-client/dashboard').then((c) => c.C),
+  },
+  {
+    path: 'appointments',
+    data: {
+      view: 'appointments',
+    },
+    loadComponent: () =>
+      import('@tevet-troc-client/appointment').then((c) => c.C),
   },
   {
     path: 'emergency',
