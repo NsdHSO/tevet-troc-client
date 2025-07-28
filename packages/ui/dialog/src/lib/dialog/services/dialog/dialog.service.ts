@@ -24,10 +24,6 @@ export class DialogService {
       ...additionalDialogConfigData,
     });
 
-    this.dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
-    });
-
     return this.dialogRef;
   }
 }

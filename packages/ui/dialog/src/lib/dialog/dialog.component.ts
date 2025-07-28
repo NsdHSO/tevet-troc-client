@@ -1,21 +1,29 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { DialogData } from './types/dialog.type';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
-  MatDialogRef,
+  MatDialogRef
 } from '@angular/material/dialog';
 import { ButtonComponent } from '@tevet-troc-client/button';
 import { NgTemplateOutlet } from '@angular/common';
 import { TextDirective } from '@tevet-troc-client/text';
 
+/**
+ * A reusable dialog component that integrates with Angular Material's dialog system.
+ *
+ * @component
+ * @selector lib-dialog
+ *
+ * @description
+ * This component provides a customizable dialog interface with the following features:
+ * - Automatic integration with Angular Material's dialog system
+ * - OnPush change detection for better performance
+ * - No view encapsulation for global styling capabilities
+ * - Built-in close functionality
+ */
 @Component({
   selector: 'lib-dialog',
   templateUrl: './dialog.component.html',
@@ -32,10 +40,18 @@ import { TextDirective } from '@tevet-troc-client/text';
   ],
 })
 export class DialogComponent {
+  /** Dialog data injected through MAT_DIALOG_DATA token */
   public data = inject<DialogData>(MAT_DIALOG_DATA);
+
+  /** Reference to the dialog instance */
   public dialogRef = inject(MatDialogRef<DialogComponent>);
 
-  close() {
+  /**
+   * Closes the dialog with a true value.
+   *
+   * @returns void
+   */
+  close(): void {
     this.dialogRef.close(true);
   }
 }

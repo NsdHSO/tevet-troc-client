@@ -3,5 +3,11 @@
   2xs:grid-cols-2
   sm:grid-cols-2">
   <div ></div>
-  <lib-button class="justify-self-end" text="Add"/>
+  <lib-button class="justify-self-end" text="Add" (event)="addAppointment(appointment)"/>
 </section>
+
+<ng-template #appointment>
+
+  <lib-text> Iancu</lib-text>
+
+</ng-template>
