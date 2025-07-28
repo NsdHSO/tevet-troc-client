@@ -47,7 +47,7 @@ export class DialogComponent {
   public dialogRef = inject(MatDialogRef<DialogComponent>);
 
   /**
-   * Closes the dialog with a true value.
+   * Closes the dialog, passing 'true' as the result to indicate the OK/confirm action.
    *
    * @returns void
    */

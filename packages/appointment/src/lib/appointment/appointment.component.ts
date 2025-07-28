@@ -1,24 +1,30 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, TemplateRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TextComponent, TextDirective } from '@tevet-troc-client/text';
 import { ButtonComponent } from '@tevet-troc-client/button';
 import { DialogData, DialogService } from '@tevet-troc-client/dialog';
+import { ScheduleComponent } from './components/schedule/schedule.component';
 
 @Component({
   selector: 'lib-appointment',
-  imports: [CommonModule, TextDirective, TextComponent, ButtonComponent],
+  imports: [
+    CommonModule,
+    TextDirective,
+    TextComponent,
+    ButtonComponent,
+    ScheduleComponent,
+  ],
   templateUrl: './appointment.component.html',
   styleUrl: './appointment.component.css',
 })
 export default class AppointmentComponent {
   dialogService = inject(DialogService);
 
-  addAppointment(template: any) {
+  addAppointment(template: TemplateRef<ScheduleComponent>) {
     const dialogData: DialogData = {
-      title: 'Test Dialog',
-      message: 'This is our first dialog!',
+      templateRef: template,
       showOKBtn: true,
-      showCancelBtn: true
+      showCancelBtn: true,
     };
 
     const dialogRef = this.dialogService.openDialog(dialogData, {
