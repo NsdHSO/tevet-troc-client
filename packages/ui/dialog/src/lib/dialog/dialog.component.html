@@ -1,1 +1,29 @@
-<p>Dialog works!</p>
+<div class="p-2 gap-3 grid">
+  @if (data.title) {
+    <lib-text styleText="Title_2" class="text-center">
+      {{ data.title }}
+    </lib-text>
+  }
+  <ng-container
+    [ngTemplateOutlet]="data.templateRef || defaultMessage"
+  >
+  </ng-container>
+  <mat-dialog-actions class="p-0">
+    <div class="row justify-content-center">
+      <div class="col">
+        @if (data.showCancelBtn) {
+          <lib-button text="Ok" (event)="close()" />
+        }
+        @if (data.showOKBtn) {
+          <lib-button mat-dialog-close text="Cancel" />
+        }
+      </div>
+    </div>
+  </mat-dialog-actions>
+
+  <ng-template #defaultMessage>
+    <mat-dialog-content style="padding: 0">
+      <lib-text>{{data.message}}</lib-text>
+    </mat-dialog-content>
+  </ng-template>
+</div>
