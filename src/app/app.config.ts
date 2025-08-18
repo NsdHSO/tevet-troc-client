@@ -2,6 +2,7 @@ import {
   ApplicationConfig,
   importProvidersFrom,
   inject,
+  provideAppInitializer,
   provideZoneChangeDetection,
 } from '@angular/core';
 import { FrameWholeModule, RouterConfig } from 'ngx-liburg-frame-side';
@@ -18,6 +19,13 @@ import { TransitionViewService } from '@tevet-troc-client/transition';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
+import { initAppPromise, interceptorErrorProviders } from '@tevet-troc-client/http-interceptor';
+import {
+  HttpClient,
+  HttpClientModule,
+  provideHttpClient,
+} from '@angular/common/http';
+import { firstValueFrom, tap } from 'rxjs';
 
 export const CONFIG_MAIN = Object.freeze({
   routerDataConfig: [
@@ -42,6 +50,8 @@ export const CONFIG_MAIN = Object.freeze({
 }) as RouterConfig;
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideHttpClient(),
+    provideAppInitializer(() => initAppPromise()),
     provideAnimations(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(
@@ -52,6 +62,9 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(FrameWholeModule.forRoot(CONFIG_MAIN)),
     importProvidersFrom(IconCoreModule),
     TransitionViewService,
+    provideHttpClient(),
+    importProvidersFrom(HttpClientModule),
+//    interceptorErrorProviders,
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
