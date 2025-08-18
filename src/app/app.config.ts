@@ -19,7 +19,7 @@ import { TransitionViewService } from '@tevet-troc-client/transition';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
-import { initAppPromise, interceptorErrorProviders } from '@tevet-troc-client/http-interceptor';
+import { initAppPromise, interceptorErrorProviders, interceptorAuthProviders } from '@tevet-troc-client/http-interceptor';
 import {
   HttpClient,
   HttpClientModule,
@@ -64,7 +64,8 @@ export const appConfig: ApplicationConfig = {
     TransitionViewService,
     provideHttpClient(),
     importProvidersFrom(HttpClientModule),
-//    interceptorErrorProviders,
+    interceptorAuthProviders,
+    interceptorErrorProviders,
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {

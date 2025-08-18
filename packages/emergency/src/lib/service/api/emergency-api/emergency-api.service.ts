@@ -18,9 +18,15 @@ import {
 } from '@tevet-troc-client/models';
 import { Router } from '@angular/router';
 import { BehaviorSubject, map, Observable, switchMap } from 'rxjs';
+import { AuthTokenService } from '@tevet-troc-client/http-interceptor';
 
 @Injectable({ providedIn: 'root' })
 export class EmergencyApiService {
+
+  /**
+   * Injects the AuthTokenService to retrieve the current user's token.'
+   */
+  authToken = inject(AuthTokenService)
   /**
    * A signal holding the ID of the hospital currently being filtered by.
    * This value is reactive and automatically updates the `httpAmbulanceResourceRes`
@@ -88,6 +94,7 @@ export class EmergencyApiService {
       url: `${
         this._apiConfigAmbulance.baseUrl
       }?filterBy=hospitalId=${this.hospitalId()}&page=${this.page()}&per_page=${this.pageSize()}`,
+
     }),
     {
       parse: (e: unknown) => {
