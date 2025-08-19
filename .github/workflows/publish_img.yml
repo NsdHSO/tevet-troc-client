@@ -42,7 +42,6 @@ jobs:
           TEVET_API_AUTH: ${{ secrets.TEVET_API_AUTH }}
           TEVET_API_AUTH_CLIENT: ${{ secrets.TEVET_API_AUTH_CLIENT }}
 
-
       - name: Build Project
         run: pnpm run build
 
