@@ -1,5 +1,6 @@
 import { inject, Injectable, WritableSignal } from '@angular/core';
 import { EmergencyApiService } from '../api/emergency-api/emergency-api.service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable()
 export class EmergencyService {
@@ -12,7 +13,7 @@ export class EmergencyService {
    *
    */
   pageSize = this._ambulanceApi.pageSize;
-  emergencyIdResponse = this._ambulanceApi.httpEmergencyIdResponse;
+  emergencyIdResponse = this._ambulanceApi.httpEmergencyIdResponse$;
 
   set emergencyIc(v: string) {
     this._ambulanceApi.emergencyIdValue = v;
@@ -73,13 +74,13 @@ export class EmergencyService {
 
   dataSourceForTable = [
     {
-      value: this._ambulanceApi.httpAmbulanceResourceRes as any,
+      value: toSignal(this._ambulanceApi.httpAmbulanceResponse$) as any,
       pageIndex: this.page,
       pageSize: this.pageSize,
       rows: this.ambulanceRows,
     },
     {
-      value: this._ambulanceApi.httpEmergencyResourceRes as any,
+      value: toSignal(this._ambulanceApi.httpEmergencyResponse$) as any,
       pageIndex: this._ambulanceApi.pageEmergency,
       pageSize: this._ambulanceApi.pageSizeEmergency,
       rows: this.emergencyRows,

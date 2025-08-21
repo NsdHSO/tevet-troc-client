@@ -15,7 +15,6 @@ export function initAppPromise() {
 
   const http = inject(HttpClient);
   const tokenSvc = inject(AuthTokenService);
-  debugger
   return firstValueFrom(
     http
       .post<any>(

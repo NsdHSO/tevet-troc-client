@@ -10,19 +10,19 @@
         <lib-text styleText="Title_1">{{ layout.title }}</lib-text>
       </header>
       <div class="{{layout.sectionClass}}">
-        @if (emergencyService.dataSourceForTable[idx].value.hasValue()) {
-
+        @let data = emergencyService.dataSourceForTable[idx];
+        @if (data.value()) {
           <elix-table
-            [dataSource]="emergencyService.dataSourceForTable[idx].value.value().data"
+            [dataSource]="data.value().data"
             [zebraColor]="true"
             (onPaginationChange)="
           emergencyService.changePageSize($event,
-          emergencyService.dataSourceForTable[idx].pageIndex, 
+          emergencyService.dataSourceForTable[idx].pageIndex,
           emergencyService.dataSourceForTable[idx].pageSize)"
             [pageIndex]="emergencyService.dataSourceForTable[idx].pageIndex()"
             [pageSize]="emergencyService.dataSourceForTable[idx].pageSize()"
             [showPagination]="true"
-            [lengthPagination]="emergencyService.dataSourceForTable[idx].value.value().length"
+            [lengthPagination]="data.value().length"
 
           >
             @for (row of emergencyService.dataSourceForTable[idx].rows; track row) {
@@ -39,11 +39,6 @@
               }
             }
           </elix-table>
-        } @else if (emergencyService.dataSourceForTable[idx].value.isLoading()) {
-          <lib-text styleText="Title_3">Loading...</lib-text>
-        }
-        @else if (emergencyService.dataSourceForTable[idx].value.error()) {
-          <lib-text styleText="Title_3">Error...</lib-text>
         }
       </div>
     </section>
