@@ -33,6 +33,11 @@ export class AmbulanceApiService {
    */
   private _apiConfigAmbulance = inject(API_CONFIG_AMBULANCE);
   /**
+   * Injects the API configuration for ambulance-related endpoints.
+   * @private
+   */
+  private _httpClient = inject(HttpClient);
+  /**
    * A BehaviorSubject that holds the current ambulance identifier code (IC).
    * It initially emits an empty string.
    * This subject serves as a trigger for fetching ambulance details.
@@ -297,10 +302,13 @@ export class AmbulanceApiService {
    * @returns An `Observable` emitting `BackendResponse<AmbulanceStatusDao[]>`
    * when subscribed, providing the list of all ambulance statuses.
    */
-  ambulanceStatus = httpResource<BackendResponse<AmbulanceStatusDao[]>>(
-    () => this._apiConfigAmbulance.baseUrl + '/status'
-  );
-
+  /**
+   * Fetches all ambulance statuses from the backend.
+   *
+   * @returns An `Observable` emitting `BackendResponse<AmbulanceStatusDao[]>`
+   * when subscribed, providing the list of all ambulance statuses.
+   */
+  getAmbulanceStatus= this._httpClient.get<BackendResponse<AmbulanceStatusDao[]>>(this._apiConfigAmbulance.baseUrl + '/status');
   /**
    * An RxJS Observable that triggers an ambulance status update API call
    * and updates a shared observable with the ambulance identifier code (IC) upon success.
