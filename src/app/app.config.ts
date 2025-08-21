@@ -19,13 +19,15 @@ import { TransitionViewService } from '@tevet-troc-client/transition';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
-import { initAppPromise, interceptorErrorProviders, interceptorAuthProviders } from '@tevet-troc-client/http-interceptor';
 import {
-  HttpClient,
-  HttpClientModule,
+  initAppPromise,
+  interceptorAuthProviders,
+  interceptorErrorProviders,
+} from '@tevet-troc-client/http-interceptor';
+import {
   provideHttpClient,
+  withInterceptorsFromDi,
 } from '@angular/common/http';
-import { firstValueFrom, tap } from 'rxjs';
 
 export const CONFIG_MAIN = Object.freeze({
   routerDataConfig: [
@@ -63,7 +65,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(IconCoreModule),
     TransitionViewService,
     provideHttpClient(),
-    importProvidersFrom(HttpClientModule),
+    provideHttpClient(withInterceptorsFromDi()),
     interceptorAuthProviders,
     interceptorErrorProviders,
     provideAnimationsAsync(),
