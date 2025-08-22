@@ -10,10 +10,11 @@
         <lib-text styleText="Title_1">{{ layout.title }}</lib-text>
       </header>
       <div class="{{layout.sectionClass}}">
-        @let data = emergencyService.dataSourceForTable[idx];
-        @if (data.value()) {
+        @let dataDataSource = emergencyService.dataSourceForTable[idx];
+        @let dataAsync = dataDataSource.value | async;
+        @if (dataAsync?.data) {
           <elix-table
-            [dataSource]="data.value().data"
+            [dataSource]="dataAsync.data"
             [zebraColor]="true"
             (onPaginationChange)="
           emergencyService.changePageSize($event,
@@ -22,7 +23,7 @@
             [pageIndex]="emergencyService.dataSourceForTable[idx].pageIndex()"
             [pageSize]="emergencyService.dataSourceForTable[idx].pageSize()"
             [showPagination]="true"
-            [lengthPagination]="data.value().length"
+            [lengthPagination]="dataAsync.length"
 
           >
             @for (row of emergencyService.dataSourceForTable[idx].rows; track row) {

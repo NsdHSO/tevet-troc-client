@@ -1,6 +1,19 @@
 import { inject, Injectable, WritableSignal } from '@angular/core';
 import { EmergencyApiService } from '../api/emergency-api/emergency-api.service';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { DataSourceMaterialTable } from 'ngx-liburg';
+import { Observable } from 'rxjs';
+import { AmbulanceDetails, Emergency } from '@tevet-troc-client/models';
+
+type WrapperDataSource = {
+  value: Observable<any>;
+  pageIndex: WritableSignal<any>;
+  pageSize: WritableSignal<any>;
+  rows: {
+    className: string;
+    field: string;
+    name: string;
+  }[];
+};
 
 @Injectable()
 export class EmergencyService {
@@ -72,15 +85,21 @@ export class EmergencyService {
     },
   ];
 
-  dataSourceForTable = [
+  dataSourceForTable: WrapperDataSource[] = [
     {
-      value: toSignal(this._ambulanceApi.httpAmbulanceResponse$) as any,
+      value: this._ambulanceApi.httpAmbulanceResponse$ as Observable<{
+        data: DataSourceMaterialTable<AmbulanceDetails>[];
+        length: number;
+      }>,
       pageIndex: this.page,
       pageSize: this.pageSize,
       rows: this.ambulanceRows,
     },
     {
-      value: toSignal(this._ambulanceApi.httpEmergencyResponse$) as any,
+      value: this._ambulanceApi.httpEmergencyResponse$ as Observable<{
+        data: DataSourceMaterialTable<Emergency>[];
+        length: number;
+      }>,
       pageIndex: this._ambulanceApi.pageEmergency,
       pageSize: this._ambulanceApi.pageSizeEmergency,
       rows: this.emergencyRows,
