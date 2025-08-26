@@ -10,7 +10,7 @@ import { TransitionViewService } from './../service/transition-view.service';
   template: `<a
     [libViewTransition]="'fade'"
     [identifierTransition]="'home'"
-  ></a>`,
+  >Iancu</a>`,
 })
 class HostComponent {}
 
