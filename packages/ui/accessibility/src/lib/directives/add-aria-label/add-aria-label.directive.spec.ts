@@ -15,7 +15,6 @@ describe('Add Aria label', () => {
             inputs: ['ariaName'],
           },
         ],
-        standalone: true,
       })
       class TestComponent {}
 

@@ -6,7 +6,7 @@
     "start": "nx reset && nx serve",
     "build": "nx build",
     "build-without-base-h-ref": "nx build-github",
-    "test:w": "pnpm nx run-many -t test --all --watch-all",
+    "test:w": "pnpm nx run-many -t test --all",
     "test": "nx test",
     "gen:pack": "read -p 'Enter library name: ' LIBNAME && nx g @nx/angular:library packages/$LIBNAME --tags=business®",
     "gen:lib": "read -p 'Enter library name: ' LIBNAME && nx g @nx/angular:library packages/ui/$LIBNAME --tags=ui®",
