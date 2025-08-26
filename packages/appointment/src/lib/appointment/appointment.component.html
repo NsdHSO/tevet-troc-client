@@ -3,7 +3,10 @@
   2xs:grid-cols-2
   sm:grid-cols-2">
   <div ></div>
-  <lib-button class="justify-self-end" text="Add" (event)="addAppointment(appointment)"/>
+  @if (appointmentService.permissionDirective.hasPermission(appointmentService.permissionCode)) {
+  <lib-button
+    class="justify-self-end" text="Add" (event)="addAppointment(appointment)"/>
+  }
 </section>
 
 <ng-template #appointment>

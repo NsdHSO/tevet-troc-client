@@ -1,1 +1,1 @@
-export * from './lib/permission/permission.component';
+export * from  './lib/directives'
