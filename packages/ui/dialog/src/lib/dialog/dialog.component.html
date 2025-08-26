@@ -11,10 +11,10 @@
   <mat-dialog-actions class="p-0">
     <div class="row justify-content-center">
       <div class="col">
-        @if (data.showCancelBtn) {
+        @if (data.showOKBtn) {
           <lib-button text="Ok" (event)="close()" />
         }
-        @if (data.showOKBtn) {
+        @if (data.showCancelBtn) {
           <lib-button mat-dialog-close text="Cancel" />
         }
       </div>
