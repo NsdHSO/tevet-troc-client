@@ -1,3 +1,4 @@
+// eslint-disable-next-file @angular-eslint/template/elements-content
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ViewTransitionDirective,
