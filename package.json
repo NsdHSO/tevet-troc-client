@@ -70,6 +70,7 @@
     "jest-environment-jsdom": "30.0.5",
     "jest-preset-angular": "15.0.0",
     "jest-util": "~30.0.0",
+    "jwt-decode": "^4.0.0",
     "ngx-liburg": "^20.0.1",
     "ngx-liburg-frame-side": "^20.0.1",
     "ngx-liburg-icon": "^20.0.1",
