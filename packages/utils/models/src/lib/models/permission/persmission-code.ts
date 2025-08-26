@@ -16,15 +16,20 @@ export enum PermissionCode {
   APPOINTMENT_CREATE = 'appointment.create',
   APPOINTMENT_READ = 'appointment.read',
   APPOINTMENT_UPDATE = 'appointment.update',
+  EMERGENCY_CREATE = 'emergency.create',
+  EMERGENCY_READ = 'emergency.read',
+  EMERGENCY_UPDATE = 'emergency.update',
+  DASHBOARD_CREATE = 'dashboard.create',
+  DASHBOARD_READ = 'dashboard.read',
+  DASHBOARD_UPDATE = 'dashboard.update',
 }
 export type PermissionsMap = Record<UserRoleEnum, Set<PermissionCode>>;
-
 
 /**
  * An object that defines the specific permissions for each UserRole.
  * The permissions are stored in a Set for constant time lookup (O(1)).
  */
-export const userPermissions :PermissionsMap= {
+export const userPermissions: PermissionsMap = {
   /**
    * ADMIN has all permissions.
    */
@@ -41,6 +46,12 @@ export const userPermissions :PermissionsMap= {
     PermissionCode.APPOINTMENT_CREATE,
     PermissionCode.APPOINTMENT_READ,
     PermissionCode.APPOINTMENT_UPDATE,
+    PermissionCode.EMERGENCY_READ,
+    PermissionCode.EMERGENCY_UPDATE,
+    PermissionCode.EMERGENCY_CREATE,
+    PermissionCode.DASHBOARD_READ,
+    PermissionCode.DASHBOARD_UPDATE,
+    PermissionCode.DASHBOARD_CREATE,
   ]),
   /**
    * MODERATOR has permissions to read users, manage sessions, and read/write projects.
@@ -51,6 +62,19 @@ export const userPermissions :PermissionsMap= {
     PermissionCode.SESSION_TERMINATE,
     PermissionCode.PROJECT_READ,
     PermissionCode.PROJECT_WRITE,
+    PermissionCode.EMERGENCY_READ,
+    PermissionCode.EMERGENCY_CREATE,
+  ]),
+  /**
+   * GUEST has a single permission to read projects.
+   */
+  [UserRoleEnum.OPERATOR]: new Set([
+    PermissionCode.APPOINTMENT_CREATE,
+    PermissionCode.APPOINTMENT_READ,
+    PermissionCode.APPOINTMENT_UPDATE,
+    PermissionCode.DASHBOARD_CREATE,
+    PermissionCode.DASHBOARD_READ,
+    PermissionCode.DASHBOARD_UPDATE,
   ]),
   /**
    * USER has permissions to read their own tokens and read projects.
@@ -62,9 +86,7 @@ export const userPermissions :PermissionsMap= {
   /**
    * GUEST has a single permission to read projects.
    */
-  [UserRoleEnum.GUEST]: new Set([
-    PermissionCode.PROJECT_READ,
-  ]),
+  [UserRoleEnum.GUEST]: new Set([PermissionCode.PROJECT_READ]),
 };
 
 /**
@@ -81,7 +103,10 @@ export type UserPermissions = typeof userPermissions;
  * @param permission The PermissionCode to check for.
  * @returns A boolean indicating whether the user has the permission.
  */
-export const checkPermission = (role: UserRole, permission: PermissionCode): boolean => {
+export const checkPermission = (
+  role: UserRole,
+  permission: PermissionCode
+): boolean => {
   const permissionsForRole = userPermissions[role];
   if (!permissionsForRole) {
     return false;

@@ -3,7 +3,7 @@ import { PermissionService } from '@tevet-troc-client/http-interceptor';
 import { checkPermission, PermissionCode } from '@tevet-troc-client/models';
 
 @Directive({
-  selector: '[libPermission], lib-button',
+  selector: '[libPermission]',
 })
 export class PermissionDirective {
   /**

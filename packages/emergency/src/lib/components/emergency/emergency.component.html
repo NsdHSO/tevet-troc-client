@@ -33,10 +33,12 @@
                   [field]="row.field"
                   [name]="row.name" />
               } @else {
-                <elix-column-icon-action
-                  [className]="row.className"
-                  [field]="row.field"
-                  [name]="row.name" />
+                @if (emergencyService.permissionDirective.hasPermission(emergencyService.permissionCode)) {
+                  <elix-column-icon-action
+                    [className]="row.className"
+                    [field]="row.field"
+                    [name]="row.name" />
+                }
               }
             }
           </elix-table>

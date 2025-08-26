@@ -2,7 +2,12 @@ import { inject, Injectable, WritableSignal } from '@angular/core';
 import { EmergencyApiService } from '../api/emergency-api/emergency-api.service';
 import { DataSourceMaterialTable } from 'ngx-liburg';
 import { Observable } from 'rxjs';
-import { AmbulanceDetails, Emergency } from '@tevet-troc-client/models';
+import {
+  AmbulanceDetails,
+  Emergency,
+  PermissionCode,
+} from '@tevet-troc-client/models';
+import { PermissionDirective } from '@tevet-troc-client/permission';
 
 type WrapperDataSource = {
   value: Observable<any>;
@@ -17,6 +22,14 @@ type WrapperDataSource = {
 
 @Injectable()
 export class EmergencyService {
+  /**
+   * Injects the PermissionDirective to check permissions.
+   */
+  readonly permissionDirective = inject(PermissionDirective);
+
+  get permissionCode() {
+    return PermissionCode.EMERGENCY_CREATE;
+  }
   /**
    *
    * @private

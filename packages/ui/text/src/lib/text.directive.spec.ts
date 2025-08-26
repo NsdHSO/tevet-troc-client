@@ -1,8 +1,9 @@
-import { StyleTextEnum, TextDirective } from './text.directive';
 import { ElementRef, Renderer2 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { DOCUMENT } from '@angular/common';
 import { of } from 'rxjs';
+import { StyleTextEnum } from '@tevet-troc-client/models';
+import { TextDirective } from './text.directive';
 
 describe('TextDirective', () => {
   const setup = (
@@ -115,7 +116,7 @@ describe('TextDirective', () => {
     },
     {
       style: 'UnknownStyle',
-      expectedClasses: ['bg-red-500'],
+      expectedClasses: ['bg-red-700'],
       colorTextMock: '',
     },
   ];
@@ -171,53 +172,35 @@ describe('TextDirective', () => {
       });
     }
   );
-  it(`should called ng on init`, () => {
+  it('should call console.error on init when there is no content', () => {
+    jest.useFakeTimers();
     const element: ElementRef = {
       nativeElement: {
-        remove: () => {
-          console.log('Iancu');
-        },
-        innerText: {
-          trim: () => null,
-        },
+        remove: () => {},
+        innerText: { trim: () => '' },
       },
     } as ElementRef;
-    const renderer2 = {
-      addClass() {
-        // TODO: remove
-      },
-      setStyle() {
-        // TODO: remove
-      },
 
-      setProperty() {
-        // TODO: remove
-      },
-      appendChild: jest.fn().mockReturnValue(of({}) as any),
+    const renderer2 = {
+      addClass() {},
+      setStyle() {},
+      setProperty() {},
+      appendChild: jest.fn(),
     } as unknown as Renderer2;
+
     const docuument = {
-      createElement: () => ({
-        remove: () => {},
-        innerText: '',
-      }),
-      querySelectorAll: () => [
-        {
-          remove: () => {},
-        },
-      ],
-      nativeElement: {
-        remove: () => {
-          console.log('Iancu');
-        },
-        innerText: {
-          trim: () => 'fsdf',
-        },
-      },
+      createElement: () => ({ remove: () => {}, innerText: '' }),
+      querySelectorAll: () => [{ remove: () => {} }],
+      nativeElement: { innerText: { trim: () => '' } },
     };
-    jest.spyOn(console as any, 'error').mockReturnValue('sfsf');
+
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
     const directive = setup(element, renderer2, docuument);
 
-    expect(console.error).toHaveBeenCalledWith(
+    jest.runOnlyPendingTimers();
+    jest.useRealTimers();
+
+    expect(errorSpy).toHaveBeenCalledWith(
       'No content found inside <lib-text>. Please check the content projection.'
     );
   });

@@ -1,5 +1,5 @@
 
-export type UserRole = "ADMIN" | "USER" | "MODERATOR" | "GUEST";
+export type UserRole = "ADMIN" | "USER" | "MODERATOR" | "GUEST" | "OPERATOR";
 /**
  * @fileoverview Defines user roles and their associated permissions using permission
  * and a type-safe object structure.
@@ -13,5 +13,6 @@ export enum UserRoleEnum {
   ADMIN = "ADMIN",
   USER = "USER",
   MODERATOR = "MODERATOR",
+  OPERATOR = "OPERATOR",
   GUEST = "GUEST",
 }
