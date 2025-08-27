@@ -1,17 +1,36 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AmbulanceIDComponent } from './ambulance-id.component';
+import { AmbulanceIdComponent } from './ambulance-id.component';
+import { of } from 'rxjs';
 
 describe('AmbulanceComponent', () => {
-  let component: AmbulanceIDComponent;
-  let fixture: ComponentFixture<AmbulanceIDComponent>;
+  let component: AmbulanceIdComponent;
+  let fixture: ComponentFixture<AmbulanceIdComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AmbulanceIDComponent],
+      imports: [AmbulanceIdComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AmbulanceIDComponent);
+    fixture = TestBed.createComponent(AmbulanceIdComponent);
     component = fixture.componentInstance;
+
+    // Provide required @Input() values
+    component.service = {
+      ambulanceApiService: {
+        getAmbulanceStatus: of({ message: [] }),
+        changeAmbulanceStatus: of(false),
+      },
+      changeStatus: jest.fn(),
+    } as any;
+
+    component.ambulance = {
+      id: 1,
+      hospital_id: 'HOSP-1',
+      ambulance_ic: 123,
+      status: 'Active',
+      uiElements: [],
+    } as any;
+
     fixture.detectChanges();
   });
 

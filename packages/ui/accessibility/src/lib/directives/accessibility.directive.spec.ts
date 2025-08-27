@@ -1,8 +1,12 @@
+import { TestBed } from '@angular/core/testing';
 import { AccessibilityDirective } from './accessibility.directive';
 
 describe('AccessibilityDirective', () => {
   it('should create an instance', () => {
-    const directive = new AccessibilityDirective();
+    let directive: AccessibilityDirective | undefined;
+    TestBed.runInInjectionContext(() => {
+      directive = new AccessibilityDirective();
+    });
     expect(directive).toBeTruthy();
   });
 });

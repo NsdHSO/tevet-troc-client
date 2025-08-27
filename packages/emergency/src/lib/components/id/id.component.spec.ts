@@ -5,6 +5,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { EmergencyService } from '../../service/emergency/emergency.service';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
+import { PermissionDirective } from '@tevet-troc-client/permission';
 
 describe('IdComponent', () => {
   let component: IdComponent;
@@ -23,6 +24,7 @@ describe('IdComponent', () => {
         EmergencyService,
         provideHttpClientTesting(),
         provideHttpClient(),
+        { provide: PermissionDirective, useValue: { hasPermission: () => true } },
       ],
     }).compileComponents();
 
