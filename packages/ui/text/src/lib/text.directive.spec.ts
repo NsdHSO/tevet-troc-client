@@ -1,3 +1,4 @@
+//eslint-disable-next-file
 import { ElementRef, Renderer2 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { DOCUMENT } from '@angular/common';
@@ -42,7 +43,7 @@ describe('TextDirective', () => {
     const docuument = {
       querySelectorAll: () => [
         {
-          remove: () => {},
+          remove: () => {console.log('Iancu');},
         },
       ],
     };
@@ -142,12 +143,16 @@ describe('TextDirective', () => {
       } as unknown as Renderer2;
       const docuument = {
         createElement: () => ({
-          remove: () => {},
+          remove: () => {
+            console.log('Iancu');
+          },
           innerText: '',
         }),
         querySelectorAll: () => [
           {
-            remove: () => {},
+            remove: () => {
+              console.log('Iancu');
+            },
           },
         ],
         nativeElement: {
@@ -176,25 +181,29 @@ describe('TextDirective', () => {
     jest.useFakeTimers();
     const element: ElementRef = {
       nativeElement: {
-        remove: () => {},
+        remove: () => {console.log('Iancu');},
         innerText: { trim: () => '' },
       },
     } as ElementRef;
 
     const renderer2 = {
-      addClass() {},
-      setStyle() {},
-      setProperty() {},
+      addClass() {console.log('Iancu');},
+      setStyle() {
+        console.log('Iancu');
+      },
+      setProperty() {
+        console.log('Iancu');
+      },
       appendChild: jest.fn(),
     } as unknown as Renderer2;
 
     const docuument = {
-      createElement: () => ({ remove: () => {}, innerText: '' }),
-      querySelectorAll: () => [{ remove: () => {} }],
+      createElement: () => ({ remove: () => {console.log('Iancu');}, innerText: '' }),
+      querySelectorAll: () => [{ remove: () => {console.log('Iancu');} }],
       nativeElement: { innerText: { trim: () => '' } },
     };
 
-    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {console.log('Iancu');});
     const directive = setup(element, renderer2, docuument);
 
     jest.runOnlyPendingTimers();
