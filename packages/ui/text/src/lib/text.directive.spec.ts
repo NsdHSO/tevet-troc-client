@@ -1,4 +1,3 @@
-//eslint-disable-next-file
 import { ElementRef, Renderer2 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { DOCUMENT } from '@angular/common';
