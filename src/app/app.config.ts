@@ -3,12 +3,17 @@ import {
   importProvidersFrom,
   inject,
   provideAppInitializer,
-  provideZonelessChangeDetection
+  provideZonelessChangeDetection,
 } from '@angular/core';
 import { FrameWholeModule, RouterConfig } from 'ngx-liburg-frame-side';
 import { IconCoreModule } from 'ngx-liburg-icon';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideRouter, ViewTransitionInfo, withComponentInputBinding, withViewTransitions } from '@angular/router';
+import {
+  provideRouter,
+  ViewTransitionInfo,
+  withComponentInputBinding,
+  withViewTransitions,
+} from '@angular/router';
 import { appRoutes } from './app.routes';
 import { TransitionViewService } from '@tevet-troc-client/transition';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -17,9 +22,12 @@ import Aura from '@primeng/themes/aura';
 import {
   initAppPromise,
   interceptorAuthProviders,
-  interceptorErrorProviders
+  interceptorErrorProviders,
 } from '@tevet-troc-client/http-interceptor';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
 export const CONFIG_MAIN = Object.freeze({
   routerDataConfig: [
