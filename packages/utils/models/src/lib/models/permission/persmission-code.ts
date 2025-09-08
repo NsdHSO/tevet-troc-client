@@ -88,7 +88,11 @@ export const userPermissions: PermissionsMap = {
   /**
    * GUEST has a single permission to read projects.
    */
-  [UserRoleEnum.GUEST]: new Set([PermissionCode.PROJECT_READ]),
+  [UserRoleEnum.GUEST]: new Set([
+    PermissionCode.PROJECT_READ,
+    PermissionCode.APPOINTMENT_READ,
+    PermissionCode.DASHBOARD_READ,
+  ]),
 };
 
 /**
@@ -109,7 +113,7 @@ export const checkPermission = (
   roles: UserRole[],
   permission: PermissionCode
 ) => {
-  const allPermissions = roles.flatMap(role => {
+  const allPermissions = roles.flatMap((role) => {
     const permissionsForRole = userPermissions[role];
     return permissionsForRole ? [...permissionsForRole] : [];
   });
