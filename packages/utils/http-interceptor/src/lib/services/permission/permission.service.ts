@@ -9,14 +9,14 @@ import {
   providedIn: 'root',
 })
 export class PermissionService {
-  private role = signal<UserRole>(UserRoleEnum.GUEST);
+  private role = signal<UserRole[]>([UserRoleEnum.GUEST]);
   private permissions = signal<PermissionCode>(PermissionCode.PROJECT_READ);
 
-  set userRole(role: UserRole) {
-    this.role.set(role);
+  set userRole(role: UserRole[]) {
+    this.role.set([...role]);
   }
 
-  get userRole() {
+  get userRole(): UserRole[] {
     return this.role();
   }
   set userPermission(perm: PermissionCode) {

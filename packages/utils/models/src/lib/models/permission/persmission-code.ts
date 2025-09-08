@@ -64,6 +64,8 @@ export const userPermissions: PermissionsMap = {
     PermissionCode.PROJECT_WRITE,
     PermissionCode.EMERGENCY_READ,
     PermissionCode.EMERGENCY_CREATE,
+    PermissionCode.APPOINTMENT_CREATE,
+    PermissionCode.APPOINTMENT_READ,
   ]),
   /**
    * GUEST has a single permission to read projects.
@@ -99,17 +101,20 @@ export type UserPermissions = typeof userPermissions;
  * Checks if a user has a specific permission.
  * This version uses a Set for a more efficient lookup.
  *
- * @param role The UserRole of the user.
+ * @param roles The UserRole of the user.
  * @param permission The PermissionCode to check for.
  * @returns A boolean indicating whether the user has the permission.
  */
 export const checkPermission = (
-  role: UserRole,
+  roles: UserRole[],
   permission: PermissionCode
-): boolean => {
-  const permissionsForRole = userPermissions[role];
-  if (!permissionsForRole) {
-    return false;
-  }
-  return permissionsForRole.has(permission);
+) => {
+  const allPermissions = roles.flatMap(role => {
+    const permissionsForRole = userPermissions[role];
+    return permissionsForRole ? [...permissionsForRole] : [];
+  });
+
+  const permissionSet = new Set(allPermissions);
+
+  return permissionSet.has(permission);
 };
