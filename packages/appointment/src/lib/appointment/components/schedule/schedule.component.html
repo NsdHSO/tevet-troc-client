@@ -1,97 +1,96 @@
 <div class="p-2 gap-3 grid">
-  <lib-text content="Schedule New Appointment" styleText="Title_2" colorText="text-gray-800">Schedule New Appointment</lib-text>
-    <div class="border-b  border-gray-200">
-      <div class="gap-1 grid">
-        <label for="patient-search" class="block text-sm font-medium text-gray-700 mb-1">
-          <lib-text content="Search Patient" styleText="Small_1" colorText="text-gray-700">Search Patient</lib-text>
-        </label>
-        <input type="text" id="patient-search" placeholder="Enter patient name or ID"
-               [value]="appointmentService.patientName()"
-               (input)="appointmentService.patientName.set($event.target.value)"
-               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-        @if (appointmentService.permissionDirective.hasPermission(appointmentService.permissionAppointmentCreateCode)) {
-          <lib-text>
-            Or <a href="#" class="text-blue-600 hover:underline">Register New Patient</a>
+  <lib-text content="Schedule New Appointment" styleText="Title_2" colorText="text-gray-800">Schedule New Appointment
+  </lib-text>
+  <div class="border-b  border-gray-200">
+    <div class="gap-1 grid">
+      <lib-input-selectable label="Patient Name"
+                            [(inputValue)]="appointmentService.patientName"
+                            [options]="appointmentService.persons"
+
+      />
+      @if (appointmentService.permissionDirective.hasPermission(appointmentService.permissionAppointmentCreateCode)) {
+        <lib-text>
+          Or <a href="#" class="text-blue-600 hover:underline">Register New Patient</a>
+        </lib-text>
+      }
+    </div>
+  </div>
+
+  <div class="border-b  border-gray-200">
+    <lib-text content="2. Doctor & Department" styleText="Medium_1" colorText="text-gray-700">2. Doctor & Department
+    </lib-text>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label for="department-select" class="block text-sm font-medium text-gray-700 mb-1">
+          <lib-text content="Department/Specialty" styleText="Small_1" colorText="text-gray-700">
+            Department/Specialty
           </lib-text>
-        }
+        </label>
+        <select id="department-select"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+          <option value="">Select a Department</option>
+          <option value="cardiology">Cardiology</option>
+          <option value="pediatrics">Pediatrics</option>
+          <option value="dermatology">Dermatology</option>
+        </select>
       </div>
-    </div>
-
-    <div class="border-b  border-gray-200">
-      <lib-text content="2. Doctor & Department" styleText="Medium_1" colorText="text-gray-700">2. Doctor & Department
-      </lib-text>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label for="department-select" class="block text-sm font-medium text-gray-700 mb-1">
-            <lib-text content="Department/Specialty" styleText="Small_1" colorText="text-gray-700">
-              Department/Specialty
-            </lib-text>
-          </label>
-          <select id="department-select"
-                  class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-            <option value="">Select a Department</option>
-            <option value="cardiology">Cardiology</option>
-            <option value="pediatrics">Pediatrics</option>
-            <option value="dermatology">Dermatology</option>
-          </select>
-        </div>
-        <div>
-          <label for="doctor-select" class="block text-sm font-medium text-gray-700 mb-1">
-            <lib-text content="Doctor/Provider" styleText="Small_1" colorText="text-gray-700">Doctor/Provider</lib-text>
-          </label>
-          <select id="doctor-select"
-                  class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-            <option value="">Select a Doctor</option>
-            <option value="dr-smith">Dr. Emily Smith</option>
-            <option value="dr-jones">Dr. Robert Jones</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <div class="border-b  border-gray-200">
-      <lib-text content="3. Appointment Details" styleText="Medium_1" colorText="text-gray-700">3. Appointment Details
-      </lib-text>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label for="appointment-date" class="block text-sm font-medium text-gray-700 mb-1">
-            <lib-text content="Date" styleText="Small_1" colorText="text-gray-700">Date</lib-text>
-          </label>
-          <input type="date" id="appointment-date"
-                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-        </div>
-        <div>
-          <label for="appointment-time" class="block text-sm font-medium text-gray-700 mb-1">
-            <lib-text content="Time" styleText="Small_1" colorText="text-gray-700">Time</lib-text>
-          </label>
-          <select id="appointment-time"
-                  class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-            <option value="">Select Time Slot</option>
-            <option value="09:00">09:00 AM</option>
-            <option value="09:30">09:30 AM</option>
-          </select>
-        </div>
-        <div class="md:col-span-2">
-          <label for="appointment-type" class="block text-sm font-medium text-gray-700 mb-1">
-            <lib-text content="Appointment Type" styleText="Small_1" colorText="text-gray-700">Appointment Type
-            </lib-text>
-          </label>
-          <select id="appointment-type"
-                  class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-            <option value="consultation">Consultation</option>
-            <option value="follow-up">Follow-up</option>
-            <option value="procedure">Procedure</option>
-            <option value="vaccination">Vaccination</option>
-          </select>
-        </div>
-        <div class="md:col-span-2">
-          <label for="reason-for-visit" class="block text-sm font-medium text-gray-700 mb-1">
-            <lib-text content="Reason for Visit" styleText="Small_1" colorText="text-gray-700"></lib-text>
-          </label>
-          <textarea id="reason-for-visit" rows="3"
-                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                    placeholder="Briefly describe the reason for the appointment"></textarea>
-        </div>
+      <div>
+        <label for="doctor-select" class="block text-sm font-medium text-gray-700 mb-1">
+          <lib-text content="Doctor/Provider" styleText="Small_1" colorText="text-gray-700">Doctor/Provider</lib-text>
+        </label>
+        <select id="doctor-select"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+          <option value="">Select a Doctor</option>
+          <option value="dr-smith">Dr. Emily Smith</option>
+          <option value="dr-jones">Dr. Robert Jones</option>
+        </select>
       </div>
     </div>
   </div>
+
+  <div class="border-b  border-gray-200">
+    <lib-text content="3. Appointment Details" styleText="Medium_1" colorText="text-gray-700">3. Appointment Details
+    </lib-text>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label for="appointment-date" class="block text-sm font-medium text-gray-700 mb-1">
+          <lib-text content="Date" styleText="Small_1" colorText="text-gray-700">Date</lib-text>
+        </label>
+        <input type="date" id="appointment-date"
+               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+      </div>
+      <div>
+        <label for="appointment-time" class="block text-sm font-medium text-gray-700 mb-1">
+          <lib-text content="Time" styleText="Small_1" colorText="text-gray-700">Time</lib-text>
+        </label>
+        <select id="appointment-time"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+          <option value="">Select Time Slot</option>
+          <option value="09:00">09:00 AM</option>
+          <option value="09:30">09:30 AM</option>
+        </select>
+      </div>
+      <div class="md:col-span-2">
+        <label for="appointment-type" class="block text-sm font-medium text-gray-700 mb-1">
+          <lib-text content="Appointment Type" styleText="Small_1" colorText="text-gray-700">Appointment Type
+          </lib-text>
+        </label>
+        <select id="appointment-type"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+          <option value="consultation">Consultation</option>
+          <option value="follow-up">Follow-up</option>
+          <option value="procedure">Procedure</option>
+          <option value="vaccination">Vaccination</option>
+        </select>
+      </div>
+      <div class="md:col-span-2">
+        <label for="reason-for-visit" class="block text-sm font-medium text-gray-700 mb-1">
+          <lib-text content="Reason for Visit" styleText="Small_1" colorText="text-gray-700"></lib-text>
+        </label>
+        <textarea id="reason-for-visit" rows="3"
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  placeholder="Briefly describe the reason for the appointment"></textarea>
+      </div>
+    </div>
+  </div>
+</div>

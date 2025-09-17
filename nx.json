@@ -89,9 +89,13 @@
     },
     "@nx/angular:component": {
       "style": "scss",
+      "changeDetection": "OnPush",
+      "inlineStyle": true,
       "type": "component"
     },
     "@schematics/angular:component": {
+      "changeDetection": "OnPush",
+      "inlineStyle": true,
       "type": "component"
     },
     "@nx/angular:directive": {
