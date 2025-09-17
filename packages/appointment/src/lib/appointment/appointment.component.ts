@@ -23,6 +23,9 @@ import { AppointmentService } from './service/appointment/appointment.service';
 })
 export default class AppointmentComponent {
   dialogService = inject(DialogService);
+  /**
+   * Appointment Service
+   */
   readonly appointmentService = inject(AppointmentService);
   addAppointment(template: TemplateRef<ScheduleComponent>) {
     const dialogData: DialogData = {

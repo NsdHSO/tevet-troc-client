@@ -22,6 +22,9 @@ export enum PermissionCode {
   DASHBOARD_CREATE = 'dashboard.create',
   DASHBOARD_READ = 'dashboard.read',
   DASHBOARD_UPDATE = 'dashboard.update',
+  PERSON_CREATE = 'person.create',
+  PERSON_READ = 'person.read',
+  PERSON_UPDATE = 'person.update',
 }
 export type PermissionsMap = Record<UserRoleEnum, Set<PermissionCode>>;
 
@@ -52,6 +55,9 @@ export const userPermissions: PermissionsMap = {
     PermissionCode.DASHBOARD_READ,
     PermissionCode.DASHBOARD_UPDATE,
     PermissionCode.DASHBOARD_CREATE,
+    PermissionCode.PERSON_UPDATE,
+    PermissionCode.PERSON_READ,
+    PermissionCode.PERSON_CREATE,
   ]),
   /**
    * MODERATOR has permissions to read users, manage sessions, and read/write projects.
@@ -66,6 +72,8 @@ export const userPermissions: PermissionsMap = {
     PermissionCode.EMERGENCY_CREATE,
     PermissionCode.APPOINTMENT_CREATE,
     PermissionCode.APPOINTMENT_READ,
+    PermissionCode.PERSON_READ,
+    PermissionCode.PERSON_CREATE,
   ]),
   /**
    * GUEST has a single permission to read projects.
@@ -77,6 +85,8 @@ export const userPermissions: PermissionsMap = {
     PermissionCode.DASHBOARD_CREATE,
     PermissionCode.DASHBOARD_READ,
     PermissionCode.DASHBOARD_UPDATE,
+    PermissionCode.PERSON_READ,
+    PermissionCode.PERSON_CREATE,
   ]),
   /**
    * USER has permissions to read their own tokens and read projects.

@@ -3,7 +3,7 @@
   2xs:grid-cols-2
   sm:grid-cols-2">
   <div ></div>
-  @if (appointmentService.permissionDirective.hasPermission(appointmentService.permissionCode)) {
+  @if (appointmentService.permissionDirective.hasPermission(appointmentService.permissionAppointmentCreateCode)) {
   <lib-button
     class="justify-self-end" text="Add" (event)="addAppointment(appointment)"/>
   }

@@ -55,7 +55,7 @@ body {
     // Override with dark theme variables
     @include app-mixins.apply-theme(app-themes.$dark-theme);
     @include mat.dialog-overrides((
-            container-color: base-colors.$app-gray-400,
+            container-color: base-colors.$app-neutral-900,
             subhead-color: red,
             actions-padding: 0,
             content-padding: 0
