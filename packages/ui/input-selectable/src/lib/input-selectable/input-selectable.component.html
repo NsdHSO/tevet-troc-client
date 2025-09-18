@@ -13,6 +13,7 @@
     [attr.aria-label]="label()"
     [value]="displayValue()"
     (input)="onInput($event)"
+    (click)="checkDropDownOpenAndOpen()"
   />
 
   <div aria-live="polite" aria-atomic="true" class="sr-only">

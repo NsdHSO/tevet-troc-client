@@ -117,4 +117,10 @@ export class InputSelectableComponent<T> {
 
     this.isOpen.set(false);
   }
+
+  public checkDropDownOpenAndOpen() {
+    if (this.filteredOptions()?.length > 0 && !this.isLoading()) {
+      this.isOpen.set(true);
+    }
+  }
 }
