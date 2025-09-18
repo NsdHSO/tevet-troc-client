@@ -34,14 +34,12 @@ export class InputSelectableComponent<T> {
 
   // Use a writable signal for the input field's value
   public inputValue = model<string>('');
+  public isLoading = input<boolean>(false);
+  public displayWith = input<(option: T) => string >();
 
   // Writable signals for component state
   public isOpen = signal(false);
-  public isLoading = signal(false);
 
-  // Use viewChild() for template references
-  public dropdownInput =
-    viewChild<ElementRef<HTMLInputElement>>('dropdownInput');
   public dropdownList = viewChild<ElementRef<HTMLUListElement>>('dropdownList');
 
   // Use contentChild() for projected templates
@@ -50,27 +48,18 @@ export class InputSelectableComponent<T> {
       'optionTemplate'
     );
 
-  // Computed signal for the filtered list
   public filteredOptions = computed(() => {
+    if (this.isLoading()) {
+      return ['Loading...']; // temporary UI option
+    }
+
     const input = this.inputValue()?.toLowerCase();
     if (!input) {
-      return this.options();
+      return this.options() ?? [];
     }
-    return this.options().filter((option: any) =>
-      String(option).toLowerCase().includes(input)
-    );
+    return (this.options() ?? [])
   });
 
-  // Use an effect to handle focusing the dropdown when it opens
-  constructor() {
-    effect(() => {
-      if (this.isOpen() && !this.isLoading()) {
-        setTimeout(() => {
-          this.dropdownList()?.nativeElement.focus();
-        }, 0);
-      }
-    });
-  }
 
   // Toggles the visibility of the dropdown list.
   toggleDropdown(): void {
@@ -83,10 +72,17 @@ export class InputSelectableComponent<T> {
   }
 
   // Handles the selection of an option
-  selectOption(option: T): void {
-    this.picked.set(option);
-    this.inputValue.set(String(option));
+  selectOption(option: T | string): void {
+    if (option === 'Loading...') return; // ignore
+    this.picked.set(option as any as T);
+
+    const displayFn = this.displayWith();
+    if (displayFn) {
+      this.inputValue.set(displayFn(option as T));
+    } else {
+      this.inputValue.set(String(option));
+    }
+
     this.isOpen.set(false);
-    this.dropdownInput()?.nativeElement.focus();
   }
 }

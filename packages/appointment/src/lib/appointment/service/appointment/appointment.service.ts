@@ -36,6 +36,7 @@ export class AppointmentService {
    *
    */
   public loading = signal(false);
+  displayPerson = (person: Person) => `${person.first_name} ${person.last_name}`;
 
   /**
    * Permission Code

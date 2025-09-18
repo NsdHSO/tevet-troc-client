@@ -5,9 +5,17 @@
     <div class="gap-1 grid">
       <lib-input-selectable label="Patient Name"
                             [(inputValue)]="appointmentService.patientName"
-                            [options]="appointmentService.persons"
+                            [options]="appointmentService.persons()"
+                            [isLoading]="appointmentService.loading()"
+                            [displayWith]="appointmentService.displayPerson"
+      >
+        <ng-template #optionTemplate let-person>
+          <lib-text>
+            {{ person.first_name }} {{ person.last_name}}
+          </lib-text>
+        </ng-template>
 
-      />
+      </lib-input-selectable>
       @if (appointmentService.permissionDirective.hasPermission(appointmentService.permissionAppointmentCreateCode)) {
         <lib-text>
           Or <a href="#" class="text-blue-600 hover:underline">Register New Patient</a>

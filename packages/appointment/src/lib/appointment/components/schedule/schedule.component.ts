@@ -22,4 +22,8 @@ export class ScheduleComponent {
   readonly appointmentService = inject(AppointmentService, {
     skipSelf: true,
   });
+
+  ngOnDestroy() {
+    this.appointmentService.patientName.set('');
+  }
 }

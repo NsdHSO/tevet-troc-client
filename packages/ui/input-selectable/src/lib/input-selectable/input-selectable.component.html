@@ -4,7 +4,6 @@
   </lib-text>
 
   <input
-    #dropdownInput
     type="text"
     aria-controls="dropdown-list"
     role="combobox"
@@ -13,9 +12,8 @@
     aria-haspopup="listbox"
     [attr.aria-label]="label()"
     (focus)="onInputFocus()"
-    (click)="toggleDropdown()"
     [value]="inputValue()"
-    (change)="inputValue.set($event.target.value)"
+    (input)="inputValue.set($event.target.value)"
   />
 
   <div aria-live="polite" aria-atomic="true" class="sr-only">
