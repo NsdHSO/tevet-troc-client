@@ -3,6 +3,7 @@ import {
   Component,
   computed,
   contentChild,
+  effect,
   input,
   model,
   signal,
@@ -36,9 +37,21 @@ export class InputSelectableComponent<T> {
   public picked = model<T | undefined>();
 
   /**
-   * The value of the text input field.
+   * The value of the text input field (emitted to parent when user types).
    */
   public inputValue = model<string>('');
+
+  /**
+   * The value shown in the input for display purposes (not emitted on select).
+   */
+  public displayValue = signal<string>('');
+
+  constructor() {
+    effect(() => {
+      const v = this.inputValue() ?? '';
+      this.displayValue.set(v);
+    });
+  }
   /**
    * Flag to indicate whether options are being loaded.
    */
@@ -82,6 +95,7 @@ export class InputSelectableComponent<T> {
    */
   onInput(event: Event): void {
     const value = (event.target as HTMLInputElement).value;
+    this.displayValue.set(value);
     this.inputValue.set(value);
     this.isOpen.set(value.trim().length > 0);
   }
@@ -96,9 +110,9 @@ export class InputSelectableComponent<T> {
 
     const displayFn = this.displayWith();
     if (displayFn) {
-      this.inputValue.set(displayFn(option as T));
+      this.displayValue.set(displayFn(option as T));
     } else {
-      this.inputValue.set(String(option));
+      this.displayValue.set(String(option));
     }
 
     this.isOpen.set(false);
