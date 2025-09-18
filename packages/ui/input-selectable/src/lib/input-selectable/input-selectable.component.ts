@@ -3,13 +3,10 @@ import {
   Component,
   computed,
   contentChild,
-  effect,
-  ElementRef,
   input,
   model,
   signal,
   TemplateRef,
-  viewChild,
 } from '@angular/core';
 import { TextComponent, TextDirective } from '@tevet-troc-client/text';
 import { JumbotronComponent } from '@tevet-troc-client/jumbotron';
@@ -23,58 +20,79 @@ import { NgTemplateOutlet } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputSelectableComponent<T> {
-  // Use `input()` for the label property
+  /**
+   * Label for the input element.
+   */
   public label = input<string>('Select an option');
 
-  // Use `input()` for an array of options
-  public options = input<any>([]);
+  /**
+   * The list of options available for selection.
+   */
+  public options = input<T[]>([]);
 
-  // Use `model()` for two-way binding of the picked value
+  /**
+   * The currently picked option.
+   */
   public picked = model<T | undefined>();
 
-  // Use a writable signal for the input field's value
+  /**
+   * The value of the text input field.
+   */
   public inputValue = model<string>('');
+  /**
+   * Flag to indicate whether options are being loaded.
+   */
   public isLoading = input<boolean>(false);
-  public displayWith = input<(option: T) => string >();
+  /**
+   * A function to convert an option of type `T` to a displayable string.
+   */
+  public displayWith = input<(option: T) => string>();
 
-  // Writable signals for component state
+  /**
+   * Signal to control the visibility of the dropdown.
+   */
   public isOpen = signal(false);
 
-  public dropdownList = viewChild<ElementRef<HTMLUListElement>>('dropdownList');
-
-  // Use contentChild() for projected templates
+  /**
+   * Content child for a custom option template.
+   */
   public optionTemplateRef =
     contentChild<TemplateRef<{ $implicit: T; index: number }>>(
       'optionTemplate'
     );
 
+  /**
+   * A computed signal that filters options based on input or returns a loading state.
+   */
   public filteredOptions = computed(() => {
     if (this.isLoading()) {
-      return ['Loading...']; // temporary UI option
+      return ['Loading...'];
     }
 
     const input = this.inputValue()?.toLowerCase();
+    const allOptions = this.options() ?? [];
     if (!input) {
-      return this.options() ?? [];
+      return allOptions;
     }
-    return (this.options() ?? [])
+    return allOptions;
   });
 
-
-  // Toggles the visibility of the dropdown list.
-  toggleDropdown(): void {
-    this.isOpen.update((value) => !value);
+  /**
+   * Opens/closes the dropdown when the user types.
+   */
+  onInput(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
+    this.inputValue.set(value);
+    this.isOpen.set(value.trim().length > 0);
   }
 
-  // Handles input focus to open the dropdown
-  onInputFocus(): void {
-    this.isOpen.set(true);
-  }
-
-  // Handles the selection of an option
+  /**
+   * Sets the picked option and updates the input value.
+   * @param option The selected option.
+   */
   selectOption(option: T | string): void {
-    if (option === 'Loading...') return; // ignore
-    this.picked.set(option as any as T);
+    if (option === 'Loading...') return;
+    this.picked.set(option as T);
 
     const displayFn = this.displayWith();
     if (displayFn) {

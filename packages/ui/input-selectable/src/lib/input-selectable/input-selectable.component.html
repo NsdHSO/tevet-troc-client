@@ -11,9 +11,8 @@
     [attr.aria-expanded]="isOpen()"
     aria-haspopup="listbox"
     [attr.aria-label]="label()"
-    (focus)="onInputFocus()"
     [value]="inputValue()"
-    (input)="inputValue.set($event.target.value)"
+    (input)="onInput($event)"
   />
 
   <div aria-live="polite" aria-atomic="true" class="sr-only">

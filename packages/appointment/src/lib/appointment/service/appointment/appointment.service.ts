@@ -17,51 +17,74 @@ import {
 @Injectable()
 export class AppointmentService {
   /**
-   * HttpClient
+   * HttpClient instance injected for making API calls.
    */
-  private httpClient = inject(HttpClient);
+  private readonly httpClient = inject(HttpClient);
 
   /**
-   * PERSON injector
+   * API configuration for the person endpoint, injected via a token.
    */
   private readonly apiConfigPerson = inject(API_CONFIG_PERSON);
 
+  /**
+   * A flag to control the visibility of a "create new patient" UI element.
+   * Currently set to `false`.
+   */
   readonly showCreateNewPatient = false;
-  /**
-   * Permission Directive
-   */
-  readonly permissionDirective = inject(PermissionDirective);
-  public patientName = signal<string>('');
-  /**
-   *
-   */
-  public loading = signal(false);
-  displayPerson = (person: Person) => `${person.first_name} ${person.last_name}`;
 
   /**
-   * Permission Code
+   * The `PermissionDirective` instance injected to check user permissions.
+   */
+  readonly permissionDirective = inject(PermissionDirective);
+
+  /**
+   * A signal to hold the value of the patient name search input.
+   */
+  public readonly patientName = signal<string>('');
+
+  /**
+   * A signal to track the loading state of the asynchronous data fetch.
+   */
+  public readonly loading = signal(false);
+
+  /**
+   * Formats a `Person` object's full name for display.
+   * @param person The `Person` object to format.
+   * @returns A string combining the person's first and last name.
+   */
+  displayPerson = (person: Person) =>
+    `${person.first_name} ${person.last_name}`;
+
+  /**
+   * A getter that provides the permission code for creating an appointment.
    */
   get permissionAppointmentCreateCode() {
     return PermissionCode.APPOINTMENT_CREATE;
   }
 
   /**
-   * Permission Code
+   * A getter that provides the permission code for creating a person.
    */
   get permissionPersonCreateCode() {
     return PermissionCode.PERSON_CREATE;
   }
 
-  public persons = toSignal(
+  /**
+   * A readonly signal that reactively fetches and holds the list of persons
+   * based on the `patientName` signal's value.
+   * The signal is derived from an observable pipeline that handles:
+   * - Debouncing user input.
+   * - Filtering out empty values.
+   * - Making HTTP requests.
+   * - Managing the `loading` signal.
+   * - Mapping the API response to an array of `Person` objects.
+   */
+  public readonly persons = toSignal(
     toObservable(this.patientName).pipe(
       tap(() => this.loading.set(true)),
-      // Wait for 500ms after the last keystroke
       debounceTime(500),
-      // Only proceed if the value has changed
       distinctUntilChanged(),
-      // Optional: Filter out empty strings to avoid an initial or empty search
       filter((name) => !!name),
-      // Use switchMap to cancel previous requests and make a new one
       switchMap((name) =>
         this.httpClient
           .get<PaginatedBackendResponse<Person>>(
@@ -76,6 +99,7 @@ export class AppointmentService {
           .pipe(tap(() => this.loading.set(false)))
       ),
       map((response) => response.message.data)
-    )
+    ),
+    { initialValue: [] }
   );
 }
