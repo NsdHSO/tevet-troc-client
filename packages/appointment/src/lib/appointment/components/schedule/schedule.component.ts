@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppointmentService } from '../../service/appointment/appointment.service';
 import { TextComponent, TextDirective } from '@tevet-troc-client/text';
@@ -15,7 +15,7 @@ import { InputSelectableComponent } from '@tevet-troc-client/input-selectable';
   templateUrl: './schedule.component.html',
   styleUrl: './schedule.component.scss',
 })
-export class ScheduleComponent {
+export class ScheduleComponent implements OnDestroy {
   /**
    * Appointment Service
    */
@@ -28,5 +28,7 @@ export class ScheduleComponent {
     this.appointmentService.selectedPatient.set(undefined);
     this.appointmentService.departmentSearch.set('');
     this.appointmentService.selectedDepartment.set(undefined);
+    this.appointmentService.doctorSearch.set('');
+    this.appointmentService.selectedDoctor.set(undefined);
   }
 }
