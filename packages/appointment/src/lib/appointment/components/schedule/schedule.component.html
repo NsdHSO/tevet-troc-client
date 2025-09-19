@@ -5,13 +5,14 @@
     <div class="gap-1 grid">
       <lib-input-selectable label="Patient Name"
                             [(inputValue)]="appointmentService.patientName"
+                            [(picked)]="appointmentService.selectedPatient"
                             [options]="appointmentService.persons()"
                             [isLoading]="appointmentService.loading()"
                             [displayWith]="appointmentService.displayPerson"
       >
         <ng-template #optionTemplate let-person>
           <lib-text>
-            {{ person.first_name }} {{ person.last_name}}
+            {{ person.first_name }} {{ person.last_name }}
           </lib-text>
         </ng-template>
 
@@ -29,29 +30,34 @@
     </lib-text>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div>
-        <label for="department-select" class="block text-sm font-medium text-gray-700 mb-1">
-          <lib-text content="Department/Specialty" styleText="Small_1" colorText="text-gray-700">
-            Department/Specialty
-          </lib-text>
-        </label>
-        <select id="department-select"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-          <option value="">Select a Department</option>
-          <option value="cardiology">Cardiology</option>
-          <option value="pediatrics">Pediatrics</option>
-          <option value="dermatology">Dermatology</option>
-        </select>
+        <lib-input-selectable label="Department/Specialty"
+                              [(picked)]="appointmentService.selectedDepartment"
+                              [options]="appointmentService.departments()"
+                              [displayWith]="appointmentService.displayDepartment"
+        >
+          <ng-template #optionTemplate let-department>
+            <lib-text>
+              {{ department.description }}
+            </lib-text>
+          </ng-template>
+
+        </lib-input-selectable>
+        
       </div>
       <div>
-        <label for="doctor-select" class="block text-sm font-medium text-gray-700 mb-1">
-          <lib-text content="Doctor/Provider" styleText="Small_1" colorText="text-gray-700">Doctor/Provider</lib-text>
-        </label>
-        <select id="doctor-select"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-          <option value="">Select a Doctor</option>
-          <option value="dr-smith">Dr. Emily Smith</option>
-          <option value="dr-jones">Dr. Robert Jones</option>
-        </select>
+        <lib-input-selectable label="Doctor/Provider"
+                              [(picked)]="appointmentService.selectedDoctor"
+                              [options]="appointmentService.staff()"
+                              [displayWith]="appointmentService.displayDoctor"
+        >
+          <ng-template #optionTemplate let-staff>
+            <lib-text>
+              {{ staff.last_name  +" "+ staff.first_name }}
+            </lib-text>
+          </ng-template>
+
+        </lib-input-selectable>
+
       </div>
     </div>
   </div>

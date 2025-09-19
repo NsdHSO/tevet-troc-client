@@ -25,5 +25,8 @@ export class ScheduleComponent {
 
   ngOnDestroy() {
     this.appointmentService.patientName.set('');
+    this.appointmentService.selectedPatient.set(undefined);
+    this.appointmentService.departmentSearch.set('');
+    this.appointmentService.selectedDepartment.set(undefined);
   }
 }
