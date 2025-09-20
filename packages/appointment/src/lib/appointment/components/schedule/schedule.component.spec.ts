@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ScheduleComponent } from './schedule.component';
 import { AppointmentService } from '../../service/appointment/appointment.service';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { PermissionDirective } from '@tevet-troc-client/permission';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('ScheduleComponent', () => {
   let component: ScheduleComponent;
@@ -8,27 +11,8 @@ describe('ScheduleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ScheduleComponent],
-      providers: [
-        {
-          provide: AppointmentService,
-          useValue: {
-            persons: () => [],
-            departments: () => [],
-            staff: () => [],
-            loading: () => false,
-            displayPerson: () => '',
-            displayDepartment: () => '',
-            displayDoctor: () => '',
-            patientName: () => '',
-            selectedPatient: () => undefined,
-            selectedDepartment: () => undefined,
-            selectedDoctor: () => undefined,
-            setNotes: () => void 0,
-            permissionDirective: { hasPermission: () => false },
-          },
-        },
-      ],
+      imports: [ScheduleComponent, PermissionDirective],
+      providers: [provideHttpClientTesting(),provideHttpClient(), AppointmentService, PermissionDirective],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ScheduleComponent);
