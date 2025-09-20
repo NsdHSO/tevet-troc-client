@@ -6,7 +6,6 @@ import { DialogData, DialogService } from '@tevet-troc-client/dialog';
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { PermissionDirective } from '@tevet-troc-client/permission';
 import { AppointmentService } from './service/appointment/appointment.service';
-import { catchError } from 'rxjs';
 
 @Component({
   selector: 'lib-appointment',

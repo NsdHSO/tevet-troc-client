@@ -25,7 +25,7 @@ import {
   tap,
   throwError,
 } from 'rxjs';
-import { AppointmentPayload } from '../../../../../../utils/models/src/lib/models/payload/appointment.type';
+import { AppointmentPayload } from '@tevet-troc-client/models';
 
 @Injectable()
 export class AppointmentService {
