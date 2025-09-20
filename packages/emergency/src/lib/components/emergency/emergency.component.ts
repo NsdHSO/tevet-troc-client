@@ -20,7 +20,6 @@ import { PermissionDirective } from '@tevet-troc-client/permission';
     TableComponent,
     ColumnTextComponent,
     ColumnIconActionComponent,
-    PermissionDirective,
     AsyncPipe,
   ],
   templateUrl: './emergency.component.html',
