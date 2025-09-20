@@ -2,7 +2,9 @@
   [attr.aria-hidden]="true"
   [styleText]="type()"
 >
-  {{ title() }} @if (description()) {:}
+  {{ title() }} @if (description()) {
+  :
+}
 </lib-text>
 @if (description()) {
   <lib-text

@@ -8,6 +8,8 @@ import {
   ColumnTextComponent,
   TableComponent,
 } from 'ngx-liburg';
+import { AsyncPipe, JsonPipe } from '@angular/common';
+import { PermissionDirective } from '@tevet-troc-client/permission';
 
 @Component({
   selector: 'lib-emergency',
@@ -17,11 +19,13 @@ import {
     MatIcon,
     TableComponent,
     ColumnTextComponent,
-    ColumnIconActionComponent
-],
+    ColumnIconActionComponent,
+    PermissionDirective,
+    AsyncPipe,
+  ],
   templateUrl: './emergency.component.html',
   styleUrl: './emergency.component.scss',
-  providers: [EmergencyService],
+  providers: [EmergencyService, PermissionDirective],
 })
 export default class EmergencyComponent {
   readonly emergencyService = inject(EmergencyService);

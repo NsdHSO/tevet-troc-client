@@ -5,8 +5,8 @@ import { By } from '@angular/platform-browser';
 
 @Component({
   template: `<lib-jumbotron>trasd</lib-jumbotron>`,
-  imports:[JumbotronComponent],
-  selector:'lib-acncu'
+  imports: [JumbotronComponent],
+  selector: 'lib-acncu',
 })
 export class TestJumbotronComponent {}
 
@@ -28,10 +28,11 @@ describe('TestJumbotron', () => {
     expect(component).toBeTruthy();
   });
 
-
   it('should have rendered the text', () => {
     // Get the lib-jumbotron element itself
-    const jumbotronElement = fixture.debugElement.query(By.css('lib-jumbotron')).nativeElement;
+    const jumbotronElement = fixture.debugElement.query(
+      By.css('lib-jumbotron')
+    ).nativeElement;
 
     // Check that it renders the content
     expect(jumbotronElement.textContent).toContain('trasd');

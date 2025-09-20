@@ -1,6 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @use 'reset-css';
 @use '@angular/material/prebuilt-themes/indigo-pink.css';
+@use './assets/styles/_colors' as base-colors;
+// Use a namespace for colors
+@use './assets/styles/_themes' as app-themes;
+// Use a namespace for themes
+@use './assets/styles/_mixins' as app-mixins; // Use a namespace for mixins
+@use '@angular/material' as mat;
 
 @tailwind base;
 @tailwind components;
@@ -21,23 +27,38 @@ body {
 }
 
 
-:root {
-  /* Background color for the drawer outlet area */
-  --app-background-drawer-outlet: #eef2ff;
-  --app-background-drawer-outlet-x-button: #eef2ff;
 
-  /* Background color for the drawer component itself */
-  --app-background-drawer: #eef2ff;
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:root {
+
+}
+// >>>>>>>>>>>>>>>>>>>>>>>>>> IMPORTANT CHANGE HERE <<<<<<<<<<<<<<<<<<<<<<<<<<<
+// Use Sass modules for your SCSS partials to ensure correct function availability
+// Ensure _colors.scss has all your $app-* variable definitions.
+// @use directives moved to top of the file
+// >>>>>>>>>>>>>>>>>>>>>>>>>> END IMPORTANT CHANGE <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+:root {
+  // Apply light theme variables by default
+  @include app-mixins.apply-theme(app-themes.$light-theme);
+  @include mat.dialog-overrides((
+          container-color: base-colors.$app-blue-100,
+          subhead-color: red,
+          actions-padding: 0,
+          content-padding: 0
+  ));
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* Background color for the drawer outlet area */
-    --app-background-drawer-outlet: #171717;
-    --app-background-drawer-outlet-x-button: #eef2ff;
-
-    /* Background color for the drawer component itself */
-    --app-background-drawer: #171717;
+    // Override with dark theme variables
+    @include app-mixins.apply-theme(app-themes.$dark-theme);
+    @include mat.dialog-overrides((
+            container-color: base-colors.$app-neutral-900,
+            subhead-color: red,
+            actions-padding: 0,
+            content-padding: 0
+    ));
   }
 }
-

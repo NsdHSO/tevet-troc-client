@@ -1,0 +1,33 @@
+// src/assets/styles/_mixins.scss
+@use 'sass:map';
+// Already there, good for map-related functions
+@use 'sass:meta'; // <<< ADD THIS LINE for meta.type-of()
+
+@mixin apply-theme($theme-map) {
+  @each $prop, $value in $theme-map {
+    // Only output properties that are defined in the map
+    @if $value != null {
+      // Special handling for values that are lists (like shadows)
+      @if meta.type-of($value) == list { // <<< CHANGE type-of to meta.type-of
+        // Reconstruct the shadow string from the list
+        // This assumes a specific format for shadow values.
+        // You might need to adjust this if your shadow values are more complex.
+        // For simplicity, directly using the value for now if it's already a string:
+        // If your shadows are defined as "a b c, d e f" (a single string value in the map),
+        // then this 'if type-of($value) == list' block might not be needed.
+        // If they are literally Sass lists like (0,0,0,0.15) then you'd build the rgba()
+        // For now, assuming they are direct string values, or adjust.
+        --app-#{$prop}: #{$value};
+      } @else {
+        --app-#{$prop}: #{$value};
+      }
+    }
+  }
+}
+
+// Mixin to apply all base color variables to :root
+@mixin define-base-colors($colors-map) {
+  @each $name, $value in $colors-map {
+    --app-#{$name}: #{$value};
+  }
+}

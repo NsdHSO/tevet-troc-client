@@ -19,19 +19,30 @@
       "@tevet-troc-client/accessibility": [
         "packages/ui/accessibility/src/index.ts"
       ],
+      "@tevet-troc-client/appointment": ["packages/appointment/src/index.ts"],
       "@tevet-troc-client/badge": ["packages/ui/badge/src/index.ts"],
       "@tevet-troc-client/button": ["packages/ui/button/src/index.ts"],
       "@tevet-troc-client/card": ["packages/ui/card/src/index.ts"],
       "@tevet-troc-client/dashboard": ["packages/dashboard/src/index.ts"],
+      "@tevet-troc-client/dialog": ["packages/ui/dialog/src/index.ts"],
       "@tevet-troc-client/emergency": ["packages/emergency/src/index.ts"],
+      "@tevet-troc-client/http-interceptor": [
+        "packages/utils/http-interceptor/src/index.ts"
+      ],
       "@tevet-troc-client/http-response": [
         "packages/utils/http-response/src/index.ts"
       ],
       "@tevet-troc-client/info-line": ["packages/ui/info-line/src/index.ts"],
+      "@tevet-troc-client/input-selectable": [
+        "packages/ui/input-selectable/src/index.ts"
+      ],
       "@tevet-troc-client/jumbotron": ["packages/ui/jumbotron/src/index.ts"],
       "@tevet-troc-client/landing": ["packages/landing/src/index.ts"],
       "@tevet-troc-client/models": ["packages/utils/models/src/index.ts"],
       "@tevet-troc-client/not-found": ["packages/not-found/src/index.ts"],
+      "@tevet-troc-client/permission": [
+        "packages/utils/permission/src/index.ts"
+      ],
       "@tevet-troc-client/selector": ["packages/ui/selector/src/index.ts"],
       "@tevet-troc-client/text": ["packages/ui/text/src/index.ts"],
       "@tevet-troc-client/transition": [

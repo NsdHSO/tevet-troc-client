@@ -54,7 +54,7 @@ export class TextDirective implements OnChanges {
    * - An object with a 'label' property (string).
    * @type {string | { label: string } | any}
    */
-  content = input<string |{label:string}| any>(null);
+  content = input<string | { label: string } | any>(null);
   /**
    * An input what wanted to put it on the element
    */
@@ -89,7 +89,11 @@ export class TextDirective implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['content']&&changes['content']['currentValue']&&changes['content']['currentValue']['label']) {
+    if (
+      changes['content'] &&
+      changes['content']['currentValue'] &&
+      changes['content']['currentValue']['label']
+    ) {
       this.checkContentAndApplied(changes['content']['currentValue']['label']);
     }
   }
@@ -202,6 +206,11 @@ export class TextDirective implements OnChanges {
 
     // Append the newly created element
     this._renderer2.appendChild(this._elementRef.nativeElement, element);
+    this._renderer2.setStyle(
+      this._elementRef.nativeElement.firstChild,
+      'color',
+      'var(--app-text-color)'
+    );
     this._renderer2.setStyle(
       this._elementRef.nativeElement.firstChild,
       'hyphens',

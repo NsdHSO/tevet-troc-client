@@ -10,12 +10,9 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AccessibilityDirective } from '@tevet-troc-client/accessibility';
-import {
-  StyleTextEnum,
-  StyleTextType,
-  TextComponent,
-  TextDirective,
-} from '@tevet-troc-client/text';
+import { TextComponent, TextDirective } from '@tevet-troc-client/text';
+import { StyleTextEnum, StyleTextType } from '@tevet-troc-client/models';
+
 
 @Component({
   selector: 'lib-button',
@@ -68,8 +65,7 @@ export class ButtonComponent implements OnDestroy {
       event.stopPropagation();
       return;
     }
-    if (!(event.target instanceof HTMLButtonElement) &&
-      !this.disabled()) {
+    if (!(event.target instanceof HTMLButtonElement) && !this.disabled()) {
       this.addRipple();
       this.event.emit();
     }
@@ -78,6 +74,7 @@ export class ButtonComponent implements OnDestroy {
   buttonClick(event: MouseEvent) {
     this.onClick(event);
   }
+
   // Bind the disabled attribute to the host element
   @HostBinding('attr.disabled')
   get isDisabled() {

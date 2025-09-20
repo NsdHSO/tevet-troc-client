@@ -44,7 +44,7 @@
 
   /* Hover state */
   &:hover {
-    @apply dark:bg-neutral-700 bg-indigo-50 shadow-lg;
+    @apply dark:bg-neutral-700 bg-indigo-50 shadow-lg cursor-pointer;
     transform: translateY(-2px);
     box-shadow: 0 0 0 2.5px rgba(79, 70, 229, 0.4);
   }
@@ -60,6 +60,7 @@
     animation: ripple-complete 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     opacity: 0.2;
   }
+
   &[aria-disabled="true"] {
     @apply dark:bg-neutral-600 bg-indigo-50
     dark:text-neutral-400 text-neutral-400
@@ -68,9 +69,6 @@
 
     &::before {
       display: none; /* No ripple effect when disabled */
-    }
-    button{
-
     }
   }
 
@@ -112,6 +110,7 @@
       opacity: 0;
     }
   }
+
   button {
     // Inherit properties that should apply to both host and button
     width: inherit;

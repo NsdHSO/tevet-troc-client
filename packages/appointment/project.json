@@ -1,0 +1,21 @@
+{
+  "name": "appointment",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/appointment/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["business®"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/appointment/jest.config.ts",
+        "tsConfig": "packages/appointment/tsconfig.spec.json"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

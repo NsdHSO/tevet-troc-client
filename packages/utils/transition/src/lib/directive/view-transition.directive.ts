@@ -28,8 +28,10 @@ export class ViewTransitionDirective {
   protected readonly viewTransitionName = computed(() => {
     const currentTransition = this._transitionView.currentTransition();
     const apply =
-      currentTransition?.to.firstChild?.routeConfig?.path === this.identifierTransition() ||
-      currentTransition?.from.firstChild?.routeConfig?.path === this.identifierTransition();
+      currentTransition?.to.firstChild?.routeConfig?.path ===
+        this.identifierTransition() ||
+      currentTransition?.from.firstChild?.routeConfig?.path ===
+        this.identifierTransition();
 
     return apply ? this.nameForTransition() : 'none';
   });
