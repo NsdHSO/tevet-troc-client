@@ -15,18 +15,22 @@
 - Follow existing patterns for component/service organization
 
 ## Component Guidelines
-- Use modern Angular patterns with signals and inject()
+- Use modern Angular patterns with signals, inject(), and linkedSignal()
+- Always use standalone components
+- Use OnPush change detection
+- Prefer reactive forms over template forms
+- Use the async pipe for handling observables in templates
 - Follow this component pattern:
   ```typescript
-  @Component({
-    selector: 'app-example',
-    standalone: true,
-    imports: [CommonModule],
-    templateUrl: './example.component.html',
-    styleUrls: ['./example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
-  })
-  export class ExampleComponent {
+    @Component({
+  selector: 'app-example',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './example.component.html',
+  styleUrls: ['./example.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+    })
+    export class ExampleComponent {
     // Use input() instead of @Input() decorator
     inputData = input<string>();
     
@@ -39,16 +43,26 @@
     // Use computed for derived state
     doubleCounter = computed(() => this.counter() * 2);
     
+    // Use linkedSignal to automatically keep state in sync with input or other signals
+    syncedCounter = linkedSignal({
+      source: this.counter, // watches another signal
+      transform: (value) => value * 10, // transforms it
+    });
+    
     // Example method
     increment(): void {
       this.counter.update(value => value + 1);
+      }
     }
-  }
+
   ```
 - Always use standalone components
 - Use OnPush change detection
 - Prefer reactive forms over template forms
 - Use the async pipe for handling observables in templates
+- Use linkedSignal when you need two signals to stay in sync without manually updating both.
+- Typical use case: syncing a form control or component input with a signal.
+- Supports a transform function for adapting values between source and target.
 
 ## For Adding Features
 - Add new components to `packages/ui/**/`
