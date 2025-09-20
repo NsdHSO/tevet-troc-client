@@ -6,7 +6,7 @@ import { DialogData, DialogService } from '@tevet-troc-client/dialog';
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { PermissionDirective } from '@tevet-troc-client/permission';
 import { AppointmentService } from './service/appointment/appointment.service';
-
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'lib-appointment',
@@ -19,7 +19,7 @@ import { AppointmentService } from './service/appointment/appointment.service';
   ],
   templateUrl: './appointment.component.html',
   styleUrl: './appointment.component.css',
-  providers:[AppointmentService, PermissionDirective]
+  providers: [AppointmentService, PermissionDirective],
 })
 export default class AppointmentComponent {
   dialogService = inject(DialogService);
@@ -40,7 +40,8 @@ export default class AppointmentComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log('User clicked OK');
+        this.appointmentService.postAppointment().subscribe()
+
       } else {
         console.log('User clicked Cancel');
       }

@@ -27,3 +27,12 @@ export const API_CONFIG_STAFF = new InjectionToken('API_CONFIG_STAFF', {
     };
   },
 });
+
+export const API_CONFIG_APPOINTMENT = new InjectionToken('API_CONFIG_APPOINTMENT', {
+  factory: () => {
+    const apiUrl = process.env['TEVET_API'] || '';
+    return {
+      baseUrl: apiUrl + '/v1/appointment',
+    };
+  },
+});
