@@ -1,8 +1,35 @@
 import { inject, Injectable, WritableSignal } from '@angular/core';
 import { EmergencyApiService } from '../api/emergency-api/emergency-api.service';
+import { DataSourceMaterialTable } from 'ngx-liburg';
+import { Observable } from 'rxjs';
+import {
+  AmbulanceDetails,
+  Emergency,
+  PermissionCode,
+} from '@tevet-troc-client/models';
+import { PermissionDirective } from '@tevet-troc-client/permission';
+
+type WrapperDataSource = {
+  value: Observable<any>;
+  pageIndex: WritableSignal<any>;
+  pageSize: WritableSignal<any>;
+  rows: {
+    className: string;
+    field: string;
+    name: string;
+  }[];
+};
 
 @Injectable()
 export class EmergencyService {
+  /**
+   * Injects the PermissionDirective to check permissions.
+   */
+  readonly permissionDirective = inject(PermissionDirective);
+
+  get permissionCode() {
+    return PermissionCode.EMERGENCY_CREATE;
+  }
   /**
    *
    * @private
@@ -12,7 +39,7 @@ export class EmergencyService {
    *
    */
   pageSize = this._ambulanceApi.pageSize;
-  emergencyIdResponse = this._ambulanceApi.httpEmergencyIdResponse;
+  emergencyIdResponse = this._ambulanceApi.httpEmergencyIdResponse$;
 
   set emergencyIc(v: string) {
     this._ambulanceApi.emergencyIdValue = v;
@@ -71,15 +98,21 @@ export class EmergencyService {
     },
   ];
 
-  dataSourceForTable = [
+  dataSourceForTable: WrapperDataSource[] = [
     {
-      value: this._ambulanceApi.httpAmbulanceResourceRes as any,
+      value: this._ambulanceApi.httpAmbulanceResponse$ as Observable<{
+        data: DataSourceMaterialTable<AmbulanceDetails>[];
+        length: number;
+      }>,
       pageIndex: this.page,
       pageSize: this.pageSize,
       rows: this.ambulanceRows,
     },
     {
-      value: this._ambulanceApi.httpEmergencyResourceRes as any,
+      value: this._ambulanceApi.httpEmergencyResponse$ as Observable<{
+        data: DataSourceMaterialTable<Emergency>[];
+        length: number;
+      }>,
       pageIndex: this._ambulanceApi.pageEmergency,
       pageSize: this._ambulanceApi.pageSizeEmergency,
       rows: this.emergencyRows,

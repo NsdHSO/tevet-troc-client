@@ -4,17 +4,14 @@
   "sourceRoot": "packages/utils/transition/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [
-    "utils®"
-  ],
+  "tags": ["utils®"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "packages/utils/transition/jest.config.ts"
+        "jestConfig": "packages/utils/transition/jest.config.ts",
+        "tsConfig": "packages/utils/transition/tsconfig.spec.json"
       }
     },
     "lint": {

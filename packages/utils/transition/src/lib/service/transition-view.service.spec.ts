@@ -6,7 +6,9 @@ describe('TransitionViewService', () => {
   let service: TransitionViewService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [TransitionViewService],
+    });
     service = TestBed.inject(TransitionViewService);
   });
 

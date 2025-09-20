@@ -1,0 +1,21 @@
+{
+  "name": "http-interceptor",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/utils/http-interceptor/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["utils®"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/utils/http-interceptor/jest.config.ts",
+        "tsConfig": "packages/utils/http-interceptor/tsconfig.spec.json"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

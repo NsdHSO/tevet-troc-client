@@ -4,17 +4,14 @@
   "sourceRoot": "packages/ui/badge/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [
-    "ui®"
-  ],
+  "tags": ["ui®"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "packages/ui/badge/jest.config.ts"
+        "jestConfig": "packages/ui/badge/jest.config.ts",
+        "tsConfig": "packages/ui/badge/tsconfig.spec.json"
       }
     },
     "lint": {

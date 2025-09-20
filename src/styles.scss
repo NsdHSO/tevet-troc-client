@@ -6,6 +6,7 @@
 @use './assets/styles/_themes' as app-themes;
 // Use a namespace for themes
 @use './assets/styles/_mixins' as app-mixins; // Use a namespace for mixins
+@use '@angular/material' as mat;
 
 @tailwind base;
 @tailwind components;
@@ -26,6 +27,11 @@ body {
 }
 
 
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:root {
+
+}
 // >>>>>>>>>>>>>>>>>>>>>>>>>> IMPORTANT CHANGE HERE <<<<<<<<<<<<<<<<<<<<<<<<<<<
 // Use Sass modules for your SCSS partials to ensure correct function availability
 // Ensure _colors.scss has all your $app-* variable definitions.
@@ -36,11 +42,23 @@ body {
 :root {
   // Apply light theme variables by default
   @include app-mixins.apply-theme(app-themes.$light-theme);
+  @include mat.dialog-overrides((
+          container-color: base-colors.$app-blue-100,
+          subhead-color: red,
+          actions-padding: 0,
+          content-padding: 0
+  ));
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     // Override with dark theme variables
     @include app-mixins.apply-theme(app-themes.$dark-theme);
+    @include mat.dialog-overrides((
+            container-color: base-colors.$app-neutral-900,
+            subhead-color: red,
+            actions-padding: 0,
+            content-padding: 0
+    ));
   }
 }

@@ -1,0 +1,13 @@
+:host{
+  display: block;
+}
+
+/* Ensure dialog uses app theme variables */
+:host .mat-mdc-dialog-surface{
+  background-color: var(--app-bg-color);
+  color: var(--app-text-color);
+}
+
+:host .mat-mdc-dialog-content{
+  color: var(--app-text-color);
+}

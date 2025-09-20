@@ -4,17 +4,14 @@
   "sourceRoot": "packages/ui/text/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [
-    "ui"
-  ],
+  "tags": ["ui"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "packages/ui/text/jest.config.ts"
+        "jestConfig": "packages/ui/text/jest.config.ts",
+        "tsConfig": "packages/ui/text/tsconfig.spec.json"
       }
     },
     "lint": {

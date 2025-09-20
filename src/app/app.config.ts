@@ -2,7 +2,8 @@ import {
   ApplicationConfig,
   importProvidersFrom,
   inject,
-  provideZoneChangeDetection,
+  provideAppInitializer,
+  provideZonelessChangeDetection,
 } from '@angular/core';
 import { FrameWholeModule, RouterConfig } from 'ngx-liburg-frame-side';
 import { IconCoreModule } from 'ngx-liburg-icon';
@@ -18,6 +19,15 @@ import { TransitionViewService } from '@tevet-troc-client/transition';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
+import {
+  initAppPromise,
+  interceptorAuthProviders,
+  interceptorErrorProviders,
+} from '@tevet-troc-client/http-interceptor';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
 export const CONFIG_MAIN = Object.freeze({
   routerDataConfig: [
@@ -31,14 +41,21 @@ export const CONFIG_MAIN = Object.freeze({
       icon: 'fa_solid:truck-medical',
       text: 'Emergency',
     },
+    {
+      path: 'appointments',
+      icon: 'fa_solid:calendar-check',
+      text: 'Appointments',
+    },
   ],
   iconApp: 'fa_solid:logo',
   appConfig: appRoutes,
 }) as RouterConfig;
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideHttpClient(),
+    provideAppInitializer(() => initAppPromise()),
     provideAnimations(),
-    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideZonelessChangeDetection(),
     provideRouter(
       appRoutes,
       withViewTransitions({ onViewTransitionCreated }),
@@ -47,6 +64,10 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(FrameWholeModule.forRoot(CONFIG_MAIN)),
     importProvidersFrom(IconCoreModule),
     TransitionViewService,
+    provideHttpClient(),
+    provideHttpClient(withInterceptorsFromDi()),
+    interceptorAuthProviders,
+    interceptorErrorProviders,
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {

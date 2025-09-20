@@ -1,0 +1,80 @@
+<div class="p-2 gap-3 grid">
+  <lib-text content="Schedule New Appointment" styleText="Title_2" colorText="text-gray-800">Schedule New Appointment
+  </lib-text>
+  <div class="border-b  border-gray-200">
+    <div class="gap-1 grid">
+      <lib-input-selectable label="Patient Name"
+                            [(inputValue)]="appointmentService.patientName"
+                            [(picked)]="appointmentService.selectedPatient"
+                            [options]="appointmentService.persons()"
+                            [isLoading]="appointmentService.loading()"
+                            [displayWith]="appointmentService.displayPerson"
+      >
+        <ng-template #optionTemplate let-person>
+          <lib-text>
+            {{ person.first_name }} {{ person.last_name }}
+          </lib-text>
+        </ng-template>
+
+      </lib-input-selectable>
+      @if (appointmentService.permissionDirective.hasPermission(appointmentService.permissionAppointmentCreateCode)) {
+        <lib-text>
+          Or <a href="#" class="text-blue-600 hover:underline">Register New Patient</a>
+        </lib-text>
+      }
+    </div>
+  </div>
+
+  <div class="border-b  border-gray-200">
+    <lib-text content="2. Doctor & Department" styleText="Medium_1" colorText="text-gray-700">2. Doctor & Department
+    </lib-text>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <lib-input-selectable label="Department/Specialty"
+                              [(picked)]="appointmentService.selectedDepartment"
+                              [options]="appointmentService.departments()"
+                              [displayWith]="appointmentService.displayDepartment"
+        >
+          <ng-template #optionTemplate let-department>
+            <lib-text>
+              {{ department.description }}
+            </lib-text>
+          </ng-template>
+
+        </lib-input-selectable>
+
+      </div>
+      <div>
+        <lib-input-selectable label="Doctor/Provider"
+                              [(picked)]="appointmentService.selectedDoctor"
+                              [options]="appointmentService.staff()"
+                              [displayWith]="appointmentService.displayDoctor"
+        >
+          <ng-template #optionTemplate let-staff>
+            <lib-text>
+              {{ staff.last_name + " " + staff.first_name }}
+            </lib-text>
+          </ng-template>
+
+        </lib-input-selectable>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="border-b  border-gray-200">
+    <lib-text content="3. Appointment Details" styleText="Medium_1" colorText="text-gray-700">3. Appointment Details
+    </lib-text>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="md:col-span-2">
+        <label for="reason-for-visit" class="block text-sm font-medium text-gray-700 mb-1">
+          <lib-text content="Reason for Visit" styleText="Small_1" colorText="text-gray-700">Notes</lib-text>
+        </label>
+        <textarea id="reason-for-visit" rows="3"
+                  (input)="appointmentService.setNotes($event)"
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  placeholder="Briefly describe the reason for the appointment"></textarea>
+      </div>
+    </div>
+  </div>
+</div>

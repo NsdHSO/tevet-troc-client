@@ -10,12 +10,9 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AccessibilityDirective } from '@tevet-troc-client/accessibility';
-import {
-  StyleTextEnum,
-  StyleTextType,
-  TextComponent,
-  TextDirective,
-} from '@tevet-troc-client/text';
+import { TextComponent, TextDirective } from '@tevet-troc-client/text';
+import { StyleTextEnum, StyleTextType } from '@tevet-troc-client/models';
+
 
 @Component({
   selector: 'lib-button',

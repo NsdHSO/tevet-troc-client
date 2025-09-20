@@ -1,4 +1,4 @@
-@let statuses = service.ambulanceApiService.ambulanceStatus;
+@let statuses = service.ambulanceApiService.getAmbulanceStatus | async;
 @if (service.ambulanceApiService.changeAmbulanceStatus | async) {
 }
 
@@ -27,10 +27,10 @@
       }
     </ul>
 
-    @if (statuses.isLoading()) {
+    @if (!statuses) {
       <lib-text>Loading</lib-text>
     } @else {
-      <lib-selector [options]="statuses.value()?.message" [selectedTemplateRef]="selectedTemplate"
+      <lib-selector [options]="statuses?.message" [selectedTemplateRef]="selectedTemplate"
                     (optionSelected)="service.changeStatus($event, ambulance.id, ambulance.hospital_id, ambulance.ambulance_ic)"
       >
         <ng-template #optionTemplate let-status>

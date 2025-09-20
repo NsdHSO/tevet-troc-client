@@ -1,4 +1,5 @@
 import { Route } from '@angular/router';
+import { authCanMatchGuard } from '@tevet-troc-client/http-interceptor';
 
 export const appRoutes: Route[] = [
   {
@@ -8,14 +9,23 @@ export const appRoutes: Route[] = [
       view: 'landing',
     },
   },
-
   {
     path: 'dashboard',
     data: {
       view: 'dashboard',
     },
+    canMatch: [authCanMatchGuard],
     loadComponent: () =>
       import('@tevet-troc-client/dashboard').then((c) => c.C),
+  },
+  {
+    path: 'appointments',
+    data: {
+      view: 'appointments',
+    },
+    canMatch: [authCanMatchGuard],
+    loadComponent: () =>
+      import('@tevet-troc-client/appointment').then((c) => c.C),
   },
   {
     path: 'emergency',
@@ -41,6 +51,7 @@ export const appRoutes: Route[] = [
         },
       ],
     },
+    canMatch: [authCanMatchGuard],
     loadComponent: () =>
       import('@tevet-troc-client/emergency').then((c) => c.C),
   },

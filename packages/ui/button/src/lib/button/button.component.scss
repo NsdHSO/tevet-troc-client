@@ -44,7 +44,7 @@
 
   /* Hover state */
   &:hover {
-    @apply dark:bg-neutral-700 bg-indigo-50 shadow-lg;
+    @apply dark:bg-neutral-700 bg-indigo-50 shadow-lg cursor-pointer;
     transform: translateY(-2px);
     box-shadow: 0 0 0 2.5px rgba(79, 70, 229, 0.4);
   }
@@ -69,10 +69,6 @@
 
     &::before {
       display: none; /* No ripple effect when disabled */
-    }
-
-    button {
-
     }
   }
 

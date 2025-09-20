@@ -1,0 +1,71 @@
+<div class="relative inline-block w-full">
+  <lib-text styleText="Small_1" id="input-label-{{ label() }}">
+    {{ label() }}
+  </lib-text>
+
+  <input
+    type="text"
+    aria-controls="dropdown-list"
+    role="combobox"
+    class="w-full p-2 border rounded-lg"
+    [attr.aria-expanded]="isOpen()"
+    aria-haspopup="listbox"
+    [attr.aria-label]="label()"
+    [value]="displayValue()"
+    (input)="onInput($event)"
+    (click)="checkDropDownOpenAndOpen()"
+  />
+
+  <div aria-live="polite" aria-atomic="true" class="sr-only">
+    @if (isOpen()) {
+      Dropdown opened.
+    } @else {
+      Dropdown closed.
+    }
+  </div>
+
+  @if (isOpen()) {
+    <ul
+      class="flex w-max absolute top-full left-0 z-10"
+      role="listbox"
+      tabindex="-1"
+      #dropdownList
+      id="dropdown-list"
+    >
+      <lib-jumbotron>
+        @if (isLoading()) {
+          <li role="status" class="px-4 py-2">
+            Loading...
+          </li>
+        } @else if (filteredOptions().length > 0) {
+          @for (option of filteredOptions(); track $index) {
+            <li
+              class="hover:bg-gray-100 hover:dark:bg-gray-600 hover:cursor-pointer rounded-lg"
+              role="option"
+              [attr.aria-selected]="option === picked()"
+              [class.bg-gray-100]="option === picked()"
+              [class.dark:bg-gray-700]="option === picked()"
+            >
+              <button (click)="selectOption(option)">
+                <ng-template #defaultOption>
+                  <lib-text>
+                    {{ option }}
+                  </lib-text>
+                </ng-template>
+
+                <ng-container
+                  [ngTemplateOutlet]="optionTemplateRef() || defaultOption"
+                  [ngTemplateOutletContext]="{ $implicit: option, index: $index }"
+                />
+              </button>
+            </li>
+          }
+        } @else {
+          <li role="status" class="px-4 py-2">
+            No results found.
+          </li>
+        }
+      </lib-jumbotron>
+    </ul>
+  }
+</div>
