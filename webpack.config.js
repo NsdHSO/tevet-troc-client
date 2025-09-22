@@ -1,24 +1,22 @@
-module.exports = (config) => {
-  // Reuse Angular's existing DefinePlugin instance to inject our envs
-  if (Array.isArray(config.plugins)) {
-    const definePlugin = config.plugins.find(
-      (p) => p && p.constructor && p.constructor.name === 'DefinePlugin'
-    );
-    if (definePlugin && definePlugin.definitions) {
-      const env = {
-        TEVET_API: process.env.TEVET_API || '',
-        TEVET_API_AUTH_CLIENT: process.env.TEVET_API_AUTH_CLIENT || '',
-        TEVET_API_AUTH: process.env.TEVET_API_AUTH || '',
-      };
-      // Support both dot and bracket notation by defining the full env object
-      definePlugin.definitions['process.env'] = JSON.stringify(env);
-      // Also define `process` to ensure runtime access in both dot and bracket notation
-      definePlugin.definitions['process'] = JSON.stringify({ env });
-      // Still define direct keys for good measure
-      definePlugin.definitions['process.env.TEVET_API'] = JSON.stringify(env.TEVET_API);
-      definePlugin.definitions['process.env.TEVET_API_AUTH_CLIENT'] = JSON.stringify(env.TEVET_API_AUTH_CLIENT);
-      definePlugin.definitions['process.env.TEVET_API_AUTH'] = JSON.stringify(env.TEVET_API_AUTH);
+const webpack = require('webpack');
+
+const myOrgEnvRegex = /^TEVET_API/i;
+
+function getClientEnvironment() {
+  const envVars = {};
+  for (const key in process.env) {
+    if (myOrgEnvRegex.test(key)) {
+      envVars[key] = process.env[key];
     }
   }
+  return {
+    'process.env': JSON.stringify(envVars),
+  };
+}
+
+module.exports = (config, options, context) => {
+  // Overwrite the mode set by Angular if the NODE_ENV is set
+  config.mode = process.env.NODE_ENV || config.mode;
+  config.plugins.push(new webpack.DefinePlugin(getClientEnvironment()));
   return config;
 };

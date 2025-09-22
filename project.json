@@ -8,12 +8,15 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nx/angular:application",
+      "executor": "@angular-builders/custom-webpack:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "plugins": ["env-var-plugin.js"],
+        "customWebpackConfig": {
+          "path": "webpack.config.js"
+        },
         "outputPath": "dist/tevet-troc-client",
         "index": "./src/index.html",
+        "main": "./src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "tsconfig.app.json",
         "inlineStyleLanguage": "scss",
@@ -57,12 +60,15 @@
       "defaultConfiguration": "production"
     },
     "build-github": {
-      "executor": "@nx/angular:application",
+      "executor": "@angular-builders/custom-webpack:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "plugins": ["env-var-plugin.js"],
+        "customWebpackConfig": {
+          "path": "webpack.config.js"
+        },
         "outputPath": "dist/tevet-troc-client",
         "index": "./src/index.html",
+        "main": "./src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "tsconfig.app.json",
         "inlineStyleLanguage": "scss",
@@ -105,7 +111,7 @@
       "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@angular-builders/custom-webpack:dev-server",
+      "executor": "@nx/angular:dev-server",
       "configurations": {
         "production": {
           "buildTarget": "tevet-troc-client:build:production"
