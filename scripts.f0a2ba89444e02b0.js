@@ -1,0 +1,1 @@
+typeof globalThis<"u"&&(globalThis.process=globalThis.process||{},globalThis.process.env=Object.assign({},globalThis.process.env,{TEVET_API:"https://hospital-miyw4q.fly.dev"}));
