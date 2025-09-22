@@ -63,7 +63,6 @@
     "autoprefixer": "^10.4.20",
     "cssnano": "^7.0.6",
     "dotenv": "^16.4.7",
-    "dotenv-webpack": "^8.1.0",
     "eslint": "^9.28.0",
     "eslint-config-prettier": "10.1.5",
     "eslint-plugin-playwright": "^1.6.2",
