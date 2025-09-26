@@ -15,21 +15,11 @@ import { InputSelectableComponent } from '@tevet-troc-client/input-selectable';
   templateUrl: './schedule.component.html',
   styleUrl: './schedule.component.scss',
 })
-export class ScheduleComponent implements OnDestroy {
+export class ScheduleComponent {
   /**
    * Appointment Service
    */
   readonly appointmentService = inject(AppointmentService, {
     skipSelf: true,
   });
-
-  ngOnDestroy() {
-    this.appointmentService.patientName.set('');
-    this.appointmentService.selectedPatient.set(undefined);
-    this.appointmentService.departmentSearch.set('');
-    this.appointmentService.selectedDepartment.set(undefined);
-    this.appointmentService.doctorSearch.set('');
-    this.appointmentService.selectedDoctor.set(undefined);
-    this.appointmentService.notes.set(null);
-  }
 }

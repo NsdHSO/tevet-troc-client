@@ -6,6 +6,7 @@ import { DialogData, DialogService } from '@tevet-troc-client/dialog';
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { PermissionDirective } from '@tevet-troc-client/permission';
 import { AppointmentService } from './service/appointment/appointment.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'lib-appointment',
@@ -39,8 +40,20 @@ export default class AppointmentComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.appointmentService.postAppointment().subscribe()
-
+        this.appointmentService
+          .postAppointment()
+          .pipe(
+            tap(() => {
+              this.appointmentService.patientName.set('');
+              this.appointmentService.selectedPatient.set(undefined);
+              this.appointmentService.departmentSearch.set('');
+              this.appointmentService.selectedDepartment.set(undefined);
+              this.appointmentService.doctorSearch.set('');
+              this.appointmentService.selectedDoctor.set(undefined);
+              this.appointmentService.notes.set(null);
+            })
+          )
+          .subscribe();
       } else {
         console.log('User clicked Cancel');
       }
