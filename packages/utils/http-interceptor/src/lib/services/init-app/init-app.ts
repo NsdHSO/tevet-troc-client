@@ -1,9 +1,10 @@
 import { inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { firstValueFrom, of } from 'rxjs';
+import { firstValueFrom, of, switchMap } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { AuthTokenService } from '../token/auth-token.service';
 import { TEVET_API_AUTH } from '../providers/api.token';
+import { MeService } from '../me/me.service';
 
 /**
  * Initialize app by attempting to refresh access token using refresh cookie.
@@ -12,7 +13,10 @@ import { TEVET_API_AUTH } from '../providers/api.token';
  */
 export function initAppPromise() {
   const tokenAuthAPI = inject(TEVET_API_AUTH);
-
+  /**
+   * Me Service
+   */
+  const meService = inject(MeService);
   const http = inject(HttpClient);
   const tokenSvc = inject(AuthTokenService);
   return firstValueFrom(
@@ -34,6 +38,9 @@ export function initAppPromise() {
             tokenSvc.setToken(accessToken);
           }
         }),
+        switchMap(() =>
+          meService.getMe$
+        ),
         catchError(() => {
           // Do not block bootstrap; error interceptor will handle redirect if needed
           tokenSvc.clear();

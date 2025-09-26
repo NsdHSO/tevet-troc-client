@@ -1,6 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core';
 import {
+  AppointmentPayload,
   Department,
+  Me,
   PermissionCode,
   Person,
   Staff,
@@ -25,7 +27,7 @@ import {
   tap,
   throwError,
 } from 'rxjs';
-import { AppointmentPayload } from '@tevet-troc-client/models';
+import { MeService } from '@tevet-troc-client/http-interceptor';
 
 @Injectable()
 export class AppointmentService {
@@ -33,6 +35,11 @@ export class AppointmentService {
    * HttpClient instance injected for making API calls.
    */
   private readonly httpClient = inject(HttpClient);
+
+  /**
+   * Me Service
+   */
+  private readonly meService = inject(MeService);
 
   /**
    * API configuration for the person endpoint, injected via a token.
@@ -171,7 +178,7 @@ export class AppointmentService {
         `${this.apiConfigDepartment.baseUrl}`,
         {
           params: {
-            value: 'd7051eea-7698-415f-b5ce-7c15e71cc17b',
+            value:  (this.meService.meInfo as Me)?.attributes.hospital_id || '',
             field: 'hospital_id',
           },
         }
@@ -188,7 +195,8 @@ export class AppointmentService {
         `${this.apiConfigStaff.baseUrl}`,
         {
           params: {
-            hospital_id: 'd7051eea-7698-415f-b5ce-7c15e71cc17b',
+            hospital_id:
+              (this.meService.meInfo as Me)?.attributes.hospital_id || '',
             field: 'role',
             value: 'doctor'.toUpperCase(),
           },
