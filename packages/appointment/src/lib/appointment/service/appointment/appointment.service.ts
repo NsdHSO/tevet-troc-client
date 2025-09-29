@@ -148,7 +148,7 @@ export class AppointmentService {
     return PermissionCode.PERSON_CREATE;
   }
 
-  pageOffsetAppointments = signal(1);
+  pageOffsetAppointments = signal(0);
   perPageOffsetAppointments = signal(10);
 
   triggeredGetAppointment = new Subject<void>();
