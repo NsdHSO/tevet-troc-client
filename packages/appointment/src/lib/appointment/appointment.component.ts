@@ -7,6 +7,7 @@ import { ScheduleComponent } from './components/schedule/schedule.component';
 import { PermissionDirective } from '@tevet-troc-client/permission';
 import { AppointmentService } from './service/appointment/appointment.service';
 import { tap } from 'rxjs';
+import { ColumnTextComponent, TableComponent } from 'ngx-liburg';
 
 @Component({
   selector: 'lib-appointment',
@@ -16,6 +17,8 @@ import { tap } from 'rxjs';
     TextComponent,
     ButtonComponent,
     ScheduleComponent,
+    TableComponent,
+    ColumnTextComponent,
   ],
   templateUrl: './appointment.component.html',
   styleUrl: './appointment.component.css',
@@ -51,6 +54,9 @@ export default class AppointmentComponent {
               this.appointmentService.doctorSearch.set('');
               this.appointmentService.selectedDoctor.set(undefined);
               this.appointmentService.notes.set(null);
+            }),
+            tap(() => {
+              this.appointmentService.triggeredGetAppointment.next();
             })
           )
           .subscribe();

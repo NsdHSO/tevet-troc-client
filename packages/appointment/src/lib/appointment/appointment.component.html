@@ -1,14 +1,46 @@
 <lib-text styleText="Title_3" ariaDesc="Appointment section">Appointment</lib-text>
-<section class="grid gap-3 w-full
-  2xs:grid-cols-2
-  sm:grid-cols-2">
-  <div></div>
-  @if (appointmentService.permissionDirective.hasPermission(appointmentService.permissionAppointmentCreateCode)) {
-    <lib-button
-      class="justify-self-end" text="Add" (event)="addAppointment(appointment)" />
-  }
+<section class="w-full h-screen flex flex-col gap-3">
+  <div class="sticky top-0 z-10">
+    <div class="flex flex-row-reverse">
+      @if (appointmentService.permissionDirective.hasPermission(appointmentService.permissionAppointmentCreateCode)) {
+        <lib-button
+
+          text="Add"
+          (event)="addAppointment(appointment)" />
+      }
+    </div>
+  </div>
+  <main class="w-full h-full overflow-y-auto">
+    <elix-table
+      [zebraColor]="true"
+      [dataSource]="appointmentService.getAppointment()"
+      [pageIndex]="appointmentService.pageOffsetAppointments()"
+      [pageSize]="appointmentService.perPageOffsetAppointments()"
+      (onPaginationChange)="
+          appointmentService.changePageSize($event,
+          appointmentService.pageOffsetAppointments,
+          appointmentService.perPageOffsetAppointments)"
+      [lengthPagination]="appointmentService.totalAppointments"
+      [showPagination]="true"
+    >
+      <elix-column-text
+        className="appointment-ic"
+        field="appointment_ic"
+        name="Appointment IC"
+      />
+      <elix-column-text
+        className="notes"
+        field="notes"
+        name="Notes"
+      />
+
+    </elix-table>
+  </main>
+
+
 </section>
 
 <ng-template #appointment>
   <lib-schedule></lib-schedule>
 </ng-template>
+

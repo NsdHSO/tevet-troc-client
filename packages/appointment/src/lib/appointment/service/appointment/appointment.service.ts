@@ -1,4 +1,10 @@
-import { inject, Injectable, signal } from '@angular/core';
+import {
+  inject,
+  Injectable,
+  Signal,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import {
   AppointmentPayload,
   Department,
@@ -19,15 +25,21 @@ import {
 import { PaginatedBackendResponse } from '@tevet-troc-client/http-response';
 import {
   catchError,
+  combineLatest,
   debounceTime,
   distinctUntilChanged,
   filter,
   map,
+  merge,
+  Observable,
+  startWith,
+  Subject,
   switchMap,
   tap,
   throwError,
 } from 'rxjs';
 import { MeService } from '@tevet-troc-client/http-interceptor';
+import { DataSourceMaterialTable } from 'ngx-liburg';
 
 @Injectable()
 export class AppointmentService {
@@ -121,6 +133,7 @@ export class AppointmentService {
    */
   notes = signal<string | null>(null);
 
+
   /**
    * A getter that provides the permission code for creating an appointment.
    */
@@ -134,6 +147,59 @@ export class AppointmentService {
   get permissionPersonCreateCode() {
     return PermissionCode.PERSON_CREATE;
   }
+
+  pageOffsetAppointments = signal(1);
+  perPageOffsetAppointments = signal(10);
+
+  triggeredGetAppointment = new Subject<void>();
+
+  loadingAppointments = signal(false);
+  totalAppointments = 0; // Can be a signal if needed elsewhere
+
+
+  private pageOffset$: Observable<number> = toObservable(this.pageOffsetAppointments);
+  private perPageOffset$: Observable<number> = toObservable(this.perPageOffsetAppointments);
+
+  private combinedTrigger$ = merge(
+    combineLatest([this.pageOffset$, this.perPageOffset$]),
+    this.triggeredGetAppointment,
+  ).pipe(
+    debounceTime(0),
+    tap(() => this.loadingAppointments.set(true)),
+    switchMap(() =>
+      this.httpClient
+        .get<PaginatedBackendResponse<AppointmentPayload>>(
+          `${this.apiConfigAppointment.baseUrl}`,
+          {
+            params: {
+              page: this.pageOffsetAppointments(),
+              per_page: this.perPageOffsetAppointments(),
+              filter:`hospital_id=${(this.meService.meInfo as Me)?.attributes.hospital_id || ''}`
+            },
+          }
+        )
+        .pipe(
+          tap((response) => {
+            this.totalAppointments = response.message.pagination.total_items;
+          }),
+          map((response) =>
+            response.message.data.map(
+              (appointment, index) =>
+                ({
+                  model: appointment,
+                  editable: true,
+                  actions: [],
+                  id: index,
+                } as DataSourceMaterialTable<AppointmentPayload>)
+            )
+          ),
+          tap(() => this.loadingAppointments.set(false))
+        )
+    )
+  );
+
+  getAppointment: Signal<DataSourceMaterialTable<AppointmentPayload>[]> =
+    toSignal(this.combinedTrigger$, { initialValue: [] });
 
   /**
    * A readonly signal that reactively fetches and holds the list of persons
@@ -178,7 +244,7 @@ export class AppointmentService {
         `${this.apiConfigDepartment.baseUrl}`,
         {
           params: {
-            value:  (this.meService.meInfo as Me)?.attributes.hospital_id || '',
+            value: (this.meService.meInfo as Me)?.attributes.hospital_id || '',
             field: 'hospital_id',
           },
         }
@@ -258,4 +324,14 @@ export class AppointmentService {
   public setNotes($event: Event) {
     this.notes.set(($event.target as HTMLInputElement).value);
   }
+
+  changePageSize(
+    event: any,
+    pageIndex: WritableSignal<any>,
+    pageSize: WritableSignal<any>
+  ): void {
+    pageSize.set(event.pageSize);
+    pageIndex.set(event.pageIndex);
+  }
+
 }
