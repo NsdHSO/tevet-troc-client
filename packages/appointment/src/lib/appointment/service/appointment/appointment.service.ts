@@ -307,7 +307,7 @@ export class AppointmentService {
       notes: this.notes() ?? '',
       appointment_date: new Date().toDateString(),
       reason: 'Test',
-      scheduled_by: 'Test',
+      scheduled_by:  (this.meService.meInfo as Me)?.attributes.staff_name || '',
       appointment_type: 'Test',
       status: 'Scheduled',
     };
