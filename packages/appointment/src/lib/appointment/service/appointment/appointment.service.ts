@@ -301,7 +301,7 @@ export class AppointmentService {
      */
 
     const payload: AppointmentPayload = {
-      hospital_name: 'Singapore General Hospital',
+      hospital_name: (this.meService.meInfo as Me)?.attributes.hospital_id || '',
       patient_name: patient.first_name,
       doctor_name: doctor.first_name,
       notes: this.notes() ?? '',
