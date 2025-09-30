@@ -7,13 +7,14 @@ import { AmbulanceIdComponent } from './ambulance-id/ambulance-id.component';
 import { EmergencyIdComponent } from './emergency-id/emergency-id.component';
 import { EmergencyService } from '../../service/emergency/emergency.service';
 import { EmergencyUi } from '@tevet-troc-client/models';
+import { PermissionDirective } from '@tevet-troc-client/permission';
 
 @Component({
   selector: 'lib-emergency',
   imports: [CommonModule],
   templateUrl: './id.component.html',
   styleUrl: './id.component.scss',
-  providers: [AmbulanceService, EmergencyService],
+  providers: [AmbulanceService, EmergencyService, PermissionDirective],
 })
 export default class IdComponent {
   private viewContainer = inject(ViewContainerRef);
