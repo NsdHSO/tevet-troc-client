@@ -8,6 +8,7 @@ import { PermissionDirective } from '@tevet-troc-client/permission';
 import { AppointmentService } from './service/appointment/appointment.service';
 import { tap } from 'rxjs';
 import { ColumnTextComponent, TableComponent } from 'ngx-liburg';
+import { LoadingSpinnerComponent } from '@tevet-troc-client/loading-spinner';
 
 @Component({
   selector: 'lib-appointment',
@@ -19,6 +20,7 @@ import { ColumnTextComponent, TableComponent } from 'ngx-liburg';
     ScheduleComponent,
     TableComponent,
     ColumnTextComponent,
+    LoadingSpinnerComponent,
   ],
   templateUrl: './appointment.component.html',
   styleUrl: './appointment.component.css',

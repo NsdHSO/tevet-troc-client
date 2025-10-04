@@ -26,8 +26,10 @@ import {
 } from '@tevet-troc-client/http-interceptor';
 import {
   provideHttpClient,
+  withInterceptors,
   withInterceptorsFromDi,
 } from '@angular/common/http';
+import { loadingInterceptor } from '@tevet-troc-client/loading-spinner';
 
 export const CONFIG_MAIN = Object.freeze({
   routerDataConfig: [
@@ -52,7 +54,10 @@ export const CONFIG_MAIN = Object.freeze({
 }) as RouterConfig;
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(),
+    provideHttpClient(
+      withInterceptors([loadingInterceptor]),
+      withInterceptorsFromDi()
+    ),
     provideAppInitializer(() => initAppPromise()),
     provideAnimations(),
     provideZonelessChangeDetection(),
@@ -64,8 +69,6 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(FrameWholeModule.forRoot(CONFIG_MAIN)),
     importProvidersFrom(IconCoreModule),
     TransitionViewService,
-    provideHttpClient(),
-    provideHttpClient(withInterceptorsFromDi()),
     interceptorAuthProviders,
     interceptorErrorProviders,
     provideAnimationsAsync(),

@@ -10,6 +10,7 @@ import {
 } from 'ngx-liburg';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { PermissionDirective } from '@tevet-troc-client/permission';
+import { LoadingSpinnerComponent } from '@tevet-troc-client/loading-spinner';
 
 @Component({
   selector: 'lib-emergency',
@@ -21,6 +22,7 @@ import { PermissionDirective } from '@tevet-troc-client/permission';
     ColumnTextComponent,
     ColumnIconActionComponent,
     AsyncPipe,
+    LoadingSpinnerComponent,
   ],
   templateUrl: './emergency.component.html',
   styleUrl: './emergency.component.scss',

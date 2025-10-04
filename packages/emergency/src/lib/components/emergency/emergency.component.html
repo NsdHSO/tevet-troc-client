@@ -9,7 +9,7 @@
         <span class="text-purple-600 dark:text-purple-400"><mat-icon [svgIcon]="layout.icon" /></span>
         <lib-text styleText="Title_1">{{ layout.title }}</lib-text>
       </header>
-      <div class="{{layout.sectionClass}}">
+      <div class="{{layout.sectionClass}} relative">
         @let dataDataSource = emergencyService.dataSourceForTable[idx];
         @let dataAsync = dataDataSource.value | async;
         @if (dataAsync?.data) {
@@ -42,6 +42,7 @@
               }
             }
           </elix-table>
+          <lib-loading-spinner [position]="'absolute'"/>
         }
       </div>
     </section>

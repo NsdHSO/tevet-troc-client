@@ -2,15 +2,29 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import AppointmentComponent from './appointment.component';
 import { provideHttpClient } from '@angular/common/http';
+import { MeService } from '@tevet-troc-client/http-interceptor';
 
 describe('AppointmentComponent', () => {
   let component: AppointmentComponent;
   let fixture: ComponentFixture<AppointmentComponent>;
 
   beforeEach(async () => {
+
+
     await TestBed.configureTestingModule({
       imports: [AppointmentComponent],
-      providers: [provideHttpClient(),provideHttpClientTesting()],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        { provide: MeService, useValue: {
+          meInfo: {
+            attributes: {
+              hospital_id: 'test-hospital-id',
+              name: 'Test User'
+            }
+          }
+          } }
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppointmentComponent);

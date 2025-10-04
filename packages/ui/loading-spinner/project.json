@@ -1,0 +1,21 @@
+{
+  "name": "loading-spinner",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/ui/loading-spinner/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["ui®"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/ui/loading-spinner/jest.config.ts",
+        "tsConfig": "packages/ui/loading-spinner/tsconfig.spec.json"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

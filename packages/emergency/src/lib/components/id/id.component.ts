@@ -34,16 +34,13 @@ export default class IdComponent {
         return this.ambulanceService.ambulanceApiService.ambulanceResource.pipe(
           tap(() => {
             this.viewContainer.clear();
-
           }),
           tap((ambulance) => {
-
             if (ambulance) {
               const componentRef =
                 this.viewContainer.createComponent(AmbulanceIdComponent);
               componentRef.instance.ambulance = ambulance;
               componentRef.instance.service = this.ambulanceService;
-              // Trigger change detection for the newly created component if needed
               componentRef.changeDetectorRef.detectChanges();
             }
           })

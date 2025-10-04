@@ -26,7 +26,7 @@ import { PaginatedBackendResponse } from '@tevet-troc-client/http-response';
 import {
   catchError,
   combineLatest,
-  debounceTime,
+  debounceTime, delay,
   distinctUntilChanged,
   filter,
   map,
