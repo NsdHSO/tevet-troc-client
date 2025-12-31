@@ -1,0 +1,8 @@
+
+::ng-deep {
+  mat-drawer-content {
+    .content__body {
+      overflow-x: auto !important;
+    }
+  }
+}
